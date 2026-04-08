@@ -16,8 +16,8 @@ use App\Http\Controllers\OrderHistoryController;
 */
 use App\Http\Controllers\Auth\SocialLoginController;
 
-Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
-Route::get('auth/google/callback', [SocialLoginController::class, 'handleGoogleCallback']);
+Route::get('auth/{provider}', [SocialLoginController::class, 'redirect'])->name('social.redirect');
+Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');

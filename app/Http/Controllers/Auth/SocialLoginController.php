@@ -10,35 +10,32 @@ use Illuminate\Support\Str;
 
 class SocialLoginController extends Controller
 {
-    public function redirectToGoogle()
+    public function redirect($provider)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function handleGoogleCallback()
+    public function callback($provider)
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $socialUser = Socialite::driver($provider)->user();
 
-            $finduser = User::where('provider_id', $user->id)->first();
+            $user = User::updateOrCreate(
+                ['email' => $socialUser->getEmail()],
+                [
+                    'name'        => $socialUser->getName() ?? $socialUser->getNickname(),
+                    'provider_id' => $socialUser->getId(),
+                    'provider'    => $provider,
+                    'avatar'      => $socialUser->getAvatar(),
+                    'password'    => encrypt(Str::random(24)),
+                ]
+            );
 
-            if($finduser){
-                Auth::login($finduser);
-                return redirect()->intended('home');
-            }else{
-                $newUser = User::updateOrCreate(['email' => $user->email],[
-                    'name' => $user->name,
-                    'provider_id'=> $user->id,
-                    'provider' => 'google',
-                    'avatar' => $user->avatar,
-                    'password' => encrypt(Str::random(24))
-                ]);
+            Auth::login($user);
+            return redirect()->intended('home');
 
-                Auth::login($newUser);
-                return redirect()->intended('home');
-            }
         } catch (\Exception $e) {
-            return redirect('login')->with('error', 'Something went wrong!');
+            return redirect('login')->with('error', 'Login with ' . ucfirst($provider) . ' failed. Please try again.');
         }
     }
 }
