@@ -210,20 +210,26 @@
                     @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" style="color:#374151;font-weight:600;">
-                                <div style="width:34px;height:34px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;">
-                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                <div style="width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid #6366f1;flex-shrink:0;">
+                                    @if(Auth::user()->avatar)
+                                        <img src="{{ Storage::url(Auth::user()->avatar) }}" style="width:100%;height:100%;object-fit:cover;" alt="">
+                                    @else
+                                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;">
+                                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                        </div>
+                                    @endif
                                 </div>
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="border-radius:16px;padding:8px;">
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard</a></li>
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2 text-success"></i>My Orders</a></li>
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-warning"></i>Profile Settings</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-primary"></i>ዳሽቦርድ</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2 text-success"></i>የእኔ ትዕዛዞች</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-warning"></i>የእኔ መለያ</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item rounded-3 py-2 text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        <i class="fas fa-sign-out-alt me-2"></i>ውጣ
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                                 </li>

@@ -235,7 +235,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div>
                     <div style="font-weight:700;color:#1e1b4b;margin-bottom:4px;">መለያ ሰርዝ</div>
-                    <div style="color:#9ca3af;font-size:0.85rem;">መለያዎን ከሰረዙ ሁሉም ውሂብዎ 영구적으로 ይጠፋል።</div>
+                    <div style="color:#9ca3af;font-size:0.85rem;">መለያዎን ከሰረዙ ሁሉም ውሂብዎ ለዘለዓለም ይጠፋል።</div>
                 </div>
                 <button type="button" class="btn-danger-outline" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <i class="fas fa-trash me-2"></i>መለያ ሰርዝ
