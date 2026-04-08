@@ -270,13 +270,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <h5>የኛ ገበያ</h5>
-                    <p class="text-light">Your trusted online shopping destination.</p>
+                    <p class="text-light">የታመነ የ online ግዢ መድረክ።</p>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <h6>Contact Info</h6>
+                    <h6>አድራሻ</h6>
                     <p class="text-light">
-                        Email: tesheyimer86@gmail.com<br>
-                        Phone: 0962868748
+                        ኢሜይል: tesheyimer86@gmail.com<br>
+                        ስልክ: 0962868748
                     </p>
                 </div>
             </div>

@@ -1,21 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Order Details')
+@section('title', 'የትዕዛዝ ዝርዝር')
 
 @section('content')
 <div class="container py-4">
     <div class="row">
         <div class="col-12">
-            <!-- Page Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h2><i class="fas fa-receipt me-2"></i>Order #{{ $order->id }}</h2>
-                    <small class="text-muted">
-                        <i class="fas fa-calendar me-1"></i>Placed on {{ $order->created_at->format('d M Y, H:i') }}
-                    </small>
+                    <h2><i class="fas fa-receipt me-2"></i>ትዕዛዝ #{{ $order->id }}</h2>
+                    <small class="text-muted"><i class="fas fa-calendar me-1"></i>የተደረገው {{ $order->created_at->format('d M Y, H:i') }}</small>
                 </div>
                 <a href="{{ route('orders.history') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Orders
+                    <i class="fas fa-arrow-left me-2"></i>ወደ ትዕዛዞቼ
                 </a>
             </div>
 
@@ -24,7 +21,7 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h5 class="mb-3">Order Status</h5>
+                            <h5 class="mb-3">የትዕዛዝ ሁኔታ</h5>
                             <div class="d-flex gap-3 align-items-center">
                                 <span class="badge bg-{{ $order->status === 'delivered' ? 'success' : ($order->status === 'processing' ? 'warning' : ($order->status === 'canceled' ? 'danger' : 'primary')) }} fs-6">
                                     {{ ucfirst($order->status) }}
@@ -37,31 +34,22 @@
                         <div class="col-md-6 text-md-end">
                             <div class="d-flex gap-2 justify-content-md-end flex-wrap">
                                 @if($order->payment_status === 'paid')
-                                    <a href="{{ route('invoice.download', $order) }}" class="btn btn-success">
-                                        <i class="fas fa-download me-2"></i>Download Invoice
-                                    </a>
-                                    <a href="{{ route('invoice.preview', $order) }}" class="btn btn-outline-info">
-                                        <i class="fas fa-eye me-2"></i>View Invoice
-                                    </a>
+                                    <a href="{{ route('invoice.download', $order) }}" class="btn btn-success"><i class="fas fa-download me-2"></i>ደረሰኝ አውርዱ</a>
+                                    <a href="{{ route('invoice.preview', $order) }}" class="btn btn-outline-info"><i class="fas fa-eye me-2"></i>ደረሰኝ ይመልከቱ</a>
                                 @endif
 
                                 @if(in_array($order->status, ['new', 'processing']))
                                     <form action="{{ route('orders.cancel', $order) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="btn btn-outline-danger"
-                                                onclick="return confirm('Are you sure you want to cancel this order?')">
-                                            <i class="fas fa-times me-2"></i>Cancel Order
-                                        </button>
+                                        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('ትዕዛዙን መሰረዝ ይፈልጋሉ?')"><i class="fas fa-times me-2"></i>ሰርዝ</button>
                                     </form>
                                 @endif
 
                                 @if($order->status === 'delivered')
                                     <form action="{{ route('orders.reorder', $order) }}" method="POST" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="btn btn-outline-primary">
-                                            <i class="fas fa-redo me-2"></i>Reorder
-                                        </button>
+                                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-redo me-2"></i>እንደገና ዕዘዝ</button>
                                     </form>
                                 @endif
                             </div>
@@ -74,17 +62,15 @@
                 <!-- Order Items -->
                 <div class="col-lg-8 mb-4">
                     <div class="card-clean">
-                        <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-box me-2"></i>Order Items</h5>
-                        </div>
+                        <div class="card-header"><h5 class="mb-0"><i class="fas fa-box me-2"></i>የታዘዙ ምርቶች</h5></div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th style="width: 60%">Product</th>
-                                            <th style="width: 15%" class="text-center">Qty</th>
-                                            <th style="width: 25%" class="text-end">Price</th>
+                                            <th style="width: 60%">ምርት</th>
+                                            <th style="width: 15%" class="text-center">ብዛት</th>
+                                            <th style="width: 25%" class="text-end">ዋጋ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,15 +90,13 @@
                                                         </div>
                                                     @endif
                                                     <div>
-                                                        <h6 class="mb-1">{{ $item->product->name ?? 'Product Deleted' }}</h6>
+                                                        <h6 class="mb-1">{{ $item->product->name ?? 'ምርት ተሰርዟል' }}</h6>
                                                         @if($item->product)
                                                             <small class="text-muted">
                                                                 {{ $item->product->category->name ?? '' }} • {{ $item->product->brand->name ?? '' }}
                                                             </small>
                                                         @endif
-                                                        <div class="small text-muted">
-                                                            Unit Price: Birr {{ number_format($item->unit_amount, 2, '.', ',') }}
-                                                        </div>
+                                                        <div class="small text-muted">የአንድ ዋጋ: Birr {{ number_format($item->unit_amount, 0, '.', ',') }}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -135,61 +119,33 @@
                 <div class="col-lg-4">
                     <!-- Order Summary -->
                     <div class="card-clean mb-4">
-                        <div class="card-header">
-                            <h6 class="mb-0"><i class="fas fa-calculator me-2"></i>Order Summary</h6>
-                        </div>
+                        <div class="card-header"><h6 class="mb-0"><i class="fas fa-calculator me-2"></i>ማጠቃለያ</h6></div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Subtotal:</span>
-                                <span>Birr {{ number_format($order->items->sum('total_amount'), 2, '.', ',') }}</span>
-                            </div>
+                            <div class="d-flex justify-content-between mb-2"><span>ድምር:</span><span>Birr {{ number_format($order->items->sum('total_amount'), 0, '.', ',') }}</span></div>
                             @if($order->shipping_amount)
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Shipping:</span>
-                                <span>Birr {{ number_format($order->shipping_amount, 2, '.', ',') }}</span>
-                            </div>
+                            <div class="d-flex justify-content-between mb-2"><span>የመላኪያ ዋጋ:</span><span>Birr {{ number_format($order->shipping_amount, 0, '.', ',') }}</span></div>
                             @endif
                             <hr>
-                            <div class="d-flex justify-content-between">
-                                <strong>Total:</strong>
-                                <strong class="text-primary">Birr {{ number_format($order->grand_total, 2, '.', ',') }}</strong>
-                            </div>
+                            <div class="d-flex justify-content-between"><strong>ጠቅላላ:</strong><strong class="text-primary">Birr {{ number_format($order->grand_total, 0, '.', ',') }}</strong></div>
                         </div>
                     </div>
 
                     <!-- Payment Info -->
                     <div class="card-clean mb-4">
-                        <div class="card-header">
-                            <h6 class="mb-0"><i class="fas fa-credit-card me-2"></i>Payment Information</h6>
-                        </div>
+                        <div class="card-header"><h6 class="mb-0"><i class="fas fa-credit-card me-2"></i>የክፍያ መረጃ</h6></div>
                         <div class="card-body">
-                            <div class="mb-2">
-                                <small class="text-muted">Payment Method:</small>
-                                <div>{{ $order->payment_method ?? 'Not specified' }}</div>
+                            <div class="mb-2"><small class="text-muted">የክፍያ ዘዴ:</small><div>{{ $order->payment_method ?? 'አልተገለጸም' }}</div></div>
+                            <div class="mb-2"><small class="text-muted">የክፍያ ሁኔታ:</small>
+                                <div><span class="badge bg-{{ $order->payment_status === 'paid' ? 'success' : ($order->payment_status === 'pending' ? 'warning' : 'danger') }}">{{ $order->payment_status==='paid'?'ተከፍሏል':($order->payment_status==='pending'?'በመጠባበቅ':'አልተሳካም') }}</span></div>
                             </div>
-                            <div class="mb-2">
-                                <small class="text-muted">Payment Status:</small>
-                                <div>
-                                    <span class="badge bg-{{ $order->payment_status === 'paid' ? 'success' : ($order->payment_status === 'pending' ? 'warning' : 'danger') }}">
-                                        {{ ucfirst($order->payment_status) }}
-                                    </span>
-                                </div>
-                            </div>
-                            @if($order->notes)
-                            <div>
-                                <small class="text-muted">Notes:</small>
-                                <div class="small">{{ $order->notes }}</div>
-                            </div>
-                            @endif
+                            @if($order->notes)<div><small class="text-muted">ማስታወሻ:</small><div class="small">{{ $order->notes }}</div></div>@endif
                         </div>
                     </div>
 
                     <!-- Shipping Address -->
                     @if($order->address)
                     <div class="card-clean">
-                        <div class="card-header">
-                            <h6 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h6>
-                        </div>
+                        <div class="card-header"><h6 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>የመላኪያ አድራሻ</h6></div>
                         <div class="card-body">
                             <address class="mb-0">
                                 <strong>{{ $order->address->first_name }} {{ $order->address->last_name }}</strong><br>
@@ -207,67 +163,24 @@
             <!-- Order Timeline (if needed) -->
             @if($order->status !== 'new')
             <div class="card-clean mt-4">
-                <div class="card-header">
-                    <h6 class="mb-0"><i class="fas fa-timeline me-2"></i>Order Timeline</h6>
-                </div>
+                <div class="card-header"><h6 class="mb-0"><i class="fas fa-history me-2"></i>የትዕዛዝ ታሪክ</h6></div>
                 <div class="card-body">
                     <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-success"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Order Placed</h6>
-                                <p class="timeline-description">{{ $order->created_at->format('d M Y, H:i') }}</p>
-                            </div>
-                        </div>
-
+                        <div class="timeline-item"><div class="timeline-marker bg-success"></div><div class="timeline-content"><h6 class="timeline-title">ትዕዛዝ ተቀበለ</h6><p class="timeline-description">{{ $order->created_at->format('d M Y, H:i') }}</p></div></div>
                         @if($order->payment_status === 'paid')
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-success"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Payment Confirmed</h6>
-                                <p class="timeline-description">Payment received successfully</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-marker bg-success"></div><div class="timeline-content"><h6 class="timeline-title">ክፍያ ተረጋገጠ</h6><p class="timeline-description">ክፍያ ተቀብሏል</p></div></div>
                         @endif
-
                         @if(in_array($order->status, ['processing', 'shipped', 'delivered']))
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-warning"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Order Processing</h6>
-                                <p class="timeline-description">Your order is being prepared</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-marker bg-warning"></div><div class="timeline-content"><h6 class="timeline-title">በሂደት ላይ</h6><p class="timeline-description">ትዕዛዝዎ እየተዘጋጀ ነው</p></div></div>
                         @endif
-
                         @if(in_array($order->status, ['shipped', 'delivered']))
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-info"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Order Shipped</h6>
-                                <p class="timeline-description">Your order is on the way</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-marker bg-info"></div><div class="timeline-content"><h6 class="timeline-title">ተላከ</h6><p class="timeline-description">ትዕዛዝዎ በመምጣት ላይ ነው</p></div></div>
                         @endif
-
                         @if($order->status === 'delivered')
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-success"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Order Delivered</h6>
-                                <p class="timeline-description">Order delivered successfully</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-marker bg-success"></div><div class="timeline-content"><h6 class="timeline-title">ደረሰ</h6><p class="timeline-description">ትዕዛዝ በተሳካ ሁኔታ ደርሷል</p></div></div>
                         @endif
-
                         @if($order->status === 'canceled')
-                        <div class="timeline-item">
-                            <div class="timeline-marker bg-danger"></div>
-                            <div class="timeline-content">
-                                <h6 class="timeline-title">Order Canceled</h6>
-                                <p class="timeline-description">Order has been canceled</p>
-                            </div>
-                        </div>
+                        <div class="timeline-item"><div class="timeline-marker bg-danger"></div><div class="timeline-content"><h6 class="timeline-title">ተሰረዘ</h6><p class="timeline-description">ትዕዛዝ ተሰርዟል</p></div></div>
                         @endif
                     </div>
                 </div>

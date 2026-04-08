@@ -1,64 +1,61 @@
 @extends('layouts.app')
 
-@section('title', 'Checkout')
+@section('title', 'ክፍያ')
 
 @section('content')
 <div class="container my-4">
-    <h2>Checkout</h2>
-
+    <h2>ክፍያ</h2>
     <div class="row">
         <div class="col-lg-8">
             <form id="checkout-form">
                 @csrf
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">Shipping Information</h5>
-                    </div>
+                    <div class="card-header"><h5 class="mb-0">የመላኪያ መረጃ</h5></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="first_name" class="form-label">First Name *</label>
+                                <label for="first_name" class="form-label">የመጀመሪያ ስም *</label>
                                 <input type="text" class="form-control" id="first_name" name="first_name" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="last_name" class="form-label">Last Name *</label>
+                                <label for="last_name" class="form-label">የአባት ስም *</label>
                                 <input type="text" class="form-control" id="last_name" name="last_name" required>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone Number *</label>
+                            <label for="phone" class="form-label">ስልክ ቁጥር *</label>
                             <input type="tel" class="form-control" id="phone" name="phone" required>
                         </div>
                         <div class="mb-3">
-                            <label for="street_address" class="form-label">Street Address *</label>
+                            <label for="street_address" class="form-label">አድራሻ *</label>
                             <input type="text" class="form-control" id="street_address" name="street_address" required>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="city" class="form-label">City *</label>
+                                <label for="city" class="form-label">ከተማ *</label>
                                 <input type="text" class="form-control" id="city" name="city" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="state" class="form-label">State/Province *</label>
+                                <label for="state" class="form-label">ክልል *</label>
                                 <input type="text" class="form-control" id="state" name="state" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="country" class="form-label">Country *</label>
+                                <label for="country" class="form-label">ሀገር *</label>
                                 <select class="form-select" id="country" name="country" required>
-                                    <option value="">Select Country</option>
-                                    <option value="Ethiopia" selected>Ethiopia</option>
-                                    <option value="Eritrea">Ertirea</option>
-                                    <option value="America">America</option>
-                                    <option value="Russia">Russia</option>
-                                    <option value="Iran"> Iran</option>
-                                    <option value="Indonesia">Indonesia</option>
-                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="">ሀገር ይምረጡ</option>
+                                    <option value="Ethiopia" selected>ኢትዮጵያ</option>
+                                    <option value="Eritrea">ኤርትራ</option>
+                                    <option value="America">አሜሪካ</option>
+                                    <option value="Russia">ሩሲያ</option>
+                                    <option value="Iran">ኢራን</option>
+                                    <option value="Indonesia">ኢንዶኔዥያ</option>
+                                    <option value="Malaysia">ማሌዥያ</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="zip_code" class="form-label">ZIP/Postal Code *</label>
+                                <label for="zip_code" class="form-label">ፖስታ ቁጥር *</label>
                                 <input type="text" class="form-control" id="zip_code" name="zip_code" required>
                             </div>
                         </div>
@@ -149,8 +146,8 @@
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-shield-alt text-success me-2"></i>
                                 <div>
-                                    <small class="fw-bold">Secure Payment</small><br>
-                                    <small class="text-muted">Your payment is encrypted and protected.</small>
+                                    <small class="fw-bold">ደህንነቱ የተጠበቀ ክፍያ</small><br>
+                                    <small class="text-muted">ክፍያዎ ምስጠራ ተደርጎ ተጠብቋል።</small>
                                 </div>
                             </div>
                         </div>
@@ -166,34 +163,22 @@
 
         <div class="col-lg-4">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Order Summary</h5>
-                </div>
+                <div class="card-header"><h5 class="mb-0">የትዕዛዝ ማጠቃለያ</h5></div>
                 <div class="card-body">
                     @foreach($cartItems as $item)
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="flex-grow-1">
                             <h6 class="mb-0">{{ $item->product->name }}</h6>
-                            <small class="text-muted">Qty: {{ $item->quantity }} × ETB {{ number_format($item->unit_amount, 2) }}</small>
+                            <small class="text-muted">ብዛት: {{ $item->quantity }} × Birr {{ number_format($item->unit_amount, 0) }}</small>
                         </div>
-                        <span>ETB {{ number_format($item->total_amount, 2) }}</span>
+                        <span>Birr {{ number_format($item->total_amount, 0) }}</span>
                     </div>
                     @endforeach
-
                     <hr>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Subtotal:</span>
-                        <span>ETB {{ number_format($total, 2) }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Shipping:</span>
-                        <span>ETB {{ number_format($shippingCost, 2) }}</span>
-                    </div>
+                    <div class="d-flex justify-content-between mb-2"><span>ድምር:</span><span>Birr {{ number_format($total, 0) }}</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span>የመላኪያ ዋጋ:</span><span>Birr {{ number_format($shippingCost, 0) }}</span></div>
                     <hr>
-                    <div class="d-flex justify-content-between mb-3">
-                        <strong>Total:</strong>
-                        <strong>ETB {{ number_format($grandTotal, 2) }}</strong>
-                    </div>
+                    <div class="d-flex justify-content-between mb-3"><strong>ጠቅላላ:</strong><strong>Birr {{ number_format($grandTotal, 0) }}</strong></div>
 
                     <button type="button" class="btn btn-primary w-100" id="pay-button">
                         <i class="fas fa-wallet"></i> Pay with Chapa
@@ -236,10 +221,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updatePayButton(paymentMethod) {
         const buttonText = {
-            'chapa': '<i class="fas fa-wallet"></i> Pay with Chapa',
-            'credit_card': '<i class="fas fa-credit-card"></i> Pay with Card',
-            'bank_transfer': '<i class="fas fa-university"></i> Pay with Bank Transfer',
-            'ewallet': '<i class="fas fa-mobile-alt"></i> Pay with E-Wallet'
+            'chapa': '<i class="fas fa-wallet"></i> Chapa በኩል ክፈሉ',
+            'credit_card': '<i class="fas fa-credit-card"></i> ካርድ በኩል ክፈሉ',
+            'bank_transfer': '<i class="fas fa-university"></i> ባንክ ዝውውር',
+            'ewallet': '<i class="fas fa-mobile-alt"></i> ሞባይል ዋሌት'
         };
         payButton.innerHTML = buttonText[paymentMethod] || 'Place Order & Pay';
     }
@@ -250,7 +235,7 @@ document.getElementById('pay-button').addEventListener('click', function () {
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
     this.disabled = true;
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> በሂደት ላይ...';
 
     const formData = new FormData(form);
     const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
