@@ -27,16 +27,24 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'name'   => ['required', 'string', 'max:255'],
+            'email'  => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'avatar' => ['nullable', 'image', 'max:2048'],
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        $data = ['name' => $request->name, 'email' => $request->email];
 
-        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
+        if ($request->hasFile('avatar')) {
+            // Delete old avatar
+            if ($user->avatar && \Storage::disk('public')->exists($user->avatar)) {
+                \Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
+        $user->update($data);
+
+        return redirect()->route('profile.edit')->with('success', 'መረጃዎ በተሳካ ሁኔታ ተዘምኗል!');
     }
 
     /**
@@ -53,7 +61,7 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('profile.edit')->with('success', 'Password updated successfully!');
+        return redirect()->route('profile.edit')->with('success', 'የይለፍ ቃልዎ በተሳካ ሁኔታ ተዘምኗል!');
     }
 
     /**
