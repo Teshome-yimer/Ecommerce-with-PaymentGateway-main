@@ -28,7 +28,7 @@
                     <!-- Header -->
                     <div class="row mb-4 pb-4 border-bottom">
                         <div class="col-md-6">
-                            <h3 class="text-primary fw-bold">University Shop</h3>
+                            <h3 class="text-primary fw-bold">የኛ ገበያ</h3>
                             <p class="mb-1">Wollo, Ethiopia</p>
                             <p class="mb-1">Phone: +251 962868748</p>
                             <p class="mb-0">Email: teshe@universityshop.com</p>
@@ -147,7 +147,7 @@
                     <div class="text-center mt-5 pt-4 border-top">
                         <p class="fw-bold">Thank you for your business!</p>
                         <p class="text-muted">This is a computer-generated invoice. No signature required.</p>
-                        <p class="text-muted">For any questions regarding this invoice, please contact us at teshe@universityshop.com <br>University Shop - Your trusted online shopping destination</p>
+                        <p class="text-muted">For any questions regarding this invoice, please contact us at teshe@universityshop.com <br>የኛ ገበያ - Your trusted online shopping destination</p>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@
             <div class="card shadow-lg border-0 rounded-lg">
                 <div class="card-header bg-white text-center py-4">
                     <h3 class="fw-bold text-primary">{{ __('Create Account') }}</h3>
-                    <p class="text-muted">Join University Shop today!</p>
+                    <p class="text-muted">Join የኛ ገበያ today!</p>
                 </div>
 
                 <div class="card-body px-5 py-4">

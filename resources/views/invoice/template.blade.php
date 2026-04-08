@@ -199,7 +199,7 @@
         <div class="header">
             <div class="header-content">
                 <div class="company-info">
-                    <div class="company-name">University shop</div>
+                    <div class="company-name">የኛ ገበያ</div>
                     <div>Wollo, Ethiopia</div>
                     <div>Phone: +251 962868748</div>
                     <div>Email: tesheyimer86@universityshop.com</div>

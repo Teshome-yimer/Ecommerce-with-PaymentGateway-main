@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-/* ===== HERO ===== */
 .hero-section {
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     min-height: 92vh;
@@ -61,310 +60,147 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-.hero-subtitle {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.1rem;
-    animation: fadeInUp 1s ease;
-}
+.hero-subtitle { color: rgba(255,255,255,0.7); font-size: 1.1rem; animation: fadeInUp 1s ease; }
 .hero-btn-primary {
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    border: none;
-    color: #fff;
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
+    border: none; color: #fff;
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 600; font-size: 1rem;
     transition: all 0.3s;
     box-shadow: 0 8px 25px rgba(99,102,241,0.4);
 }
-.hero-btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(99,102,241,0.6);
-    color: #fff;
-}
+.hero-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(99,102,241,0.6); color: #fff; }
 .hero-btn-outline {
     background: transparent;
     border: 2px solid rgba(255,255,255,0.3);
-    color: #fff;
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s;
+    color: #fff; padding: 14px 32px; border-radius: 50px; font-weight: 600; transition: all 0.3s;
 }
-.hero-btn-outline:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.6);
-    color: #fff;
-    transform: translateY(-3px);
-}
-.hero-image-wrap {
-    position: relative;
-    animation: floatUp 1.2s ease;
-}
-.hero-image-wrap img {
-    border-radius: 24px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-}
+.hero-btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); color: #fff; transform: translateY(-3px); }
+.hero-image-wrap { position: relative; animation: floatUp 1.2s ease; }
+.hero-image-wrap img { border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
 .hero-float-card {
     position: absolute;
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 16px;
-    padding: 12px 18px;
-    color: #fff;
-    font-size: 0.85rem;
+    border-radius: 16px; padding: 12px 18px; color: #fff; font-size: 0.85rem;
     animation: float 3s ease-in-out infinite;
 }
 .hero-float-card.card-1 { top: 20px; left: -30px; animation-delay: 0s; }
 .hero-float-card.card-2 { bottom: 30px; right: -20px; animation-delay: 1.5s; }
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* ===== STATS BAR ===== */
-.stats-bar {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    padding: 20px 0;
-}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.stats-bar { background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 20px 0; }
 .stat-item { text-align: center; color: #fff; }
 .stat-number { font-size: 1.8rem; font-weight: 800; }
 .stat-label { font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
-
-/* ===== CATEGORIES ===== */
-.section-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #6366f1;
-    font-weight: 600;
-}
-.section-heading {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #1e1b4b;
-}
+.section-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #6366f1; font-weight: 600; }
+.section-heading { font-size: 2rem; font-weight: 800; color: #1e1b4b; }
 .category-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 20px;
-    text-align: center;
-    border: 2px solid transparent;
-    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-    cursor: pointer;
+    background: #fff; border-radius: 20px; padding: 28px 20px; text-align: center;
+    border: 2px solid transparent; transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
-.category-card:hover {
-    border-color: #6366f1;
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(99,102,241,0.15);
-}
+.category-card:hover { border-color: #6366f1; transform: translateY(-8px); box-shadow: 0 20px 50px rgba(99,102,241,0.15); }
 .category-icon {
     width: 70px; height: 70px;
     background: linear-gradient(135deg, #eef2ff, #e0e7ff);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px;
-    transition: all 0.3s;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px; transition: all 0.3s;
 }
-.category-card:hover .category-icon {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-}
-.category-card:hover .category-icon i,
-.category-card:hover .category-icon svg { color: #fff !important; filter: brightness(10); }
+.category-card:hover .category-icon { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
 .category-name { font-weight: 700; color: #1e1b4b; margin-bottom: 8px; }
-.category-browse {
-    font-size: 0.8rem;
-    color: #6366f1;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* ===== PRODUCT CARDS ===== */
+.category-browse { font-size: 0.8rem; color: #6366f1; font-weight: 600; text-decoration: none; }
 .product-card {
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    border: none;
+    background: #fff; border-radius: 20px; overflow: hidden; border: none;
     box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-    position: relative;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1); position: relative;
 }
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 60px rgba(99,102,241,0.18);
-}
-.product-img-wrap {
-    position: relative;
-    overflow: hidden;
-    height: 220px;
-}
-.product-img-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
+.product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(99,102,241,0.18); }
+.product-img-wrap { position: relative; overflow: hidden; height: 220px; }
+.product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .product-card:hover .product-img-wrap img { transform: scale(1.08); }
 .product-overlay {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: rgba(99,102,241,0.85);
     display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
+    opacity: 0; transition: opacity 0.3s;
 }
 .product-card:hover .product-overlay { opacity: 1; }
 .product-badge {
-    position: absolute;
-    top: 12px; left: 12px;
+    position: absolute; top: 12px; left: 12px;
     background: linear-gradient(135deg, #ef4444, #f97316);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 50px;
-    text-transform: uppercase;
+    color: #fff; font-size: 0.7rem; font-weight: 700;
+    padding: 4px 10px; border-radius: 50px; text-transform: uppercase;
 }
 .product-body { padding: 18px; }
 .product-category { font-size: 0.75rem; color: #6366f1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 .product-name { font-weight: 700; color: #1e1b4b; margin: 4px 0 8px; font-size: 1rem; }
 .product-price { font-size: 1.2rem; font-weight: 800; color: #6366f1; }
-.product-price-old { font-size: 0.85rem; color: #9ca3af; text-decoration: line-through; }
 .btn-add-cart {
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.3s;
-    width: 100%;
+    border: none; color: #fff; padding: 10px 20px;
+    border-radius: 50px; font-weight: 600; font-size: 0.85rem;
+    transition: all 0.3s; width: 100%;
 }
 .btn-add-cart:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(99,102,241,0.4); color: #fff; }
 .btn-add-cart:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* ===== PROMO BANNER ===== */
 .promo-banner {
     background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
-    border-radius: 28px;
-    padding: 60px 50px;
-    position: relative;
-    overflow: hidden;
+    border-radius: 28px; padding: 60px 50px; position: relative; overflow: hidden;
 }
 .promo-banner::before {
-    content: '';
-    position: absolute;
-    width: 300px; height: 300px;
-    background: rgba(99,102,241,0.3);
-    border-radius: 50%;
-    top: -80px; right: -80px;
-    animation: pulse-glow 4s infinite;
+    content: ''; position: absolute; width: 300px; height: 300px;
+    background: rgba(99,102,241,0.3); border-radius: 50%;
+    top: -80px; right: -80px; animation: pulse-glow 4s infinite;
 }
 .promo-timer { display: flex; gap: 12px; }
 .timer-box {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    padding: 12px 16px;
-    text-align: center;
-    min-width: 65px;
-    color: #fff;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px; padding: 12px 16px; text-align: center; min-width: 65px; color: #fff;
 }
 .timer-num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
 .timer-label { font-size: 0.65rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 1px; }
-
-/* ===== WHY US ===== */
 .feature-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 32px 24px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    transition: all 0.3s;
-    border: 2px solid transparent;
+    background: #fff; border-radius: 20px; padding: 32px 24px; text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.3s; border: 2px solid transparent;
 }
-.feature-card:hover {
-    border-color: #6366f1;
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(99,102,241,0.12);
-}
-.feature-icon {
-    width: 72px; height: 72px;
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 18px;
-    font-size: 1.6rem;
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes floatUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
-}
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.feature-card:hover { border-color: #6366f1; transform: translateY(-6px); box-shadow: 0 20px 50px rgba(99,102,241,0.12); }
+.feature-icon { width: 72px; height: 72px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 </style>
 @endpush
 
-<!-- ===== HERO SECTION ===== -->
+@section('content')
+
+<!-- HERO -->
 <section class="hero-section">
     <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
                 <div class="hero-badge">🔥 New Arrivals Every Week</div>
-                <h1 class="hero-title mb-3">
-                    Shop Smarter,<br>Live <span>Better</span>
-                </h1>
-                <p class="hero-subtitle mb-5">
-                    Discover thousands of premium products at unbeatable prices.<br>
-                    Fast delivery across Ethiopia — right to your door.
-                </p>
+                <h1 class="hero-title mb-3">Shop Smarter,<br>Live <span>Better</span></h1>
+                <p class="hero-subtitle mb-5">Discover thousands of premium products at unbeatable prices.<br>Fast delivery across Ethiopia — right to your door.</p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="{{ route('products') }}" class="btn hero-btn-primary">
-                        <i class="fas fa-shopping-bag me-2"></i>Shop Now
-                    </a>
-                    <a href="#featured" class="btn hero-btn-outline">
-                        <i class="fas fa-star me-2"></i>Featured
-                    </a>
+                    <a href="{{ route('products') }}" class="btn hero-btn-primary"><i class="fas fa-shopping-bag me-2"></i>Shop Now</a>
+                    <a href="#featured" class="btn hero-btn-outline"><i class="fas fa-star me-2"></i>Featured</a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="hero-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80"
-                         class="img-fluid" alt="Shopping">
-                    <div class="hero-float-card card-1">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" class="img-fluid" alt="Shopping">                    <div class="hero-float-card card-1">
                         <div class="d-flex align-items-center gap-2">
                             <span style="font-size:1.4rem;">📦</span>
-                            <div>
-                                <div style="font-weight:700;">Free Delivery</div>
-                                <div style="opacity:0.7;font-size:0.75rem;">On orders over Birr 500</div>
-                            </div>
+                            <div><div style="font-weight:700;">Free Delivery</div><div style="opacity:0.7;font-size:0.75rem;">On orders over Birr 500</div></div>
                         </div>
                     </div>
                     <div class="hero-float-card card-2">
                         <div class="d-flex align-items-center gap-2">
                             <span style="font-size:1.4rem;">⭐</span>
-                            <div>
-                                <div style="font-weight:700;">4.9 Rating</div>
-                                <div style="opacity:0.7;font-size:0.75rem;">10,000+ happy customers</div>
-                            </div>
+                            <div><div style="font-weight:700;">4.9 Rating</div><div style="opacity:0.7;font-size:0.75rem;">10,000+ happy customers</div></div>
                         </div>
                     </div>
                 </div>
@@ -373,39 +209,19 @@
     </div>
 </section>
 
-<!-- ===== STATS BAR ===== -->
+<!-- STATS -->
 <div class="stats-bar">
     <div class="container">
         <div class="row g-3">
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="{{ \App\Models\Product::count() }}">0</div>
-                    <div class="stat-label">Products</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="{{ \App\Models\User::count() }}">0</div>
-                    <div class="stat-label">Customers</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="{{ \App\Models\Order::count() }}">0</div>
-                    <div class="stat-label">Orders</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="{{ \App\Models\Brand::count() }}">0</div>
-                    <div class="stat-label">Brands</div>
-                </div>
-            </div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Product::count() }}">0</div><div class="stat-label">Products</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\User::count() }}">0</div><div class="stat-label">Customers</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Order::count() }}">0</div><div class="stat-label">Orders</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Brand::count() }}">0</div><div class="stat-label">Brands</div></div></div>
         </div>
     </div>
 </div>
 
-<!-- ===== CATEGORIES ===== -->
+<!-- CATEGORIES -->
 <section class="py-5" style="background:#f8f7ff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
@@ -415,7 +231,7 @@
         </div>
         <div class="row g-4">
             @foreach($categories as $i => $category)
-            <div class="col-lg-3 col-md-4 col-6 animate-on-scroll" style="transition-delay: {{ $i * 80 }}ms">
+            <div class="col-lg-3 col-md-4 col-6 animate-on-scroll" style="transition-delay:{{ $i * 80 }}ms">
                 <a href="{{ route('products', ['category' => $category->id]) }}" class="text-decoration-none">
                     <div class="category-card">
                         <div class="category-icon">
@@ -435,7 +251,7 @@
     </div>
 </section>
 
-<!-- ===== PROMO BANNER ===== -->
+<!-- PROMO BANNER -->
 <section class="py-5" style="background:#fff;">
     <div class="container animate-on-scroll">
         <div class="promo-banner">
@@ -459,7 +275,7 @@
     </div>
 </section>
 
-<!-- ===== FEATURED PRODUCTS ===== -->
+<!-- FEATURED PRODUCTS -->
 <section class="py-5" id="featured" style="background:#f8f7ff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
@@ -469,23 +285,17 @@
         </div>
         <div class="row g-4">
             @foreach($featuredProducts as $i => $product)
-            <div class="col-lg-3 col-md-6 animate-on-scroll" style="transition-delay: {{ $i * 100 }}ms">
+            <div class="col-lg-3 col-md-6 animate-on-scroll" style="transition-delay:{{ $i * 100 }}ms">
                 <div class="product-card h-100">
-                    @if($product->on_sale)
-                        <div class="product-badge">Sale</div>
-                    @endif
+                    @if($product->on_sale)<div class="product-badge">Sale</div>@endif
                     <div class="product-img-wrap">
                         @if($product->images && count($product->images) > 0)
                             <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}">
                         @else
-                            <div class="d-flex align-items-center justify-content-center h-100 bg-light">
-                                <i class="fas fa-image fa-3x text-muted"></i>
-                            </div>
+                            <div class="d-flex align-items-center justify-content-center h-100 bg-light"><i class="fas fa-image fa-3x text-muted"></i></div>
                         @endif
                         <div class="product-overlay">
-                            <a href="{{ route('product.detail', $product->slug) }}" class="btn btn-light btn-sm rounded-pill px-4">
-                                <i class="fas fa-eye me-1"></i> Quick View
-                            </a>
+                            <a href="{{ route('product.detail', $product->slug) }}" class="btn btn-light btn-sm rounded-pill px-4"><i class="fas fa-eye me-1"></i>Quick View</a>
                         </div>
                     </div>
                     <div class="product-body">
@@ -493,18 +303,14 @@
                         <div class="product-name">{{ $product->name }}</div>
                         <p class="text-muted small mb-3">{{ Str::limit($product->description, 70) }}</p>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <span class="product-price">Birr {{ number_format($product->price, 0, '.', ',') }}</span>
-                            </div>
+                            <span class="product-price">Birr {{ number_format($product->price, 0, '.', ',') }}</span>
                             @if($product->in_stock)
                                 <span class="badge" style="background:#dcfce7;color:#16a34a;font-size:0.7rem;">In Stock</span>
                             @else
                                 <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">Out of Stock</span>
                             @endif
                         </div>
-                        <button onclick="addToCart({{ $product->id }})"
-                                class="btn btn-add-cart"
-                                {{ !$product->in_stock ? 'disabled' : '' }}>
+                        <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
                             <i class="fas fa-cart-plus me-2"></i>Add to Cart
                         </button>
                     </div>
@@ -513,14 +319,12 @@
             @endforeach
         </div>
         <div class="text-center mt-5 animate-on-scroll">
-            <a href="{{ route('products') }}" class="btn hero-btn-primary btn-lg px-5">
-                View All Products <i class="fas fa-arrow-right ms-2"></i>
-            </a>
+            <a href="{{ route('products') }}" class="btn hero-btn-primary btn-lg px-5">View All Products <i class="fas fa-arrow-right ms-2"></i></a>
         </div>
     </div>
 </section>
 
-<!-- ===== WHY CHOOSE US ===== -->
+<!-- WHY CHOOSE US -->
 <section class="py-5" style="background:#fff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
@@ -537,11 +341,9 @@
             ];
             @endphp
             @foreach($features as $i => $f)
-            <div class="col-md-6 col-lg-3 animate-on-scroll" style="transition-delay: {{ $i * 100 }}ms">
+            <div class="col-md-6 col-lg-3 animate-on-scroll" style="transition-delay:{{ $i * 100 }}ms">
                 <div class="feature-card">
-                    <div class="feature-icon" style="background:{{ $f['color'] }};">
-                        <i class="{{ $f['icon'] }}" style="color:{{ $f['icolor'] }};font-size:1.5rem;"></i>
-                    </div>
+                    <div class="feature-icon" style="background:{{ $f['color'] }};"><i class="{{ $f['icon'] }}" style="color:{{ $f['icolor'] }};font-size:1.5rem;"></i></div>
                     <h6 style="font-weight:700;color:#1e1b4b;margin-bottom:8px;">{{ $f['title'] }}</h6>
                     <p class="text-muted small mb-0">{{ $f['desc'] }}</p>
                 </div>
@@ -551,19 +353,19 @@
     </div>
 </section>
 
+@endsection
+
 @push('scripts')
 <script>
-// Scroll animations
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-// Count-up animation
 document.querySelectorAll('[data-count]').forEach(el => {
     const target = parseInt(el.dataset.count);
     let count = 0;
-    const step = Math.ceil(target / 60);
+    const step = Math.max(1, Math.ceil(target / 60));
     const timer = setInterval(() => {
         count = Math.min(count + step, target);
         el.textContent = count.toLocaleString();
@@ -571,22 +373,17 @@ document.querySelectorAll('[data-count]').forEach(el => {
     }, 30);
 });
 
-// Countdown timer (24h from now)
 function startTimer() {
     const end = new Date();
     end.setHours(end.getHours() + 24);
     setInterval(() => {
         const diff = end - new Date();
         if (diff <= 0) return;
-        const h = Math.floor(diff / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-        document.getElementById('t-hours').textContent = String(h).padStart(2,'0');
-        document.getElementById('t-mins').textContent = String(m).padStart(2,'0');
-        document.getElementById('t-secs').textContent = String(s).padStart(2,'0');
+        document.getElementById('t-hours').textContent = String(Math.floor(diff / 3600000)).padStart(2,'0');
+        document.getElementById('t-mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+        document.getElementById('t-secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
     }, 1000);
 }
 startTimer();
 </script>
 @endpush
-@endsection

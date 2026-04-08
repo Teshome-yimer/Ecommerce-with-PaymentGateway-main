@@ -4,7 +4,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-2xl font-bold mb-2">
-                        🎉 Welcome to University Shop Admin!
+                        🎉 Welcome to የኛ ገበያ Admin!
                     </h2>
                     <p class="text-blue-100 mb-4">
                         Manage your e-commerce store with ease. Here's your overview for today.

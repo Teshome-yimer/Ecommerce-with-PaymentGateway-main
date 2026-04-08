@@ -72,53 +72,72 @@
                     <div class="card-body">
                         <div class="payment-methods">
                             <div class="row g-3">
+                                <!-- Chapa -->
                                 <div class="col-md-6">
                                     <div class="payment-option">
                                         <input type="radio" name="payment_method" id="chapa" value="chapa" checked>
                                         <label for="chapa" class="payment-label">
                                             <div class="payment-content">
-                                                <i class="fas fa-wallet fa-2x text-primary mb-2"></i>
+                                                <img src="https://chapa.co/asset/images/chapa_logo.svg" alt="Chapa" style="height:36px;object-fit:contain;margin-bottom:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                                                <i class="fas fa-wallet fa-2x text-primary mb-2" style="display:none;"></i>
                                                 <h6 class="mb-1">Chapa (Ethiopia)</h6>
-                                                <small class="text-muted">Telebirr, CBEBirr, Cards</small>
+                                                <div class="d-flex justify-content-center gap-1 flex-wrap mt-1">
+                                                    <span style="background:#e8f5e9;color:#2e7d32;font-size:0.65rem;padding:2px 7px;border-radius:20px;font-weight:600;">Telebirr</span>
+                                                    <span style="background:#e3f2fd;color:#1565c0;font-size:0.65rem;padding:2px 7px;border-radius:20px;font-weight:600;">CBEBirr</span>
+                                                    <span style="background:#fff3e0;color:#e65100;font-size:0.65rem;padding:2px 7px;border-radius:20px;font-weight:600;">Cards</span>
+                                                </div>
                                             </div>
                                         </label>
                                     </div>
                                 </div>
 
+                                <!-- Credit Card -->
                                 <div class="col-md-6">
                                     <div class="payment-option">
                                         <input type="radio" name="payment_method" id="credit_card" value="credit_card">
                                         <label for="credit_card" class="payment-label">
                                             <div class="payment-content">
-                                                <i class="fas fa-credit-card fa-2x text-primary mb-2"></i>
+                                                <div class="d-flex justify-content-center gap-2 mb-2">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" style="height:24px;object-fit:contain;">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height:24px;object-fit:contain;">
+                                                </div>
                                                 <h6 class="mb-1">Credit/Debit Card</h6>
-                                                <small class="text-muted">Visa, Mastercard, JCB</small>
+                                                <small class="text-muted">Visa, Mastercard</small>
                                             </div>
                                         </label>
                                     </div>
                                 </div>
 
+                                <!-- Bank Transfer -->
                                 <div class="col-md-6">
                                     <div class="payment-option">
                                         <input type="radio" name="payment_method" id="bank_transfer" value="bank_transfer">
                                         <label for="bank_transfer" class="payment-label">
                                             <div class="payment-content">
-                                                <i class="fas fa-university fa-2x text-success mb-2"></i>
+                                                <div class="d-flex justify-content-center gap-2 mb-2 flex-wrap">
+                                                    <span style="background:#1565c0;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">CBE</span>
+                                                    <span style="background:#c62828;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Awash</span>
+                                                    <span style="background:#2e7d32;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Dashen</span>
+                                                </div>
                                                 <h6 class="mb-1">Bank Transfer</h6>
-                                                <small class="text-muted">BCA, BNI, BRI, Mandiri</small>
+                                                <small class="text-muted">CBE, Awash, Dashen & more</small>
                                             </div>
                                         </label>
                                     </div>
                                 </div>
 
+                                <!-- E-Wallet -->
                                 <div class="col-md-6">
                                     <div class="payment-option">
                                         <input type="radio" name="payment_method" id="ewallet" value="ewallet">
                                         <label for="ewallet" class="payment-label">
                                             <div class="payment-content">
-                                                <i class="fas fa-mobile-alt fa-2x text-warning mb-2"></i>
-                                                <h6 class="mb-1">E-Wallet</h6>
-                                                <small class="text-muted">GoPay, OVO, DANA</small>
+                                                <div class="d-flex justify-content-center gap-1 flex-wrap mb-2">
+                                                    <span style="background:#00897b;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Telebirr</span>
+                                                    <span style="background:#1976d2;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">HelloCash</span>
+                                                </div>
+                                                <h6 class="mb-1">Mobile Wallet</h6>
+                                                <small class="text-muted">Telebirr, HelloCash</small>
                                             </div>
                                         </label>
                                     </div>
@@ -139,8 +158,6 @@
                         <div class="text-center mt-3">
                             <small class="text-muted">Powered by</small><br>
                             <span style="color: #00ADEE; font-weight: bold; font-size: 16px;">CHAPA</span>
-                            <span class="mx-2">|</span>
-                            <span style="color: #0077B6; font-weight: bold; font-size: 16px;">MIDTRANS</span>
                         </div>
                     </div>
                 </div>

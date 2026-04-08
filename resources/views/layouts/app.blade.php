@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'University Shop') }} - @yield('title', 'E-Commerce')</title>
+    <title>E-Commerce - @yield('title', 'Shop')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -156,61 +156,76 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-clean">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="fas fa-store me-2"></i>University shop
+    <nav class="navbar navbar-expand-lg" style="background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(99,102,241,0.08);padding:0 0;">
+        <div class="container" style="padding-top:10px;padding-bottom:10px;">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}" style="font-weight:800;font-size:1.3rem;color:#1e1b4b;text-decoration:none;">
+                <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-store" style="color:#fff;font-size:1rem;"></i>
+                </div>
+                <span>የኛ ገበያ</span>
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto ms-4 gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link px-3 py-2 rounded-pill fw-500" href="{{ route('home') }}" style="color:#374151;font-weight:500;transition:all 0.2s;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">Products</a>
+                        <a class="nav-link px-3 py-2 rounded-pill fw-500" href="{{ route('products') }}" style="color:#374151;font-weight:500;">Products</a>
                     </li>
                 </ul>
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <!-- Cart -->
                     <li class="nav-item">
-                        <a class="nav-link position-relative" href="{{ route('cart') }}">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-badge" id="cart-count">
-                                {{ $cartCount ?? 0 }}
-                            </span>
+                        <a class="nav-link position-relative d-flex align-items-center justify-content-center"
+                           href="{{ route('cart') }}"
+                           style="width:42px;height:42px;background:#f3f4f6;border-radius:50%;color:#374151;">
+                            <i class="fas fa-shopping-cart" style="font-size:1rem;"></i>
+                            <span class="cart-badge" id="cart-count">{{ $cartCount ?? 0 }}</span>
                         </a>
                     </li>
 
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('login') }}"
+                               style="display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:50px;border:2px solid #6366f1;color:#6366f1;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.2s;"
+                               onmouseover="this.style.background='#6366f1';this.style.color='#fff'"
+                               onmouseout="this.style.background='transparent';this.style.color='#6366f1'">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-primary-custom btn-sm ms-2" href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}"
+                               style="display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:50px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-weight:600;font-size:0.9rem;text-decoration:none;box-shadow:0 4px 15px rgba(99,102,241,0.35);transition:all 0.2s;"
+                               onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(99,102,241,0.5)'"
+                               onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(99,102,241,0.35)'">
+                                <i class="fas fa-user-plus"></i> Register
+                            </a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" style="color:#374151;font-weight:600;">
+                                <div style="width:34px;height:34px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                </div>
                                 {{ Auth::user()->name }}
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
-                                <li><a class="dropdown-item" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2"></i>My Orders</a></li>
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2"></i>Profile Settings</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="border-radius:16px;padding:8px;">
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2 text-success"></i>My Orders</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-warning"></i>Profile Settings</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                                    <a class="dropdown-item rounded-3 py-2 text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt me-2"></i>Logout
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                                 </li>
                             </ul>
                         </li>
@@ -248,7 +263,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <h5>University Shop</h5>
+                    <h5>የኛ ገበያ</h5>
                     <p class="text-light">Your trusted online shopping destination.</p>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -261,7 +276,7 @@
             </div>
             <hr>
             <div class="text-center">
-                <p class="text-light mb-0">&copy; {{ date('Y') }} Universty shop. All rights reserved.</p>
+                <p class="text-light mb-0">&copy; {{ date('Y') }} የኛ ገበያ. All rights reserved.</p>
             </div>
         </div>
     </footer>
