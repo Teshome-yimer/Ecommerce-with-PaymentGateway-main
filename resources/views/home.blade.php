@@ -181,7 +181,7 @@
     <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <div class="hero-badge">👉 አንኳን ወደ አኛ ገበያ በደህና መጡ</div>
+                <div class="hero-badge">👉 አንኳን ወደ የኛ ገበያ በደህና መጡ</div>
                 <h1 class="hero-title mb-3">ፈጣን፣ ቀላል እና<br><span>የታመነ ግዢ</span></h1>
                 <p class="hero-subtitle mb-5">የonline ግዢ መድረክ — ጥራት ያለው ምርት በቀላሉ ይግዙ!</p>
                 <div class="d-flex flex-wrap gap-3">
@@ -191,34 +191,32 @@
             </div>
             <div class="col-lg-6">
                 <div class="hero-image-wrap">
-                    <!-- Local hero image with text overlay -->
+                    <!-- Local hero image — no text overlay -->
                     <div style="position:relative;display:inline-block;width:100%;">
                         <img src="{{ asset('images/hero.jpg') }}" class="img-fluid" alt="የኛ ገበያ"
                              style="border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,0.5);width:100%;object-fit:cover;">
-                        <!-- Overlay replacing "Zemen Gebeya" text with "የኛ ገበያ" -->
-                        <div style="position:absolute;top:8%;left:50%;transform:translateX(-50%);text-align:center;width:90%;pointer-events:none;">
-                            <div style="font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.85);letter-spacing:2px;">
-                                የኛ ገበያ
-                            </div>
-                            <div style="font-size:clamp(0.7rem,1.5vw,1rem);color:rgba(255,255,255,0.92);text-shadow:0 1px 8px rgba(0,0,0,0.8);margin-top:4px;font-weight:500;">
-                                Where Ethiopia Shops Digital
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Payment methods float card -->
-                    <div class="hero-float-card card-1">
-                        <div class="d-flex align-items-center gap-2">
-                            <span style="font-size:1.2rem;">💳</span>
-                            <div>
-                                <div style="font-weight:700;font-size:0.8rem;">ይከፍሉ በ</div>
-                                <div class="d-flex gap-1 mt-1">
-                                    <span style="background:#00897b;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">Telebirr</span>
-                                    <span style="background:#1565c0;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">CBEBirr</span>
-                                    <span style="background:#c62828;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">Bank</span>
-                                </div>
+                        <!-- Payment logos bottom strip inside image -->
+                        <div style="position:absolute;bottom:0;left:0;right:0;border-radius:0 0 24px 24px;background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);padding:18px 20px 14px;display:flex;align-items:center;gap:12px;">
+                            <span style="color:rgba(255,255,255,0.7);font-size:0.72rem;font-weight:600;white-space:nowrap;">Pay with</span>
+                            <!-- Telebirr logo -->
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Telebirr_Logo.png/320px-Telebirr_Logo.png"
+                                 alt="Telebirr" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9;"
+                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span style="display:none;background:#00897b;color:#fff;font-size:0.7rem;padding:4px 10px;border-radius:20px;font-weight:700;">Telebirr</span>
+                            <!-- CBE Birr -->
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Commercial_Bank_of_Ethiopia_Logo.svg/320px-Commercial_Bank_of_Ethiopia_Logo.svg.png"
+                                 alt="CBE" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9;"
+                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <span style="display:none;background:#1565c0;color:#fff;font-size:0.7rem;padding:4px 10px;border-radius:20px;font-weight:700;">CBEBirr</span>
+                            <!-- Bank divider + icon -->
+                            <div style="width:1px;height:24px;background:rgba(255,255,255,0.3);"></div>
+                            <div style="display:flex;align-items:center;gap:6px;color:#fff;font-size:0.75rem;font-weight:600;">
+                                <i class="fas fa-university" style="font-size:1rem;opacity:0.85;"></i>
+                                Bank Transfer
                             </div>
                         </div>
                     </div>
+                    <!-- Rating float card -->
                     <div class="hero-float-card card-2">
                         <div class="d-flex align-items-center gap-2">
                             <span style="font-size:1.4rem;">⭐</span>
@@ -279,17 +277,17 @@
         <div class="promo-banner">
             <div class="row align-items-center g-4">
                 <div class="col-lg-7">
-                    <div class="hero-badge mb-3">⚡ Limited Time Offer</div>
-                    <h2 style="color:#fff;font-size:2.2rem;font-weight:800;">Up to 50% OFF<br>on Selected Items</h2>
-                    <p style="color:rgba(255,255,255,0.7);" class="mb-4">Don't miss out on our biggest sale of the season. Shop now before it's gone!</p>
-                    <a href="{{ route('products') }}" class="btn hero-btn-primary">Grab the Deal</a>
+                    <div class="hero-badge mb-3">⚡ ለተወሰነ ጊዜ ብቻ</div>
+                    <h2 style="color:#fff;font-size:2.2rem;font-weight:800;">እስከ 50% ቅናሽ<br>በተመረጡ ምርቶች ላይ</h2>
+                    <p style="color:rgba(255,255,255,0.7);" class="mb-4">የዚህን ወቅት ትልቁን ቅናሽ አያምልጥዎ። አሁኑኑ ይግዙ — ከማለቁ በፊት!</p>
+                    <a href="{{ route('products') }}" class="btn hero-btn-primary">ቅናሹን ይጠቀሙ</a>
                 </div>
                 <div class="col-lg-5">
-                    <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;" class="mb-2">Offer ends in:</p>
+                    <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;" class="mb-2">ቅናሹ የሚያልቀው:</p>
                     <div class="promo-timer">
-                        <div class="timer-box"><div class="timer-num" id="t-hours">00</div><div class="timer-label">Hours</div></div>
-                        <div class="timer-box"><div class="timer-num" id="t-mins">00</div><div class="timer-label">Mins</div></div>
-                        <div class="timer-box"><div class="timer-num" id="t-secs">00</div><div class="timer-label">Secs</div></div>
+                        <div class="timer-box"><div class="timer-num" id="t-hours">00</div><div class="timer-label">ሰዓት</div></div>
+                        <div class="timer-box"><div class="timer-num" id="t-mins">00</div><div class="timer-label">ደቂቃ</div></div>
+                        <div class="timer-box"><div class="timer-num" id="t-secs">00</div><div class="timer-label">ሰከንድ</div></div>
                     </div>
                 </div>
             </div>
