@@ -200,15 +200,15 @@
             <div class="header-content">
                 <div class="company-info">
                     <div class="company-name">የኛ ገበያ</div>
-                    <div>Wollo, Ethiopia</div>
-                    <div>Phone: +251 962868748</div>
-                    <div>Email: tesheyimer86@universityshop.com</div>
+                    <div>ወሎ, ኢትዮጵያ</div>
+                    <div>ስልክ: +251 962868748</div>
+                    <div>ኢሜይል: tesheyimer86@gmail.com</div>
                 </div>
                 <div class="invoice-info">
-                    <div class="invoice-title">INVOICE</div>
-                    <div><strong>Invoice #:</strong> {{ $order->id }}</div>
-                    <div><strong>Date:</strong> {{ $order->created_at->format('d M Y') }}</div>
-                    <div><strong>Due Date:</strong> {{ $order->created_at->addDays(30)->format('d M Y') }}</div>
+                    <div class="invoice-title">ደረሰኝ</div>
+                    <div><strong>ደረሰኝ ቁጥር:</strong> #{{ $order->id }}</div>
+                    <div><strong>ቀን:</strong> {{ $order->created_at->format('d M Y') }}</div>
+                    <div><strong>የክፍያ ቀነ ገደብ:</strong> {{ $order->created_at->addDays(30)->format('d M Y') }}</div>
                 </div>
             </div>
         </div>
@@ -216,40 +216,42 @@
         <!-- Invoice Details -->
         <div class="invoice-details">
             <div class="details-row">
-                <div class="details-label">Order Status:</div>
+                <div class="details-label">የትዕዛዝ ሁኔታ:</div>
                 <div class="details-value">
-                    <span class="status-badge status-{{ $order->status }}">{{ ucfirst($order->status) }}</span>
+                    @php $sMap=['new'=>'አዲስ','processing'=>'በሂደት','shipped'=>'ተላከ','delivered'=>'ደረሰ','canceled'=>'ተሰረዘ']; @endphp
+                    <span class="status-badge status-{{ $order->status }}">{{ $sMap[$order->status] ?? $order->status }}</span>
                 </div>
             </div>
             <div class="details-row">
-                <div class="details-label">Payment Status:</div>
+                <div class="details-label">የክፍያ ሁኔታ:</div>
                 <div class="details-value">
-                    <span class="status-badge payment-{{ $order->payment_status }}">{{ ucfirst($order->payment_status) }}</span>
+                    @php $pMap=['paid'=>'ተከፍሏል','pending'=>'በመጠባበቅ','failed'=>'አልተሳካም']; @endphp
+                    <span class="status-badge payment-{{ $order->payment_status }}">{{ $pMap[$order->payment_status] ?? $order->payment_status }}</span>
                 </div>
             </div>
             <div class="details-row">
-                <div class="details-label">Payment Method:</div>
-                <div class="details-value">{{ $order->payment_method ?? 'Not specified' }}</div>
+                <div class="details-label">የክፍያ ዘዴ:</div>
+                <div class="details-value">{{ $order->payment_method ?? 'አልተገለጸም' }}</div>
             </div>
         </div>
 
         <!-- Billing & Shipping -->
         <div class="billing-shipping">
             <div class="billing-info">
-                <div class="info-title">Bill To:</div>
+                <div class="info-title">ለ:</div>
                 <div><strong>{{ $order->user->name }}</strong></div>
                 <div>{{ $order->user->email }}</div>
             </div>
             <div class="shipping-info">
-                <div class="info-title">Ship To:</div>
+                <div class="info-title">የመላኪያ አድራሻ:</div>
                 @if($order->address)
                     <div><strong>{{ $order->address->first_name }} {{ $order->address->last_name }}</strong></div>
                     <div>{{ $order->address->street_address }}</div>
                     <div>{{ $order->address->city }}, {{ $order->address->state }} {{ $order->address->zip_code }}</div>
                     <div>{{ $order->address->country }}</div>
-                    <div>Phone: {{ $order->address->phone }}</div>
+                    <div>ስልክ: {{ $order->address->phone }}</div>
                 @else
-                    <div>No shipping address provided</div>
+                    <div>የመላኪያ አድራሻ አልተሰጠም</div>
                 @endif
             </div>
         </div>
@@ -258,10 +260,10 @@
         <table class="items-table">
             <thead>
                 <tr>
-                    <th style="width: 50%">Product</th>
-                    <th style="width: 15%" class="text-center">Qty</th>
-                    <th style="width: 20%" class="text-right">Unit Price</th>
-                    <th style="width: 15%" class="text-right">Total</th>
+                    <th style="width: 50%">ምርት</th>
+                    <th style="width: 15%" class="text-center">ብዛት</th>
+                    <th style="width: 20%" class="text-right">የአንድ ዋጋ</th>
+                    <th style="width: 15%" class="text-right">ጠቅላላ</th>
                 </tr>
             </thead>
             <tbody>
@@ -270,10 +272,10 @@
                     <td>
                         <strong>{{ $item->product->name }}</strong>
                         @if($item->product->category)
-                            <br><small>Category: {{ $item->product->category->name }}</small>
+                            <br><small>ምድብ: {{ $item->product->category->name }}</small>
                         @endif
                         @if($item->product->brand)
-                            <br><small>Brand: {{ $item->product->brand->name }}</small>
+                            <br><small>ብራንድ: {{ $item->product->brand->name }}</small>
                         @endif
                     </td>
                     <td class="text-center">{{ $item->quantity }}</td>
@@ -288,17 +290,17 @@
         <div class="totals">
             <table>
                 <tr>
-                    <td>Subtotal:</td>
+                    <td>ድምር:</td>
                     <td class="text-right">Birr {{ number_format($order->items->sum('total_amount'), 2, '.', ',') }}</td>
                 </tr>
                 @if($order->shipping_amount)
                 <tr>
-                    <td>Shipping:</td>
+                    <td>የመላኪያ ዋጋ:</td>
                     <td class="text-right">Birr {{ number_format($order->shipping_amount, 2, '.', ',') }}</td>
                 </tr>
                 @endif
                 <tr class="total-row">
-                    <td><strong>Total:</strong></td>
+                    <td><strong>ጠቅላላ:</strong></td>
                     <td class="text-right"><strong>Birr {{ number_format($order->grand_total, 2, '.', ',') }}</strong></td>
                 </tr>
             </table>
@@ -308,10 +310,10 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p><strong>Thank you for your business!</strong></p>
-            <p>This is a computer-generated invoice. No signature required.</p>
-            <p>For any questions regarding this invoice, please contact us at tesheyimer86@universityshop.com</p>
-            <p>UniversityShop - Your trusted online shopping destination</p>
+            <p><strong>ለግዢዎ እናመሰግናለን!</strong></p>
+            <p>ይህ በኮምፒዩተር የተፈጠረ ደረሰኝ ነው። ፊርማ አያስፈልግም።</p>
+            <p>ለማንኛውም ጥያቄ: tesheyimer86@gmail.com</p>
+            <p>የኛ ገበያ — የታመነ የ online ግዢ መድረክ</p>
         </div>
     </div>
 </body>
