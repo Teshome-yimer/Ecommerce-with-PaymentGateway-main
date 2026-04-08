@@ -1,0 +1,35 @@
+# 1. የPHP ስሪቱን መምረጥ (ለአብዛኛው ላራቭል 8.x - 11.x የሚሆን)
+FROM php:8.2-fpm
+
+# 2. ሲስተም ላይ አስፈላጊ የሆኑ ፓኬጆችን መጫን
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# 3. ለላራቭል እና ለዳታቤዝ (MySQL) የሚያስፈልጉ PHP ኤክስቴንሽኖችን መጫን
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# 4. Composerን ከኦፊሴላዊው ኢሜጅ መውሰድ
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 5. በኮንቴይነሩ ውስጥ የትኛው ፎልደር ላይ ስራው እንደሚሰራ መወሰን
+WORKDIR /var/www
+
+# 6. የፕሮጀክቱን ፋይሎች ወደ ኮንቴይነሩ መቅዳት
+COPY . /var/www
+
+# 7. Composer dependencies መጫን
+RUN composer install --no-interaction --optimize-autoloader --no-dev
+
+# 8. ለላራቭል ፎልደሮች ፈቃድ (Permission) መስጠት
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+
+# 9. ፖርት 9000 መክፈት
+EXPOSE 9000
+
+CMD ["php-fpm"]

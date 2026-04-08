@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <span class="fw-bold" id="item-total-{{ $item->id }}">Rp {{ number_format($item->total_amount, 0, ',', '.') }}</span>
+                                <span class="fw-bold" id="item-total-{{ $item->id }}">ETB {{ number_format($item->total_amount, 0, ',', '.') }}</span>
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-outline-danger btn-sm" onclick="removeItem({{ $item->id }})">
@@ -149,9 +149,9 @@ function updateQuantity(itemId, quantity) {
         success: function(response) {
             if (response.success) {
                 $(`#qty-${itemId}`).val(quantity);
-                $(`#item-total-${itemId}`).text('Rp ' + new Intl.NumberFormat('id-ID').format(response.item_total));
-                $('#cart-subtotal').text('Rp ' + new Intl.NumberFormat('id-ID').format(response.cart_total));
-                $('#cart-total').text('Rp ' + new Intl.NumberFormat('id-ID').format(response.cart_total + 15000));
+                $(`#item-total-${itemId}`).text('ETB ' + new Intl.NumberFormat('id-ID').format(response.item_total));
+                $('#cart-subtotal').text('ETB ' + new Intl.NumberFormat('id-ID').format(response.cart_total));
+                $('#cart-total').text('ETB ' + new Intl.NumberFormat('id-ID').format(response.cart_total + 15000));
             }
         },
         error: function(xhr) {
@@ -178,8 +178,8 @@ function removeItem(itemId) {
             if (response.success) {
                 $(`#cart-item-${itemId}`).remove();
                 $('#cart-count').text(response.cart_count);
-                $('#cart-subtotal').text('Rp ' + new Intl.NumberFormat('id-ID').format(response.cart_total));
-                $('#cart-total').text('Rp ' + new Intl.NumberFormat('id-ID').format(response.cart_total + 15000));
+                $('#cart-subtotal').text('ETB ' + new Intl.NumberFormat('id-ID').format(response.cart_total));
+                $('#cart-total').text('ETB ' + new Intl.NumberFormat('id-ID').format(response.cart_total + 15000));
 
                 if (response.cart_count === 0) {
                     location.reload();

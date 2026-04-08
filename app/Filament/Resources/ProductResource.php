@@ -70,7 +70,7 @@ class ProductResource extends Resource
                                 Forms\Components\TextInput::make('price')
                                     ->numeric()
                                     ->required()
-                                    ->prefix('IDR'),
+                                    ->prefix('Birr'),
                             ]),
 
                         Forms\Components\Section::make('Associations')

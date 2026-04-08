@@ -41,7 +41,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3"><strong>Total Amount:</strong></div>
-                        <div class="col-sm-9"><strong>Rp {{ number_format($order->grand_total, 0, ',', '.') }}</strong></div>
+                        <div class="col-sm-9"><strong>ETB {{ number_format($order->grand_total, 0, ',', '.') }}</strong></div>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                             <span>Qty: {{ $item->quantity }}</span>
                         </div>
                         <div class="col-md-2 text-end">
-                            <span>Rp {{ number_format($item->total_amount, 0, ',', '.') }}</span>
+                            <span>ETB {{ number_format($item->total_amount, 0, ',', '.') }}</span>
                         </div>
                     </div>
                     @endforeach
@@ -80,16 +80,16 @@
                         <div class="col-md-4">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal:</span>
-                                <span>Rp {{ number_format($order->grand_total - $order->shipping_amount, 0, ',', '.') }}</span>
+                                <span>ETB {{ number_format($order->grand_total - $order->shipping_amount, 0, ',', '.') }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Shipping:</span>
-                                <span>Rp {{ number_format($order->shipping_amount, 0, ',', '.') }}</span>
+                                <span>ETB {{ number_format($order->shipping_amount, 0, ',', '.') }}</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <strong>Total:</strong>
-                                <strong>Rp {{ number_format($order->grand_total, 0, ',', '.') }}</strong>
+                                <strong>ETB {{ number_format($order->grand_total, 0, ',', '.') }}</strong>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ class StatsOverview extends BaseWidget
                 ->color('info')
                 ->chart([15, 4, 10, 2, 12, 4, 12]),
 
-            Stat::make('Total Revenue', 'Rp ' . number_format(Order::where('status', 'delivered')->sum('grand_total'), 0, ',', '.'))
+            Stat::make('Total Revenue', 'ETB ' . number_format(Order::where('status', 'delivered')->sum('grand_total'), 0, ',', '.'))
                 ->description('Total delivered orders')
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('warning')

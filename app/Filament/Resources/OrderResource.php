@@ -69,18 +69,18 @@ class OrderResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('grand_total')
                                     ->numeric()
-                                    ->prefix('IDR')
+                                    ->prefix('Birr')
                                     ->maxValue(42949672.95),
 
                                 Forms\Components\TextInput::make('shipping_amount')
                                     ->numeric()
-                                    ->prefix('IDR')
+                                    ->prefix('Birr')
                                     ->maxValue(42949672.95),
 
                                 Forms\Components\TextInput::make('shipping_method'),
 
                                 Forms\Components\TextInput::make('currency')
-                                    ->default('IDR'),
+                                    ->default('Birr'),
 
                                 Forms\Components\Textarea::make('notes')
                                     ->columnSpanFull(),

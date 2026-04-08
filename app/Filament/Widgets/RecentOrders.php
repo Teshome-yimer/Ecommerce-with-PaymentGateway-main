@@ -36,7 +36,7 @@ class RecentOrders extends BaseWidget
 
                 Tables\Columns\TextColumn::make('grand_total')
                     ->label('Total')
-                    ->money('IDR')
+                    ->money('ETB')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('status')

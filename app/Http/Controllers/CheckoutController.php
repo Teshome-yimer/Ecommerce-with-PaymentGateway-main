@@ -73,7 +73,7 @@ class CheckoutController extends Controller
                 'payment_method' => $request->payment_method,
                 'payment_status' => 'pending',
                 'status' => 'new',
-                'currency' => ($request->payment_method == 'chapa') ? 'ETB' : 'IDR',
+                'currency' => 'ETB',
                 'shipping_amount' => $shippingCost,
                 'shipping_method' => 'standard',
             ]);

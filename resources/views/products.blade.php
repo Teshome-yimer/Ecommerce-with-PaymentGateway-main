@@ -81,7 +81,7 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             @if($product->images && count($product->images) > 0)
-                            <img src="{{ asset('storage/picture/' . $product->images[0]) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $product->name }}">
+                            <img src="{{ asset('storage/' . $product->images[0]) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $product->name }}">
                             @else
                                 <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                                     <i class="fas fa-image fa-3x text-muted"></i>
