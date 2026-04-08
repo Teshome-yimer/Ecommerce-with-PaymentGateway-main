@@ -181,9 +181,9 @@
     <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <div class="hero-badge">🔥 New Arrivals Every Week</div>
-                <h1 class="hero-title mb-3">Shop Smarter,<br>Live <span>Better</span></h1>
-                <p class="hero-subtitle mb-5">Discover thousands of premium products at unbeatable prices.<br>Fast delivery across Ethiopia — right to your door.</p>
+                <div class="hero-badge">👉 አንኳን ወደ አኛ ገበያ በደህና መጡ</div>
+                <h1 class="hero-title mb-3">ፈጣን፣ ቀላል እና<br><span>የታመነ ግዢ</span></h1>
+                <p class="hero-subtitle mb-5">የonline ግዢ መድረክ — ጥራት ያለው ምርት በቀላሉ ይግዙ!</p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="{{ route('products') }}" class="btn hero-btn-primary"><i class="fas fa-shopping-bag me-2"></i>Shop Now</a>
                     <a href="#featured" class="btn hero-btn-outline"><i class="fas fa-star me-2"></i>Featured</a>
@@ -191,10 +191,32 @@
             </div>
             <div class="col-lg-6">
                 <div class="hero-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" class="img-fluid" alt="Shopping">                    <div class="hero-float-card card-1">
+                    <!-- Local hero image with text overlay -->
+                    <div style="position:relative;display:inline-block;width:100%;">
+                        <img src="{{ asset('images/hero.jpg') }}" class="img-fluid" alt="የኛ ገበያ"
+                             style="border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,0.5);width:100%;object-fit:cover;">
+                        <!-- Overlay replacing "Zemen Gebeya" text with "የኛ ገበያ" -->
+                        <div style="position:absolute;top:8%;left:50%;transform:translateX(-50%);text-align:center;width:90%;pointer-events:none;">
+                            <div style="font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.85);letter-spacing:2px;">
+                                የኛ ገበያ
+                            </div>
+                            <div style="font-size:clamp(0.7rem,1.5vw,1rem);color:rgba(255,255,255,0.92);text-shadow:0 1px 8px rgba(0,0,0,0.8);margin-top:4px;font-weight:500;">
+                                Where Ethiopia Shops Digital
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Payment methods float card -->
+                    <div class="hero-float-card card-1">
                         <div class="d-flex align-items-center gap-2">
-                            <span style="font-size:1.4rem;">📦</span>
-                            <div><div style="font-weight:700;">Free Delivery</div><div style="opacity:0.7;font-size:0.75rem;">On orders over Birr 500</div></div>
+                            <span style="font-size:1.2rem;">💳</span>
+                            <div>
+                                <div style="font-weight:700;font-size:0.8rem;">ይከፍሉ በ</div>
+                                <div class="d-flex gap-1 mt-1">
+                                    <span style="background:#00897b;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">Telebirr</span>
+                                    <span style="background:#1565c0;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">CBEBirr</span>
+                                    <span style="background:#c62828;color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:10px;font-weight:700;">Bank</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-float-card card-2">
