@@ -2,174 +2,591 @@
 
 @section('title', 'Home')
 
-@section('content')
-<!-- Hero Section -->
-<section class="hero-simple">
-    <div class="container">
-        <div class="row align-items-center">
+@push('styles')
+<style>
+/* ===== HERO ===== */
+.hero-section {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    border-radius: 50%;
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+.hero-section::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    border-radius: 50%;
+    animation: pulse-glow 5s ease-in-out infinite reverse;
+}
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.2);
+    border: 1px solid rgba(99,102,241,0.5);
+    color: #a5b4fc;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s ease;
+}
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    animation: fadeInUp 0.9s ease;
+}
+.hero-title span {
+    background: linear-gradient(90deg, #818cf8, #ec4899, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    animation: fadeInUp 1s ease;
+}
+.hero-btn-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+}
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(99,102,241,0.6);
+    color: #fff;
+}
+.hero-btn-outline {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+.hero-btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
+    transform: translateY(-3px);
+}
+.hero-image-wrap {
+    position: relative;
+    animation: floatUp 1.2s ease;
+}
+.hero-image-wrap img {
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.hero-float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 12px 18px;
+    color: #fff;
+    font-size: 0.85rem;
+    animation: float 3s ease-in-out infinite;
+}
+.hero-float-card.card-1 { top: 20px; left: -30px; animation-delay: 0s; }
+.hero-float-card.card-2 { bottom: 30px; right: -20px; animation-delay: 1.5s; }
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    padding: 20px 0;
+}
+.stat-item { text-align: center; color: #fff; }
+.stat-number { font-size: 1.8rem; font-weight: 800; }
+.stat-label { font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ===== CATEGORIES ===== */
+.section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6366f1;
+    font-weight: 600;
+}
+.section-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e1b4b;
+}
+.category-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.category-card:hover {
+    border-color: #6366f1;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(99,102,241,0.15);
+}
+.category-icon {
+    width: 70px; height: 70px;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+    transition: all 0.3s;
+}
+.category-card:hover .category-icon {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+.category-card:hover .category-icon i,
+.category-card:hover .category-icon svg { color: #fff !important; filter: brightness(10); }
+.category-name { font-weight: 700; color: #1e1b4b; margin-bottom: 8px; }
+.category-browse {
+    font-size: 0.8rem;
+    color: #6366f1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ===== PRODUCT CARDS ===== */
+.product-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(99,102,241,0.18);
+}
+.product-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+}
+.product-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.product-card:hover .product-img-wrap img { transform: scale(1.08); }
+.product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(99,102,241,0.85);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.product-card:hover .product-overlay { opacity: 1; }
+.product-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+.product-body { padding: 18px; }
+.product-category { font-size: 0.75rem; color: #6366f1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.product-name { font-weight: 700; color: #1e1b4b; margin: 4px 0 8px; font-size: 1rem; }
+.product-price { font-size: 1.2rem; font-weight: 800; color: #6366f1; }
+.product-price-old { font-size: 0.85rem; color: #9ca3af; text-decoration: line-through; }
+.btn-add-cart {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    width: 100%;
+}
+.btn-add-cart:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(99,102,241,0.4); color: #fff; }
+.btn-add-cart:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ===== PROMO BANNER ===== */
+.promo-banner {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    border-radius: 28px;
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+}
+.promo-banner::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: rgba(99,102,241,0.3);
+    border-radius: 50%;
+    top: -80px; right: -80px;
+    animation: pulse-glow 4s infinite;
+}
+.promo-timer { display: flex; gap: 12px; }
+.timer-box {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+    min-width: 65px;
+    color: #fff;
+}
+.timer-num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+.timer-label { font-size: 0.65rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 1px; }
+
+/* ===== WHY US ===== */
+.feature-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+.feature-card:hover {
+    border-color: #6366f1;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(99,102,241,0.12);
+}
+.feature-icon {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 1.6rem;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+@endpush
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section">
+    <div class="container position-relative" style="z-index:2;">
+        <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">Welcome Unversal Shop</h1>
-                <p class="lead mb-4">
-                    Discover amazing products at great prices. Shop now and enjoy fast delivery!
+                <div class="hero-badge">🔥 New Arrivals Every Week</div>
+                <h1 class="hero-title mb-3">
+                    Shop Smarter,<br>Live <span>Better</span>
+                </h1>
+                <p class="hero-subtitle mb-5">
+                    Discover thousands of premium products at unbeatable prices.<br>
+                    Fast delivery across Ethiopia — right to your door.
                 </p>
-                <div class="d-flex gap-3">
-                    <a href="{{ route('products') }}" class="btn btn-light btn-lg">
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ route('products') }}" class="btn hero-btn-primary">
                         <i class="fas fa-shopping-bag me-2"></i>Shop Now
                     </a>
-                    <a href="#featured" class="btn btn-outline-light btn-lg">
+                    <a href="#featured" class="btn hero-btn-outline">
                         <i class="fas fa-star me-2"></i>Featured
                     </a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="img-fluid rounded" alt="Hero Image">
+                <div class="hero-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80"
+                         class="img-fluid" alt="Shopping">
+                    <div class="hero-float-card card-1">
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="font-size:1.4rem;">📦</span>
+                            <div>
+                                <div style="font-weight:700;">Free Delivery</div>
+                                <div style="opacity:0.7;font-size:0.75rem;">On orders over Birr 500</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-float-card card-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="font-size:1.4rem;">⭐</span>
+                            <div>
+                                <div style="font-weight:700;">4.9 Rating</div>
+                                <div style="opacity:0.7;font-size:0.75rem;">10,000+ happy customers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Categories Section -->
-<section class="py-5 bg-light">
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
     <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="section-title">Shop by Category</h2>
-            <p class="text-muted">Explore our product categories</p>
-        </div>
-        <div class="row">
-            @foreach($categories as $category)
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card-clean h-100 text-center">
-                    <div class="card-body">
-                        @if($category->image)
-                            <img src="{{ Storage::url($category->image) }}"
-                                 class="rounded-circle mb-3"
-                                 style="width: 60px; height: 60px; object-fit: cover;"
-                                 alt="{{ $category->name }}">
-                        @else
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                 style="width: 60px; height: 60px;">
-                                <i class="fas fa-tag fa-lg text-white"></i>
-                            </div>
-                        @endif
-                        <h6 class="card-title">{{ $category->name }}</h6>
-                        <a href="{{ route('products', ['category' => $category->id]) }}"
-                           class="btn btn-primary-custom btn-sm">
-                            Browse
-                        </a>
-                    </div>
+        <div class="row g-3">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="{{ \App\Models\Product::count() }}">0</div>
+                    <div class="stat-label">Products</div>
                 </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="{{ \App\Models\User::count() }}">0</div>
+                    <div class="stat-label">Customers</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="{{ \App\Models\Order::count() }}">0</div>
+                    <div class="stat-label">Orders</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="{{ \App\Models\Brand::count() }}">0</div>
+                    <div class="stat-label">Brands</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="py-5" style="background:#f8f7ff;">
+    <div class="container">
+        <div class="text-center mb-5 animate-on-scroll">
+            <div class="section-label">Browse</div>
+            <h2 class="section-heading">Shop by Category</h2>
+            <p class="text-muted">Find exactly what you're looking for</p>
+        </div>
+        <div class="row g-4">
+            @foreach($categories as $i => $category)
+            <div class="col-lg-3 col-md-4 col-6 animate-on-scroll" style="transition-delay: {{ $i * 80 }}ms">
+                <a href="{{ route('products', ['category' => $category->id]) }}" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            @if($category->image)
+                                <img src="{{ Storage::url($category->image) }}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;" alt="{{ $category->name }}">
+                            @else
+                                <i class="fas fa-tag fa-lg" style="color:#6366f1;"></i>
+                            @endif
+                        </div>
+                        <div class="category-name">{{ $category->name }}</div>
+                        <span class="category-browse">Browse →</span>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- Featured Products Section -->
-<section class="py-5" id="featured">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="section-title">Featured Products</h2>
-            <p class="text-muted">Discover our best products</p>
+<!-- ===== PROMO BANNER ===== -->
+<section class="py-5" style="background:#fff;">
+    <div class="container animate-on-scroll">
+        <div class="promo-banner">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <div class="hero-badge mb-3">⚡ Limited Time Offer</div>
+                    <h2 style="color:#fff;font-size:2.2rem;font-weight:800;">Up to 50% OFF<br>on Selected Items</h2>
+                    <p style="color:rgba(255,255,255,0.7);" class="mb-4">Don't miss out on our biggest sale of the season. Shop now before it's gone!</p>
+                    <a href="{{ route('products') }}" class="btn hero-btn-primary">Grab the Deal</a>
+                </div>
+                <div class="col-lg-5">
+                    <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;" class="mb-2">Offer ends in:</p>
+                    <div class="promo-timer">
+                        <div class="timer-box"><div class="timer-num" id="t-hours">00</div><div class="timer-label">Hours</div></div>
+                        <div class="timer-box"><div class="timer-num" id="t-mins">00</div><div class="timer-label">Mins</div></div>
+                        <div class="timer-box"><div class="timer-num" id="t-secs">00</div><div class="timer-label">Secs</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            @foreach($featuredProducts as $product)
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card-clean h-100">
+    </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="py-5" id="featured" style="background:#f8f7ff;">
+    <div class="container">
+        <div class="text-center mb-5 animate-on-scroll">
+            <div class="section-label">Handpicked</div>
+            <h2 class="section-heading">Featured Products</h2>
+            <p class="text-muted">Our best-selling items just for you</p>
+        </div>
+        <div class="row g-4">
+            @foreach($featuredProducts as $i => $product)
+            <div class="col-lg-3 col-md-6 animate-on-scroll" style="transition-delay: {{ $i * 100 }}ms">
+                <div class="product-card h-100">
                     @if($product->on_sale)
-                        <div class="position-absolute top-0 start-0 m-2">
-                            <span class="badge bg-danger">Sale</span>
-                        </div>
+                        <div class="product-badge">Sale</div>
                     @endif
-
-                    @if($product->images && count($product->images) > 0)
-                        <img src="{{ Storage::url($product->images[0]) }}"
-                             class="card-img-top"
-                             style="height: 200px; object-fit: cover;"
-                             alt="{{ $product->name }}">
-                    @else
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                            <i class="fas fa-image fa-3x text-muted"></i>
-                        </div>
-                    @endif
-
-                    <div class="card-body">
-                        <h6 class="card-title">{{ $product->name }}</h6>
-                        <p class="text-muted small">{{ $product->category->name }} • {{ $product->brand->name }}</p>
-                        <p class="card-text">{{ Str::limit($product->description, 80) }}</p>
-
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="price-simple">Birr {{ number_format($product->price, 2, ','.',') }}</span>
-                            @if($product->in_stock)
-                                <span class="badge bg-success">In Stock</span>
-                            @else
-                                <span class="badge bg-secondary">Out of Stock</span>
-                            @endif
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button onclick="addToCart({{ $product->id }})"
-                                    class="btn btn-primary-custom btn-sm"
-                                    {{ !$product->in_stock ? 'disabled' : '' }}>
-                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
-                            </button>
-                            <a href="{{ route('product.detail', $product->slug) }}"
-                               class="btn btn-outline-secondary btn-sm">
-                                View Details
+                    <div class="product-img-wrap">
+                        @if($product->images && count($product->images) > 0)
+                            <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}">
+                        @else
+                            <div class="d-flex align-items-center justify-content-center h-100 bg-light">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                            </div>
+                        @endif
+                        <div class="product-overlay">
+                            <a href="{{ route('product.detail', $product->slug) }}" class="btn btn-light btn-sm rounded-pill px-4">
+                                <i class="fas fa-eye me-1"></i> Quick View
                             </a>
                         </div>
                     </div>
+                    <div class="product-body">
+                        <div class="product-category">{{ $product->category->name }} • {{ $product->brand->name }}</div>
+                        <div class="product-name">{{ $product->name }}</div>
+                        <p class="text-muted small mb-3">{{ Str::limit($product->description, 70) }}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <span class="product-price">Birr {{ number_format($product->price, 0, '.', ',') }}</span>
+                            </div>
+                            @if($product->in_stock)
+                                <span class="badge" style="background:#dcfce7;color:#16a34a;font-size:0.7rem;">In Stock</span>
+                            @else
+                                <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">Out of Stock</span>
+                            @endif
+                        </div>
+                        <button onclick="addToCart({{ $product->id }})"
+                                class="btn btn-add-cart"
+                                {{ !$product->in_stock ? 'disabled' : '' }}>
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
-
-        <div class="text-center mt-4">
-            <a href="{{ route('products') }}" class="btn btn-primary-custom btn-lg">
-                View All Products
+        <div class="text-center mt-5 animate-on-scroll">
+            <a href="{{ route('products') }}" class="btn hero-btn-primary btn-lg px-5">
+                View All Products <i class="fas fa-arrow-right ms-2"></i>
             </a>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-5 bg-light">
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="py-5" style="background:#fff;">
     <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="section-title">Why Choose Us</h2>
+        <div class="text-center mb-5 animate-on-scroll">
+            <div class="section-label">Our Promise</div>
+            <h2 class="section-heading">Why Choose Us</h2>
         </div>
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="text-center">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-shipping-fast fa-lg text-white"></i>
+        <div class="row g-4">
+            @php
+            $features = [
+                ['icon'=>'fas fa-shipping-fast','color'=>'#eef2ff','icolor'=>'#6366f1','title'=>'Fast Delivery','desc'=>'Quick and reliable delivery right to your doorstep across Ethiopia.'],
+                ['icon'=>'fas fa-shield-alt','color'=>'#f0fdf4','icolor'=>'#16a34a','title'=>'Secure Payment','desc'=>'Your payment is protected with bank-level encryption and security.'],
+                ['icon'=>'fas fa-undo','color'=>'#fff7ed','icolor'=>'#ea580c','title'=>'Easy Returns','desc'=>'Not satisfied? Return within 7 days, no questions asked.'],
+                ['icon'=>'fas fa-headset','color'=>'#fdf4ff','icolor'=>'#9333ea','title'=>'24/7 Support','desc'=>'Our support team is always ready to help you anytime.'],
+            ];
+            @endphp
+            @foreach($features as $i => $f)
+            <div class="col-md-6 col-lg-3 animate-on-scroll" style="transition-delay: {{ $i * 100 }}ms">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:{{ $f['color'] }};">
+                        <i class="{{ $f['icon'] }}" style="color:{{ $f['icolor'] }};font-size:1.5rem;"></i>
                     </div>
-                    <h6>Fast Delivery</h6>
-                    <p class="text-muted">Quick and reliable delivery to your doorstep</p>
+                    <h6 style="font-weight:700;color:#1e1b4b;margin-bottom:8px;">{{ $f['title'] }}</h6>
+                    <p class="text-muted small mb-0">{{ $f['desc'] }}</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="text-center">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-shield-alt fa-lg text-white"></i>
-                    </div>
-                    <h6>Secure Payment</h6>
-                    <p class="text-muted">Your payment information is safe and secure</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="text-center">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-headset fa-lg text-white"></i>
-                    </div>
-                    <h6>24/7 Support</h6>
-                    <p class="text-muted">We're here to help you anytime, anywhere</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
+
+@push('scripts')
+<script>
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Count-up animation
+document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    let count = 0;
+    const step = Math.ceil(target / 60);
+    const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = count.toLocaleString();
+        if (count >= target) clearInterval(timer);
+    }, 30);
+});
+
+// Countdown timer (24h from now)
+function startTimer() {
+    const end = new Date();
+    end.setHours(end.getHours() + 24);
+    setInterval(() => {
+        const diff = end - new Date();
+        if (diff <= 0) return;
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('t-hours').textContent = String(h).padStart(2,'0');
+        document.getElementById('t-mins').textContent = String(m).padStart(2,'0');
+        document.getElementById('t-secs').textContent = String(s).padStart(2,'0');
+    }, 1000);
+}
+startTimer();
+</script>
+@endpush
 @endsection
