@@ -487,7 +487,7 @@
         </div>
     </div>
     <div class="chat-input-area">
-        <input type="text" id="chat-input" placeholder="ጥያቄዎን ይጻፉ..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <input type="text" id="chat-input" placeholder="Type in any language..." onkeypress="if(event.key==='Enter') sendMessage()">
         <button id="chat-send" onclick="sendMessage()">
             <i class="fas fa-paper-plane" style="font-size:0.85rem;"></i>
         </button>
