@@ -1,18 +1,33 @@
 #!/bin/bash
+set -e
 
-# Generate app key if not set
-php artisan key:generate --force
+echo "=== Starting የኛ ገበያ ==="
+
+# Only generate key if not set
+if [ -z "$APP_KEY" ]; then
+    php artisan key:generate --force
+fi
+
+# Wait for DB to be ready
+echo "Waiting for database..."
+sleep 3
 
 # Run migrations
 php artisan migrate --force
 
-# Cache config
+# Seed roles if needed
+php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
+
+# Cache for performance
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Create storage link
-php artisan storage:link
+# Storage link
+php artisan storage:link 2>/dev/null || true
 
-# Start Apache
+# Fix permissions
+chmod -R 775 storage bootstrap/cache
+
+echo "=== App ready! Starting Apache ==="
 apache2-foreground
