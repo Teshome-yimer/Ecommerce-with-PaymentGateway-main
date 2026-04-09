@@ -3,7 +3,13 @@ set -e
 
 echo "=== Starting የኛ ገበያ ==="
 
-# Create .env from environment variables (Railway doesn't have .env file)
+# Set Apache to listen on Railway's PORT
+PORT="${PORT:-80}"
+sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf
+sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf
+echo "Apache configured on port $PORT"
+
+# Create .env from environment variables
 cat > /var/www/html/.env << EOF
 APP_NAME="${APP_NAME:-YegnGebya}"
 APP_ENV="${APP_ENV:-production}"
@@ -33,7 +39,7 @@ MAIL_PORT="${MAIL_PORT:-465}"
 MAIL_USERNAME="${MAIL_USERNAME}"
 MAIL_PASSWORD="${MAIL_PASSWORD}"
 MAIL_ENCRYPTION="${MAIL_ENCRYPTION:-ssl}"
-MAIL_FROM_ADDRESS="${MAIL_FROM_ADDRESS}"
+MAIL_FROM_ADDRESS="${MAIL_FROM_ADDRESS:-noreply@yegngebya.com}"
 MAIL_FROM_NAME="${APP_NAME:-YegnGebya}"
 
 CHAPA_SECRET_KEY="${CHAPA_SECRET_KEY}"
@@ -46,14 +52,14 @@ GOOGLE_REDIRECT_URL="${GOOGLE_REDIRECT_URL}"
 GEMINI_API_KEY="${GEMINI_API_KEY}"
 EOF
 
-echo ".env created successfully"
+echo ".env created"
 
 # Wait for DB
 echo "Waiting for database..."
 sleep 5
 
-# Run migrations - continue even if some fail
-php artisan migrate --force 2>&1 || echo "Some migrations had issues, continuing..."
+# Run migrations - skip errors
+php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 
 # Seed roles
 php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
@@ -68,5 +74,5 @@ php artisan storage:link 2>/dev/null || true
 
 chmod -R 775 storage bootstrap/cache
 
-echo "=== App ready! ==="
+echo "=== App ready on port $PORT ==="
 apache2-foreground

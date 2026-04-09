@@ -25,15 +25,12 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
     && mkdir -p /var/www/html/public/images \
     && chmod -R 775 /var/www/html/public/images
 
-# Configure Apache
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+# Configure Apache to serve from /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
+        /etc/apache2/sites-available/000-default.conf \
     && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' \
        >> /etc/apache2/sites-available/000-default.conf \
     && a2enmod rewrite
-
-# Use PORT env variable from Railway
-RUN sed -i 's|Listen 80|Listen ${PORT:-80}|g' /etc/apache2/ports.conf \
-    && sed -i 's|<VirtualHost \*:80>|<VirtualHost *:${PORT:-80}>|g' /etc/apache2/sites-available/000-default.conf
 
 # Start script
 COPY docker-start.sh /usr/local/bin/start.sh
