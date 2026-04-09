@@ -461,23 +461,28 @@
 </style>
 
 <!-- Chatbot Toggle Button -->
-<button id="chatbot-btn" onclick="toggleChat()" title="ድጋፍ ያግኙ">
-    <i class="fas fa-comments" style="color:#fff;font-size:1.3rem;" id="chat-icon"></i>
+<button id="chatbot-btn" onclick="toggleChat()" title="ድጋፍ ያግኙ" style="padding:0;overflow:hidden;">
+    <span id="chat-icon-wrap" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+        <img src="{{ asset('images/auth-side.jpg') }}" id="chat-photo" style="width:58px;height:58px;object-fit:cover;object-position:top;border-radius:50%;" alt="Teshome">
+        <i class="fas fa-times" id="chat-icon" style="color:#fff;font-size:1.3rem;display:none;"></i>
+    </span>
 </button>
 
 <!-- Chatbot Window -->
 <div id="chatbot-window">
     <div class="chat-header">
-        <div class="chat-avatar">🤖</div>
+        <div style="width:42px;height:42px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,0.4);flex-shrink:0;">
+            <img src="{{ asset('images/auth-side.jpg') }}" style="width:100%;height:100%;object-fit:cover;object-position:top;" alt="Teshome">
+        </div>
         <div class="chat-header-info">
-            <div class="chat-header-name">የኛ ገበያ ድጋፍ</div>
+            <div class="chat-header-name">Teshome Admin Chat</div>
             <div class="chat-header-status">ዝግጁ ነኝ</div>
         </div>
         <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
     </div>
     <div class="chat-messages" id="chat-messages">
         <div class="msg bot">
-            <div class="msg-bubble">👋 ሰላም! ወደ <strong>የኛ ገበያ</strong> እንኳን ደህና መጡ።<br>ምን ልረዳዎ እችላለሁ?</div>
+            <div class="msg-bubble">👋 ሰላም! እኔ Teshome ነኝ — <strong>የኛ ገበያ</strong> ድጋፍ።<br>ምን ልረዳዎ እችላለሁ?</div>
             <div class="msg-time">አሁን</div>
         </div>
     </div>
@@ -492,13 +497,13 @@
 <script>
 function toggleChat() {
     const win = document.getElementById('chatbot-window');
+    const photo = document.getElementById('chat-photo');
     const icon = document.getElementById('chat-icon');
     const isOpen = win.style.display === 'flex';
     win.style.display = isOpen ? 'none' : 'flex';
-    icon.className = isOpen ? 'fas fa-comments' : 'fas fa-times';
-    if (!isOpen) {
-        setTimeout(() => document.getElementById('chat-input').focus(), 300);
-    }
+    photo.style.display = isOpen ? 'block' : 'none';
+    icon.style.display = isOpen ? 'none' : 'block';
+    if (!isOpen) setTimeout(() => document.getElementById('chat-input').focus(), 300);
 }
 
 function getTime() {
