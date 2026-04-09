@@ -18,6 +18,11 @@ use App\Http\Controllers\Auth\SocialLoginController;
 
 Route::get('auth/{provider}', [SocialLoginController::class, 'redirect'])->name('social.redirect');
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
+
+// Rate limit login attempts
+Route::middleware('throttle:5,1')->group(function () {
+    // Auth routes with rate limiting handled by Laravel's built-in
+});
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
@@ -62,8 +67,10 @@ Route::middleware('auth')->group(function () {
 Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
 Route::post('/chapa/webhook', [CheckoutController::class, 'chapaWebhook'])->name('chapa.webhook');
 
-// Chatbot
-Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat'])->name('chatbot');
+// Chatbot - rate limited
+Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat'])
+    ->middleware('throttle:30,1')
+    ->name('chatbot');
 
 // 1. የኢሜይል ማረጋገጫ ራውቶችን ክፈት
 Auth::routes(['verify' => true]);

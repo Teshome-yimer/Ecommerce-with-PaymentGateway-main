@@ -180,8 +180,10 @@ if ($request->payment_method == 'chapa') {
             ->with(['items.product', 'address'])
             ->firstOrFail();
 
-        // Chapa ከሆነ ክፍያውን አፕዴት ማድረግ ትችላለህ (እዚህ ጋር Verify ማድረግ ይቻላል)
-        $order->update(['payment_status' => 'paid', 'status' => 'processing']);
+        // Only update if still pending — prevent re-triggering
+        if ($order->payment_status === 'pending') {
+            $order->update(['payment_status' => 'paid', 'status' => 'processing']);
+        }
 
         return view('checkout-success', compact('order'));
     }
