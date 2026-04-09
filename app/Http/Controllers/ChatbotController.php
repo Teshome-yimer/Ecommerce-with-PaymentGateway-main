@@ -15,13 +15,18 @@ class ChatbotController extends Controller
         $apiKey = env('GEMINI_API_KEY');
 
         $systemContext = "You are 'Teshome', a friendly customer support assistant for 'የኛ ገበያ' (Yegna Gebya), an Ethiopian e-commerce platform.
-IMPORTANT: Always detect the language the customer is writing in and respond in that SAME language automatically.
-If they write in Amharic → respond in Amharic. English → English. Arabic → Arabic. French → French. Any language → same language.
-Be friendly, concise and helpful. Keep responses under 100 words.
-The shop sells electronics, clothing, sports items and more.
-Payment: Chapa (Telebirr, CBEBirr, Cards) and Bank Transfer.
-Delivery: across Ethiopia. Return policy: 7 days.
-Shipping cost: Birr 150. Orders tracked via order history page.";
+IMPORTANT RULES:
+1. Always detect the language the customer writes in and respond in that SAME language.
+2. ALWAYS give a COMPLETE and DIRECT answer to the question. Never stop mid-sentence.
+3. Be concise but complete. Max 3-4 sentences.
+4. Never just say 'Hello' or 'Thank you' without answering the actual question.
+
+Shop info:
+- Products: electronics, clothing, sports, home items
+- Payment: Telebirr, CBEBirr, Visa/Mastercard, Bank Transfer (via Chapa)
+- Delivery: 2-5 business days across Ethiopia, costs Birr 150
+- Returns: within 7 days of receiving the product
+- Contact: tesheyimer86@gmail.com, phone: 0962868748";
 
         // Try Gemini API
         $models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-2.5-flash'];
@@ -34,7 +39,7 @@ Shipping cost: Birr 150. Orders tracked via order history page.";
                     'contents' => [[
                         'parts' => [['text' => $systemContext . "\n\nCustomer: " . $userMessage . "\nTeshome:"]]
                     ]],
-                    'generationConfig' => ['temperature' => 0.7, 'maxOutputTokens' => 200]
+                    'generationConfig' => ['temperature' => 0.5, 'maxOutputTokens' => 400]
                 ]);
 
                 if ($response->successful()) {
@@ -69,8 +74,8 @@ Shipping cost: Birr 150. Orders tracked via order history page.";
         if ($this->contains($msg, ['ክፍያ', 'payment', 'telebirr', 'cbe', 'ባንክ', 'bank'])) {
             return "💳 ክፍያ ዘዴዎቻችን:\n• Telebirr\n• CBEBirr\n• ካርድ (Visa/Mastercard)\n• ባንክ ዝውውር\n\nሁሉም ክፍያዎች Chapa በኩል ደህንነቱ ተጠብቆ ይሰራሉ።";
         }
-        if ($this->contains($msg, ['ማድረስ', 'delivery', 'shipping', 'መላክ', 'ምን ያህል ቀን'])) {
-            return "🚚 ማድረሻ:\n• ዋጋ: Birr 150\n• ጊዜ: 2-5 የስራ ቀናት\n• ኢትዮጵያ ሁሉም ቦታ እናደርሳለን";
+        if ($this->contains($msg, ['ማድረስ', 'delivery', 'shipping', 'መላክ', 'ምን ያህል ቀን', 'how many days', 'how long', 'when will'])) {
+            return "🚚 Delivery takes 2-5 business days across Ethiopia. Shipping cost is Birr 150. We deliver to all regions of Ethiopia.";
         }
         if ($this->contains($msg, ['ትዕዛዝ', 'order', 'ያዘዝኩ', 'status', 'ሁኔታ'])) {
             return "📦 ትዕዛዝዎን ለማየት:\n1. ወደ መለያዎ ይግቡ\n2. 'ትዕዛዞቼ' ይጫኑ\n3. ትዕዛዝዎን ይፈልጉ\n\nችግር ካለ ኢሜይል ይላኩልን: tesheyimer86@gmail.com";
