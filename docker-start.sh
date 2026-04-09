@@ -3,14 +3,9 @@ set -e
 
 echo "=== Starting የኛ ገበያ ==="
 
-# Only generate key if not set
-if [ -z "$APP_KEY" ]; then
-    php artisan key:generate --force
-fi
-
-# Wait for DB to be ready
+# Wait for DB
 echo "Waiting for database..."
-sleep 3
+sleep 5
 
 # Run migrations
 php artisan migrate --force
