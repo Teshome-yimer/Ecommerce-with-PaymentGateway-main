@@ -31,7 +31,7 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
     && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' \
        >> /etc/apache2/sites-available/000-default.conf \
     && a2enmod rewrite \
-    && a2dismod mpm_event mpm_worker mpm_async 2>/dev/null || true \
+    && find /etc/apache2/mods-enabled -name "mpm_*.load" -delete \
     && a2enmod mpm_prefork
 
 # Start script
