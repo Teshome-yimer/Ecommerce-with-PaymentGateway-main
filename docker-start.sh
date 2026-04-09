@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Fix Apache MPM conflict - remove ALL MPM modules and enable only mpm_prefork
+rm -f /etc/apache2/mods-enabled/mpm_*.load
+rm -f /etc/apache2/mods-enabled/mpm_*.conf
+a2enmod mpm_prefork 2>/dev/null || true
+
 set -e
 
 echo "=== Starting የኛ ገበያ ==="
