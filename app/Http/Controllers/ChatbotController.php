@@ -65,8 +65,14 @@ Shop info:
     {
         $msg = mb_strtolower($msg);
 
-        if ($this->contains($msg, ['ሰላም', 'hello', 'hi', 'selam', 'ሃይ'])) {
+        if ($this->contains($msg, ['ሰላም', 'hello', 'hi', 'selam', 'ሃይ', 'hey'])) {
             return "👋 ሰላም! እኔ Teshome ነኝ። ምን ልረዳዎ እችላለሁ?";
+        }
+        if ($this->contains($msg, ['password', 'የይለፍ ቃል', 'ፓስወርድ', 'መቀየር', 'ቀይር', 'forgot', 'reset', 'ረሱ'])) {
+            return "🔐 የይለፍ ቃል ለመቀየር:\n1. ወደ መለያዎ ይግቡ\n2. ከላይ ስምዎን ጠቅ ያድርጉ\n3. 'የእኔ መለያ' ይምረጡ\n4. 'የይለፍ ቃል ቀይር' ክፍል ይሙሉ\n\nYou can also change your password at: Profile Settings → Change Password section.";
+        }
+        if ($this->contains($msg, ['register', 'ይመዝገቡ', 'account', 'መለያ', 'login', 'ይግቡ', 'sign up', 'sign in'])) {
+            return "👤 መለያ ለመፍጠር 'ይመዝገቡ' ይጫኑ። ለመግባት 'ይግቡ' ይጫኑ። Google፣ GitHub ወይም Facebook ሊጠቀሙ ይችላሉ።";
         }
         if ($this->contains($msg, ['ዋጋ', 'price', 'ምን ያህል', 'ስንት'])) {
             return "💰 ዋጋዎቻችን በምርቶቹ ገጽ ላይ ይታያሉ። ምርቶቹን ለማየት 'ምርቶች' ይጫኑ። ለተለየ ምርት ዋጋ ስሙን ይጻፉልኝ።";
