@@ -181,7 +181,7 @@
                     <div class="d-flex justify-content-between mb-3"><strong>ጠቅላላ:</strong><strong>Birr {{ number_format($grandTotal, 0) }}</strong></div>
 
                     <button type="button" class="btn btn-primary w-100" id="pay-button">
-                        <i class="fas fa-wallet"></i> Pay with Chapa
+                        <i class="fas fa-wallet"></i> Chapa በኩል ክፈሉ
                     </button>
                 </div>
             </div>
@@ -189,7 +189,48 @@
     </div>
 </div>
 
+<!-- Payment Processing Overlay -->
+<div id="payment-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,12,41,0.85);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;flex-direction:column;">
+
+    <!-- Loading State -->
+    <div id="overlay-loading" style="text-align:center;color:#fff;">
+        <div style="width:90px;height:90px;margin:0 auto 24px;position:relative;">
+            <svg viewBox="0 0 90 90" style="width:90px;height:90px;animation:spin 1.2s linear infinite;">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="6"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#818cf8" stroke-width="6"
+                        stroke-dasharray="80 160" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-lock" style="font-size:1.6rem;color:#818cf8;"></i>
+            </div>
+        </div>
+        <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:8px;">ትዕዛዝዎን በማረጋገጥ ላይ ነን</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:0.92rem;">እባክዎ ይጠብቁ — ይህ ጥቂት ሰከንዶች ይወስዳል...</p>
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:20px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#818cf8;animation:bounce 1.2s infinite 0s;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#818cf8;animation:bounce 1.2s infinite 0.2s;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#818cf8;animation:bounce 1.2s infinite 0.4s;"></div>
+        </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="overlay-success" style="display:none;text-align:center;color:#fff;animation:popIn 0.5s ease;">
+        <div style="width:90px;height:90px;background:linear-gradient(135deg,#16a34a,#22c55e);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 0 40px rgba(34,197,94,0.5);">
+            <i class="fas fa-check" style="font-size:2.2rem;color:#fff;"></i>
+        </div>
+        <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:8px;">ትዕዛዙ በትክክል ተልኳል! ✅</h3>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.92rem;">ወደ ክፍያ ገጽ እየተዛወሩ ነው...</p>
+    </div>
+
+</div>
+
 @push('styles')
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes bounce { 0%,80%,100%{ transform:scale(0.6);opacity:0.4; } 40%{ transform:scale(1);opacity:1; } }
+@keyframes popIn { from{ transform:scale(0.5);opacity:0; } to{ transform:scale(1);opacity:1; } }
+</style>
+@endpush
 <style>
     .payment-option { position: relative; height: 100%; }
     .payment-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -234,6 +275,12 @@ document.getElementById('pay-button').addEventListener('click', function () {
     const form = document.getElementById('checkout-form');
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
+    // Show loading overlay
+    const overlay = document.getElementById('payment-overlay');
+    overlay.style.display = 'flex';
+    document.getElementById('overlay-loading').style.display = 'block';
+    document.getElementById('overlay-success').style.display = 'none';
+
     this.disabled = true;
     this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> በሂደት ላይ...';
 
@@ -248,20 +295,31 @@ document.getElementById('pay-button').addEventListener('click', function () {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            if (selectedMethod === 'chapa') {
-                // Redirect to Chapa Payment URL
-                window.location.href = data.checkout_url;
-            } else {
-                // Midtrans Logic
-                snap.pay(data.snap_token, {
-                    onSuccess: function(result) { window.location.href = data.success_url; },
-                    onClose: function() { location.reload(); }
-                });
-            }
+            // Show success state briefly then redirect
+            document.getElementById('overlay-loading').style.display = 'none';
+            document.getElementById('overlay-success').style.display = 'block';
+
+            setTimeout(() => {
+                if (selectedMethod === 'chapa') {
+                    window.location.href = data.checkout_url;
+                } else {
+                    snap.pay(data.snap_token, {
+                        onSuccess: function() { window.location.href = data.success_url; },
+                        onClose: function() { overlay.style.display = 'none'; location.reload(); }
+                    });
+                }
+            }, 1800);
         } else {
-            alert(data.error || 'Process failed');
-            this.disabled = false;
+            overlay.style.display = 'none';
+            alert(data.error || 'ሂደቱ አልተሳካም');
+            document.getElementById('pay-button').disabled = false;
+            document.getElementById('pay-button').innerHTML = '<i class="fas fa-wallet"></i> Chapa በኩል ክፈሉ';
         }
+    })
+    .catch(() => {
+        overlay.style.display = 'none';
+        document.getElementById('pay-button').disabled = false;
+        document.getElementById('pay-button').innerHTML = '<i class="fas fa-wallet"></i> Chapa በኩል ክፈሉ';
     });
 });
 </script>

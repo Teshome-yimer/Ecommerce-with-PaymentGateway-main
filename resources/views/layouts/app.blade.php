@@ -328,7 +328,7 @@
                     $('#cart-count').text(response.cart_count);
 
                     // Show success message
-                    showAlert('success', response.message);
+                    showAlert('success', response.message || 'ምርቱ ወደ ጋሪ ተጨምሯል!');
 
                     // Reset button
                     button.disabled = false;
@@ -337,7 +337,7 @@
             })
             .fail(function(xhr) {
                 const response = xhr.responseJSON;
-                showAlert('danger', response.error || 'Failed to add product to cart');
+                showAlert('danger', response.error || 'ምርቱን ወደ ጋሪ ማስገባት አልተሳካም');
 
                 // Reset button
                 button.disabled = false;
@@ -346,27 +346,38 @@
         }
 
         function showAlert(type, message) {
-            const iconMap = {
-                'success': 'fas fa-check-circle',
-                'danger': 'fas fa-exclamation-circle'
+            // Remove existing toasts
+            $('.toast-notify').remove();
+
+            const colors = {
+                'success': { bg: 'linear-gradient(135deg,#16a34a,#22c55e)', icon: 'fa-check-circle' },
+                'danger':  { bg: 'linear-gradient(135deg,#dc2626,#ef4444)', icon: 'fa-exclamation-circle' }
             };
+            const c = colors[type] || colors['success'];
 
-            const alertHtml = `
-                <div class="container">
-                    <div class="alert alert-clean alert-${type} alert-dismissible fade show" role="alert">
-                        <i class="${iconMap[type]} me-2"></i>${message}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+            const toast = $(`
+                <div class="toast-notify" style="
+                    position:fixed;top:24px;left:50%;transform:translateX(-50%);
+                    z-index:99999;min-width:300px;max-width:420px;
+                    background:${c.bg};
+                    color:#fff;border-radius:16px;padding:16px 22px;
+                    display:flex;align-items:center;gap:12px;
+                    box-shadow:0 12px 40px rgba(0,0,0,0.25);
+                    animation:slideDown 0.4s ease;
+                ">
+                    <i class="fas ${c.icon}" style="font-size:1.3rem;flex-shrink:0;"></i>
+                    <span style="font-weight:600;font-size:0.92rem;">${message}</span>
                 </div>
-            `;
+            `);
 
-            $('main').prepend(alertHtml);
-
-            // Auto dismiss after 3 seconds
-            setTimeout(() => {
-                $('.alert').fadeOut();
-            }, 3000);
+            $('body').append(toast);
+            setTimeout(() => toast.fadeOut(400, () => toast.remove()), 3500);
         }
+
+        // Toast animation
+        const toastStyle = document.createElement('style');
+        toastStyle.textContent = '@keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+        document.head.appendChild(toastStyle);
     </script>
 
     @stack('scripts')
