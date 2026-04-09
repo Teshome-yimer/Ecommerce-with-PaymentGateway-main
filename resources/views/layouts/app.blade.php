@@ -386,10 +386,10 @@
 <style>
 #chatbot-btn {
     position:fixed; bottom:28px; right:28px; z-index:9998;
-    width:58px; height:58px; border-radius:50%; border:none; cursor:pointer;
+    height:52px; border-radius:50px; border:none; cursor:pointer;
     background:linear-gradient(135deg,#6366f1,#8b5cf6);
     box-shadow:0 8px 25px rgba(99,102,241,0.5);
-    display:flex; align-items:center; justify-content:center;
+    display:flex; align-items:center; gap:10px; padding:0 18px 0 6px;
     transition:all 0.3s; animation:pulse-btn 2.5s infinite;
 }
 #chatbot-btn:hover { transform:scale(1.1); box-shadow:0 12px 35px rgba(99,102,241,0.7); }
@@ -461,10 +461,12 @@
 </style>
 
 <!-- Chatbot Toggle Button -->
-<button id="chatbot-btn" onclick="toggleChat()" title="ድጋፍ ያግኙ" style="padding:0;overflow:hidden;">
-    <span id="chat-icon-wrap" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
-        <img src="{{ asset('images/auth-side.jpg') }}" id="chat-photo" style="width:58px;height:58px;object-fit:cover;object-position:top;border-radius:50%;" alt="Teshome">
-        <i class="fas fa-times" id="chat-icon" style="color:#fff;font-size:1.3rem;display:none;"></i>
+<button id="chatbot-btn" onclick="toggleChat()" title="ድጋፍ ያግኙ" style="padding:0 18px 0 6px;overflow:visible;">
+    <span id="chat-icon-wrap" style="display:flex;align-items:center;gap:10px;">
+        <img src="{{ asset('images/auth-side.jpg') }}" id="chat-photo"
+             style="width:40px;height:40px;object-fit:cover;object-position:top;border-radius:50%;border:2px solid rgba(255,255,255,0.5);" alt="Teshome">
+        <span id="chat-label" style="color:#fff;font-weight:700;font-size:0.88rem;white-space:nowrap;">Chat</span>
+        <i class="fas fa-times" id="chat-icon" style="color:#fff;font-size:1rem;display:none;"></i>
     </span>
 </button>
 
@@ -499,10 +501,12 @@ function toggleChat() {
     const win = document.getElementById('chatbot-window');
     const photo = document.getElementById('chat-photo');
     const icon = document.getElementById('chat-icon');
+    const label = document.getElementById('chat-label');
     const isOpen = win.style.display === 'flex';
     win.style.display = isOpen ? 'none' : 'flex';
     photo.style.display = isOpen ? 'block' : 'none';
     icon.style.display = isOpen ? 'none' : 'block';
+    label.style.display = isOpen ? 'block' : 'none';
     if (!isOpen) setTimeout(() => document.getElementById('chat-input').focus(), 300);
 }
 
