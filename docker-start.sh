@@ -74,8 +74,9 @@ php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
 php artisan config:cache
 php artisan view:cache
 
-# Storage link
-php artisan storage:link 2>/dev/null || true
+# Storage link (idempotent - remove if exists, then create)
+rm -f /var/www/html/public/storage
+php artisan storage:link
 
 chmod -R 775 storage bootstrap/cache
 
