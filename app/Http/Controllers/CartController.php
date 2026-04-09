@@ -65,7 +65,7 @@ class CartController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Product added to cart',
+            'message' => 'ምርቱ ወደ ጋሪ ተጨምሯል! 🛒',
             'cart_count' => $cartCount
         ]);
     }

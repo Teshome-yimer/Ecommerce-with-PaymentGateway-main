@@ -62,6 +62,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
 Route::post('/chapa/webhook', [CheckoutController::class, 'chapaWebhook'])->name('chapa.webhook');
 
+// Chatbot
+Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat'])->name('chatbot');
+
 // 1. የኢሜይል ማረጋገጫ ራውቶችን ክፈት
 Auth::routes(['verify' => true]);
 

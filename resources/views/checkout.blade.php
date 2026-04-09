@@ -190,7 +190,7 @@
 </div>
 
 <!-- Payment Processing Overlay -->
-<div id="payment-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,12,41,0.85);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;flex-direction:column;">
+<div id="payment-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,12,41,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;">
 
     <!-- Loading State -->
     <div id="overlay-loading" style="text-align:center;color:#fff;">
@@ -229,21 +229,18 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes bounce { 0%,80%,100%{ transform:scale(0.6);opacity:0.4; } 40%{ transform:scale(1);opacity:1; } }
 @keyframes popIn { from{ transform:scale(0.5);opacity:0; } to{ transform:scale(1);opacity:1; } }
-</style>
-@endpush
-<style>
-    .payment-option { position: relative; height: 100%; }
-    .payment-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-    .payment-label {
-        display: block; width: 100%; height: 100%; padding: 1rem;
-        border: 2px solid #e3e6f0; border-radius: 0.5rem; cursor: pointer;
-        transition: all 0.3s ease; background: white;
-    }
-    .payment-label:hover { border-color: #667eea; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15); }
-    .payment-option input[type="radio"]:checked + .payment-label {
-        border-color: #667eea; background: rgba(102, 126, 234, 0.05);
-    }
-    .payment-content { text-align: center; }
+.payment-option { position: relative; height: 100%; }
+.payment-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.payment-label {
+    display: block; width: 100%; height: 100%; padding: 1rem;
+    border: 2px solid #e3e6f0; border-radius: 0.5rem; cursor: pointer;
+    transition: all 0.3s ease; background: white;
+}
+.payment-label:hover { border-color: #667eea; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15); }
+.payment-option input[type="radio"]:checked + .payment-label {
+    border-color: #667eea; background: rgba(102, 126, 234, 0.05);
+}
+.payment-content { text-align: center; }
 </style>
 @endpush
 
