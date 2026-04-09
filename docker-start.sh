@@ -52,8 +52,8 @@ echo ".env created successfully"
 echo "Waiting for database..."
 sleep 5
 
-# Run migrations
-php artisan migrate --force
+# Run migrations - continue even if some fail
+php artisan migrate --force 2>&1 || echo "Some migrations had issues, continuing..."
 
 # Seed roles
 php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
