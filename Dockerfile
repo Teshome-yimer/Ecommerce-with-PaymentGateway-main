@@ -25,12 +25,14 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
     && mkdir -p /var/www/html/public/images \
     && chmod -R 775 /var/www/html/public/images
 
-# Configure Apache to serve from /public
+# Configure Apache
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
         /etc/apache2/sites-available/000-default.conf \
     && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' \
        >> /etc/apache2/sites-available/000-default.conf \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && a2dismod mpm_event 2>/dev/null || true \
+    && a2enmod mpm_prefork
 
 # Start script
 COPY docker-start.sh /usr/local/bin/start.sh
