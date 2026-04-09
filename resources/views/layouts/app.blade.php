@@ -385,7 +385,7 @@
 <!-- ===== CHATBOT ===== -->
 <style>
 #chatbot-btn {
-    position:fixed; bottom:28px; right:28px; z-index:9998;
+    position:fixed; bottom:24px; right:20px; z-index:9998;
     height:52px; border-radius:50px; border:none; cursor:pointer;
     background:linear-gradient(135deg,#6366f1,#8b5cf6);
     box-shadow:0 8px 25px rgba(99,102,241,0.5);
@@ -398,9 +398,11 @@
     50%{ box-shadow:0 8px 35px rgba(99,102,241,0.8),0 0 0 8px rgba(99,102,241,0.15); }
 }
 #chatbot-window {
-    position:fixed; bottom:100px; right:28px; z-index:9997;
-    width:360px; height:520px; border-radius:24px;
-    background:#fff; box-shadow:0 20px 60px rgba(0,0,0,0.2);
+    position:fixed; bottom:90px; right:20px; z-index:9997;
+    width:min(380px, calc(100vw - 24px));
+    height:min(560px, calc(100vh - 120px));
+    border-radius:24px;
+    background:#fff; box-shadow:0 20px 60px rgba(0,0,0,0.25);
     display:none; flex-direction:column; overflow:hidden;
     animation:slideUp 0.3s ease;
 }
