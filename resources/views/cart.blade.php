@@ -74,9 +74,9 @@
             <div class="summary-card">
                 <div style="font-weight:800;color:#1e1b4b;font-size:1.1rem;margin-bottom:20px;">የትዕዛዝ ማጠቃለያ</div>
                 <div class="summary-row"><span>ድምር:</span><span id="cart-subtotal">Birr {{ number_format($total, 0, '.', ',') }}</span></div>
-                <div class="summary-row"><span>የመላኪያ ዋጋ:</span><span>Birr 15,000</span></div>
+                <div class="summary-row"><span>የመላኪያ ዋጋ:</span><span>Birr 150</span></div>
                 <hr style="border-color:#f3f4f6;">
-                <div class="summary-total"><span>ጠቅላላ:</span><span id="cart-total" style="color:#6366f1;">Birr {{ number_format($total + 15000, 0, '.', ',') }}</span></div>
+                <div class="summary-total"><span>ጠቅላላ:</span><span id="cart-total" style="color:#6366f1;">Birr {{ number_format($total + 150, 0, '.', ',') }}</span></div>
                 <div style="margin-top:20px;">
                     @auth
                         <a href="{{ route('checkout') }}" class="btn-checkout"><i class="fas fa-credit-card me-2"></i>ወደ ክፍያ ሂድ</a>
@@ -123,7 +123,7 @@ function updateQuantity(itemId, quantity) {
                 $(`#qty-${itemId}`).val(quantity);
                 $(`#item-total-${itemId}`).text('Birr ' + new Intl.NumberFormat('en').format(r.item_total));
                 $('#cart-subtotal').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total));
-                $('#cart-total').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total + 15000));
+                $('#cart-total').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total + 150));
             }
         },
         error: function() { showAlert('danger', 'ብዛቱን ማዘመን አልተሳካም'); }
@@ -139,7 +139,7 @@ function removeItem(itemId) {
                 $(`#cart-item-${itemId}`).remove();
                 $('#cart-count').text(r.cart_count);
                 $('#cart-subtotal').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total));
-                $('#cart-total').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total + 15000));
+                $('#cart-total').text('Birr ' + new Intl.NumberFormat('en').format(r.cart_total + 150));
                 if (r.cart_count === 0) location.reload();
             }
         },

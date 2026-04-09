@@ -59,7 +59,7 @@
                     <span style="background:#eef2ff;color:#6366f1;padding:3px 10px;border-radius:20px;font-size:0.78rem;">አዲስ</span>
                 </span>
             </div>
-            <div class="info-row"><span class="info-label">ጠቅላላ ዋጋ:</span><span class="info-value" style="color:#6366f1;font-size:1.1rem;">Birr {{ number_format($order->grand_total, 0, ',', '.') }}</span></div>
+            <div class="info-row"><span class="info-label">ጠቅላላ ዋጋ:</span><span class="info-value" style="color:#6366f1;font-size:1.1rem;">Birr {{ number_format($order->grand_total, 0) }}</span></div>
         </div>
     </div>
 
@@ -79,19 +79,19 @@
                     <div style="font-size:0.75rem;color:#9ca3af;">{{ $item->product->category->name }} • {{ $item->product->brand->name }}</div>
                 </div>
                 <div style="text-align:center;color:#6b7280;font-size:0.85rem;">ብዛት: {{ $item->quantity }}</div>
-                <div style="font-weight:700;color:#6366f1;">Birr {{ number_format($item->total_amount, 0, ',', '.') }}</div>
+                <div style="font-weight:700;color:#6366f1;">Birr {{ number_format($item->total_amount, 0) }}</div>
             </div>
             @endforeach
 
             <div style="margin-top:16px;padding-top:16px;border-top:1px solid #f3f4f6;">
                 <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;color:#6b7280;">
-                    <span>ድምር:</span><span>Birr {{ number_format($order->grand_total - $order->shipping_amount, 0, ',', '.') }}</span>
+                    <span>ድምር:</span><span>Birr {{ number_format($order->grand_total - $order->shipping_amount, 0) }}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;color:#6b7280;">
-                    <span>የመላኪያ ዋጋ:</span><span>Birr {{ number_format($order->shipping_amount, 0, ',', '.') }}</span>
+                    <span>የመላኪያ ዋጋ:</span><span>Birr {{ number_format($order->shipping_amount, 0) }}</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;font-weight:800;color:#1e1b4b;font-size:1rem;padding-top:8px;border-top:1px solid #f3f4f6;">
-                    <span>ጠቅላላ:</span><span style="color:#6366f1;">Birr {{ number_format($order->grand_total, 0, ',', '.') }}</span>
+                    <span>ጠቅላላ:</span><span style="color:#6366f1;">Birr {{ number_format($order->grand_total, 0) }}</span>
                 </div>
             </div>
         </div>
