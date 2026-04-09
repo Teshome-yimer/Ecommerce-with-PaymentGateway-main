@@ -3,18 +3,20 @@ set -e
 
 echo "=== Starting የኛ ገበያ ==="
 
-# Set Apache to listen on Railway's PORT
+# Railway injects PORT env var - configure Apache to use it
 PORT="${PORT:-80}"
-sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf
-sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf
-echo "Apache configured on port $PORT"
+echo "Configuring Apache on port $PORT"
 
-# Create .env from environment variables
-cat > /var/www/html/.env << EOF
+# Update Apache port config
+sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf 2>/dev/null || true
+sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf 2>/dev/null || true
+
+# Create .env from Railway environment variables
+cat > /var/www/html/.env << ENVEOF
 APP_NAME="${APP_NAME:-YegnGebya}"
-APP_ENV="${APP_ENV:-production}"
+APP_ENV=production
 APP_KEY="${APP_KEY}"
-APP_DEBUG="${APP_DEBUG:-false}"
+APP_DEBUG=false
 APP_URL="${APP_URL:-http://localhost}"
 
 LOG_CHANNEL=stack
@@ -50,21 +52,25 @@ GOOGLE_CLIENT_SECRET="${GOOGLE_CLIENT_SECRET}"
 GOOGLE_REDIRECT_URL="${GOOGLE_REDIRECT_URL}"
 
 GEMINI_API_KEY="${GEMINI_API_KEY}"
-EOF
+ENVEOF
 
 echo ".env created"
 
-# Wait for DB
+# Wait for DB to be ready
 echo "Waiting for database..."
-sleep 5
+for i in {1..30}; do
+    php -r "new PDO('mysql:host=${DB_HOST};port=${DB_PORT:-3306};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}');" 2>/dev/null && break
+    echo "DB not ready yet ($i/30)..."
+    sleep 2
+done
 
-# Run migrations - skip errors
+# Run migrations
 php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 
 # Seed roles
 php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
 
-# Cache config only (route cache causes issues with duplicate names)
+# Cache
 php artisan config:cache
 php artisan view:cache
 
@@ -74,4 +80,4 @@ php artisan storage:link 2>/dev/null || true
 chmod -R 775 storage bootstrap/cache
 
 echo "=== App ready on port $PORT ==="
-apache2-foreground
+exec apache2-foreground
