@@ -18,11 +18,6 @@ use App\Http\Controllers\Auth\SocialLoginController;
 
 Route::get('auth/{provider}', [SocialLoginController::class, 'redirect'])->name('social.redirect');
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
-
-// Rate limit login attempts
-Route::middleware('throttle:5,1')->group(function () {
-    // Auth routes with rate limiting handled by Laravel's built-in
-});
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
@@ -63,7 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Payment Webhooks (ከ Authentication ውጭ መሆን አለባቸው)
+// Payment Webhooks
 Route::post('/midtrans/notification', [CheckoutController::class, 'notification'])->name('midtrans.notification');
 Route::post('/chapa/webhook', [CheckoutController::class, 'chapaWebhook'])->name('chapa.webhook');
 
@@ -72,21 +67,5 @@ Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat']
     ->middleware('throttle:30,1')
     ->name('chatbot');
 
-// 1. የኢሜይል ማረጋገጫ ራውቶችን ክፈት
+// Auth routes (once only)
 Auth::routes(['verify' => true]);
-
-// 2. ሆም ፔጅህ '/' ከሆነ፣ ተጠቃሚው ገብቶ ሲጨርስ ወደ እሱ እንዲሄድ እንዲህ አድርግ
-Route::get('/home', function () {
-    return redirect('/'); // ወደ ዋናው ገጽ እንዲመለስ
-});
-
-// 3. ዋና ዋና ገጾችህን "verified" በሚለው ሚድልዌር እሰር
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-});
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
