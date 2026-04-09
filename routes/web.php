@@ -20,6 +20,10 @@ Route::get('auth/{provider}', [SocialLoginController::class, 'redirect'])->name(
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Auth routes (Laravel registers /home route internally — redirect it)
+Auth::routes(['verify' => true]);
+Route::get('/home', function() { return redirect('/'); });
 Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
 
@@ -68,4 +72,4 @@ Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat']
     ->name('chatbot');
 
 // Auth routes (once only)
-Auth::routes(['verify' => true]);
+// Already declared above

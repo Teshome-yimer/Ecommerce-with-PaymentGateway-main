@@ -64,9 +64,8 @@ php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 # Seed roles
 php artisan db:seed --class=RoleSeeder --force 2>/dev/null || true
 
-# Cache
+# Cache config only (route cache causes issues with duplicate names)
 php artisan config:cache
-php artisan route:cache
 php artisan view:cache
 
 # Storage link
