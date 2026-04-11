@@ -1,7 +1,8 @@
 FROM php:8.2-apache
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update --fix-missing || (sleep 5 && apt-get update --fix-missing) || (sleep 15 && apt-get update --fix-missing) \
+    && apt-get install -y --fix-missing \
     git curl zip unzip libpng-dev libonig-dev \
     libxml2-dev libzip-dev libicu-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl \
