@@ -72,17 +72,6 @@ php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 # Seed roles - force always
 php artisan db:seed --class=RoleSeeder --force 2>&1 || echo "Seeder warning..."
 
-# Assign admin role to admin user
-php artisan tinker --execute="
-\$user = App\Models\User::where('email', env('ADMIN_EMAIL', 'tesheyimer86@gmail.com'))->first();
-if(\$user) {
-    \$user->update(['is_admin' => true]);
-    \$user->syncRoles(['admin']);
-    echo 'Admin role assigned to: ' . \$user->email . PHP_EOL;
-} else {
-    echo 'Admin user not found' . PHP_EOL;
-}
-" 2>&1 || echo "Admin assignment warning..."
 php artisan config:cache
 php artisan view:cache
 php artisan permission:cache-reset 2>/dev/null || true
