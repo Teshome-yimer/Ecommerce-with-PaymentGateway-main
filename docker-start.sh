@@ -80,4 +80,9 @@ php artisan storage:link 2>/dev/null || true
 chmod -R 775 storage bootstrap/cache
 
 echo "=== App ready on port $PORT ==="
+
+# Fix MPM conflict: disable event and worker, enable prefork
+a2dismod mpm_event mpm_worker 2>/dev/null || true
+a2enmod mpm_prefork
+
 exec apache2-foreground
