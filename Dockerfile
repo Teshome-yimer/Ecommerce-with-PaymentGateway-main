@@ -8,13 +8,10 @@ RUN apt-get update --fix-missing || (sleep 5 && apt-get update --fix-missing) ||
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Fix MPM conflict permanently at build time
-RUN cd /etc/apache2/mods-enabled \
-    && rm -f mpm_event.conf mpm_event.load mpm_worker.conf mpm_worker.load \
-    && ls mpm_prefork* 2>/dev/null || (cd /etc/apache2/mods-available && cp mpm_prefork.conf mpm_prefork.load /etc/apache2/mods-enabled/ 2>/dev/null || true)
-
-# Enable rewrite
-RUN a2enmod rewrite
+# Fix MPM conflict: disable event and worker, enable prefork (required for mod_php)
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork \
+    && a2enmod rewrite
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
