@@ -3,6 +3,20 @@
 // Load intl override first
 require_once __DIR__ . '/intl-override.php';
 
+// Sanitize all environment variables - remove CR/LF/TAB characters
+// This fixes "Invalid URI: A URI cannot contain CR/LF/TAB characters" on Railway
+foreach ($_ENV as $key => $value) {
+    if (is_string($value)) {
+        $_ENV[$key] = str_replace(["\r", "\n", "\t"], '', $value);
+        putenv($key . '=' . $_ENV[$key]);
+    }
+}
+foreach ($_SERVER as $key => $value) {
+    if (is_string($value) && strpos($key, 'HTTP_') === false) {
+        $_SERVER[$key] = str_replace(["\r", "\n", "\t"], '', $value);
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
