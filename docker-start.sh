@@ -56,6 +56,9 @@ ENVEOF
 
 echo ".env created"
 
+# Fix Windows line endings (CRLF → LF) to prevent URI errors
+dos2unix /var/www/html/.env 2>/dev/null || sed -i 's/\r//' /var/www/html/.env
+
 # Wait for DB to be ready
 echo "Waiting for database..."
 for i in {1..30}; do
