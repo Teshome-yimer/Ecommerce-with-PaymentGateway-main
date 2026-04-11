@@ -80,4 +80,16 @@ php artisan storage:link 2>/dev/null || true
 chmod -R 775 storage bootstrap/cache
 
 echo "=== App ready on port $PORT ==="
+
+# Fix MPM at runtime (in case build cache didn't apply)
+rm -f /etc/apache2/mods-enabled/mpm_event.conf \
+      /etc/apache2/mods-enabled/mpm_event.load \
+      /etc/apache2/mods-enabled/mpm_worker.conf \
+      /etc/apache2/mods-enabled/mpm_worker.load 2>/dev/null || true
+
+# Ensure prefork is enabled
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf 2>/dev/null || true
+ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load 2>/dev/null || true
+
+echo "MPM fixed, starting Apache..."
 exec apache2-foreground
