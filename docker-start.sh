@@ -85,6 +85,7 @@ if(\$user) {
 " 2>&1 || echo "Admin assignment warning..."
 php artisan config:cache
 php artisan view:cache
+php artisan permission:cache-reset 2>/dev/null || true
 php artisan storage:link 2>/dev/null || true
 chmod -R 775 storage bootstrap/cache
 
