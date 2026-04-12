@@ -33,7 +33,7 @@ function e(\$key, \$default = '') {
   'DB_PASSWORD=' . e('DB_PASSWORD'),
   '',
   'FILESYSTEM_DISK=public',
-  'SESSION_DRIVER=file',
+  'SESSION_DRIVER=database',
   'SESSION_LIFETIME=120',
   'CACHE_DRIVER=file',
   'QUEUE_CONNECTION=sync',
