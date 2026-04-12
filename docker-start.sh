@@ -19,7 +19,7 @@ function e(\$key, \$default = '') {
   'APP_NAME=' . e('APP_NAME', 'YegnGebya'),
   'APP_ENV=production',
   'APP_KEY=' . e('APP_KEY'),
-  'APP_DEBUG=false',
+  'APP_DEBUG=' . e('APP_DEBUG', 'true'),
   'APP_URL=' . e('APP_URL', 'http://localhost'),
   '',
   'LOG_CHANNEL=stack',
