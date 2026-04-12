@@ -13,6 +13,11 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Redirect to login if not authenticated
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         $featuredProducts = Product::where('is_featured', true)
             ->where('is_active', true)
             ->where('in_stock', true)
