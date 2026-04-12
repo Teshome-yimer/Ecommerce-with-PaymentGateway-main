@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 @section('title', 'የይለፍ ቃል ቀይር')
 
 @section('content')
