@@ -45,15 +45,15 @@
         }
         @keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
-        .brand { display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:12px; }
-        .brand-icon { width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff; }
-        .brand-name { font-size:1.3rem;font-weight:800;color:#fff; }
+        .brand { display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:16px; }
+        .brand-icon { width:44px;height:44px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff; }
+        .brand-name { font-size:1.4rem;font-weight:800;color:#fff; }
 
-        h2 { font-size:1.2rem;font-weight:800;color:#fff;text-align:center;margin-bottom:2px; }
-        .sub { color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center;margin-bottom:14px; }
+        h2 { font-size:1.3rem;font-weight:800;color:#fff;text-align:center;margin-bottom:4px; }
+        .sub { color:rgba(255,255,255,0.5);font-size:0.82rem;text-align:center;margin-bottom:18px; }
 
         label { font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px; }
-        .input-wrap { position:relative;margin-bottom:8px; }
+        .input-wrap { position:relative;margin-bottom:12px; }
         .input-wrap i { position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.35);font-size:0.9rem; }
         input[type=email], input[type=password], input[type=text] {
             width:100%;padding:9px 14px 9px 40px;
