@@ -110,11 +110,14 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('images')
                     ->label('Image')
-                    ->disk('cloudinary')
-                    ->circular()
-                    ->stacked()
-                    ->limit(3)
-                    ->limitedRemainingText(),
+                    ->getStateUsing(function ($record) {
+                        if (is_array($record->images) && count($record->images) > 0) {
+                            $img = $record->images[0];
+                            return str_starts_with($img, 'http') ? $img : asset('storage/' . $img);
+                        }
+                        return null;
+                    })
+                    ->circular(),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
