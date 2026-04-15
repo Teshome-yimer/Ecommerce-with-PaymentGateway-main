@@ -60,7 +60,6 @@ function e(\$key, \$default = '') {
   'CLOUDINARY_CLOUD_NAME=' . e('CLOUDINARY_CLOUD_NAME'),
   'CLOUDINARY_API_KEY=' . e('CLOUDINARY_API_KEY'),
   'CLOUDINARY_API_SECRET=' . e('CLOUDINARY_API_SECRET'),
-  'FILESYSTEM_DISK=cloudinary',
 ];
 file_put_contents('/var/www/html/.env', implode(\"\n\", \$lines) . \"\n\");
 echo '.env created with LF line endings' . PHP_EOL;
