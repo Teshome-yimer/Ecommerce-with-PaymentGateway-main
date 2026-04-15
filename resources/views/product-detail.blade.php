@@ -39,7 +39,7 @@
                 <div class="row mt-3">
                     @foreach($product->images as $index => $image)
                     <div class="col-3">
-                        <img src="{{ Storage::url($image) }}" class="img-thumbnail" style="height: 80px; object-fit: cover; cursor: pointer;"
+                        <img src="{{ str_starts_with($image, 'http') ? $image : Storage::url($image) }}" class="img-thumbnail" style="height: 80px; object-fit: cover; cursor: pointer;"
                              onclick="$('#productCarousel').carousel({{ $index }})" alt="{{ $product->name }}">
                     </div>
                     @endforeach
