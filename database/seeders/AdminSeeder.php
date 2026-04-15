@@ -13,24 +13,32 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-        ]);
+        // Create admin user (idempotent — safe to re-run on existing data)
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'name'     => 'Admin',
+                'password' => Hash::make('password'),
+            ]
+        );
 
-        // Assign admin role
-        $admin->assignRole('admin');
+        // Assign admin role (no-op if already assigned)
+        if (!$admin->hasRole('admin')) {
+            $admin->assignRole('admin');
+        }
 
-        // Create a regular user for testing
-        $user = User::create([
-            'name' => 'User Test',
-            'email' => 'user@test.com',
-            'password' => Hash::make('password'),
-        ]);
+        // Create a regular user for testing (idempotent)
+        $user = User::firstOrCreate(
+            ['email' => 'user@test.com'],
+            [
+                'name'     => 'User Test',
+                'password' => Hash::make('password'),
+            ]
+        );
 
-        // Assign user role
-        $user->assignRole('user');
+        // Assign user role (no-op if already assigned)
+        if (!$user->hasRole('user')) {
+            $user->assignRole('user');
+        }
     }
 }

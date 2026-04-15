@@ -69,9 +69,22 @@ done
 
 php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 
-# Seed roles - force always
-php artisan db:seed --class=RoleSeeder --force 2>&1 || echo "Seeder warning..."
-php artisan db:seed --class=AdminSeeder --force 2>&1 || echo "AdminSeeder warning..."
+# Seed roles and admin — use --force (production) and --no-interaction to
+# suppress any confirmation prompts. Temporarily disable set -e so a seeder
+# failure (e.g. duplicate data on re-deploy) never stops the container.
+set +e
+php artisan db:seed --class=RoleSeeder --force --no-interaction 2>&1
+ROLE_EXIT=$?
+if [ $ROLE_EXIT -ne 0 ]; then
+    echo "RoleSeeder warning (exit $ROLE_EXIT) — continuing..."
+fi
+
+php artisan db:seed --class=AdminSeeder --force --no-interaction 2>&1
+ADMIN_EXIT=$?
+if [ $ADMIN_EXIT -ne 0 ]; then
+    echo "AdminSeeder warning (exit $ADMIN_EXIT) — continuing..."
+fi
+set -e
 
 php artisan config:cache
 php artisan view:cache
