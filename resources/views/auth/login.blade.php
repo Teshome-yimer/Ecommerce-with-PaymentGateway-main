@@ -36,11 +36,12 @@
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 24px;
-            padding: 20px 28px;
+            padding: 28px 28px;
             width: 100%; max-width: 400px;
             position: relative; z-index: 2;
             box-shadow: 0 30px 70px rgba(0,0,0,0.5);
             animation: up 0.6s ease;
+            margin: auto 0;
         }
         @keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
