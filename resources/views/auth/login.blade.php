@@ -38,20 +38,20 @@
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 24px;
-            padding: 28px 32px;
-            width: 100%; max-width: 420px;
+            padding: 20px 28px;
+            width: 100%; max-width: 400px;
             position: relative; z-index: 2;
             box-shadow: 0 30px 70px rgba(0,0,0,0.5);
             animation: up 0.6s ease;
         }
         @keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
-        .brand { display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:18px; }
-        .brand-icon { width:42px;height:42px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff; }
-        .brand-name { font-size:1.4rem;font-weight:800;color:#fff; }
+        .brand { display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:12px; }
+        .brand-icon { width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff; }
+        .brand-name { font-size:1.3rem;font-weight:800;color:#fff; }
 
-        h2 { font-size:1.3rem;font-weight:800;color:#fff;text-align:center;margin-bottom:4px; }
-        .sub { color:rgba(255,255,255,0.5);font-size:0.82rem;text-align:center;margin-bottom:18px; }
+        h2 { font-size:1.2rem;font-weight:800;color:#fff;text-align:center;margin-bottom:2px; }
+        .sub { color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center;margin-bottom:14px; }
 
         label { font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px; }
         .input-wrap { position:relative;margin-bottom:12px; }
