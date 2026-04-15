@@ -72,13 +72,13 @@
         }
         .btn-main:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(99,102,241,0.6); }
 
-        .divider { display:flex;align-items:center;gap:12px;margin:10px 0; }
+        .divider { display:flex;align-items:center;gap:12px;margin:14px 0; }
         .divider::before,.divider::after { content:'';flex:1;height:1px;background:rgba(255,255,255,0.1); }
         .divider span { color:rgba(255,255,255,0.35);font-size:0.75rem; }
 
-        .socials { display:flex;gap:8px; }
+        .socials { display:flex;gap:10px; }
         .soc-btn {
-            flex:1;padding:8px 6px;border-radius:10px;
+            flex:1;padding:10px 6px;border-radius:10px;
             border:1.5px solid rgba(255,255,255,0.1);
             background:rgba(255,255,255,0.05);
             display:flex;align-items:center;justify-content:center;gap:7px;
