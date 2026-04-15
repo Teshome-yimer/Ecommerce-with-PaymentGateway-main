@@ -33,7 +33,7 @@ function e(\$key, \$default = '') {
   'DB_PASSWORD=' . e('DB_PASSWORD'),
   '',
   'FILESYSTEM_DISK=public',
-  'SESSION_DRIVER=database',
+  'SESSION_DRIVER=file',
   'SESSION_LIFETIME=120',
   'CACHE_DRIVER=file',
   'QUEUE_CONNECTION=sync',
@@ -68,8 +68,6 @@ for i in {1..30}; do
 done
 
 php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
-php artisan session:table 2>/dev/null || true
-php artisan migrate --force 2>&1 || echo "Session migration warning (continuing)..."
 
 # Seed roles and admin — use --force (production) and --no-interaction to
 # suppress any confirmation prompts. Temporarily disable set -e so a seeder
