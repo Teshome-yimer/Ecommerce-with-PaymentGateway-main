@@ -95,7 +95,9 @@ php artisan config:cache
 php artisan view:cache
 php artisan permission:cache-reset 2>/dev/null || true
 php artisan storage:link 2>/dev/null || true
-chmod -R 775 storage bootstrap/cache
+chmod -R 777 storage bootstrap/cache
+mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
+chmod -R 777 storage bootstrap/cache
 
 # Fix MPM at runtime
 rm -f /etc/apache2/mods-enabled/mpm_event.conf \
