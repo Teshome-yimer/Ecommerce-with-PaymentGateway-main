@@ -160,5 +160,14 @@
             መለያ የለዎትም? <a href="{{ route('register') }}">አካውንት ፍጠሩ →</a>
         </div>
     </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-btn" onclick="window.scrollBy({top:-200,behavior:'smooth'})">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+        <div class="scroll-btn" onclick="window.scrollBy({top:200,behavior:'smooth'})">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
 </body>
 </html>
