@@ -9,11 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0; }
+        html { overflow-y:auto; }
         body {
             min-height:100vh;
             background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);
-            display:flex;align-items:center;justify-content:center;padding:20px;
-            position:relative;overflow:hidden;
+            display:flex;align-items:flex-start;justify-content:center;padding:20px;
+            position:relative;overflow-x:hidden;overflow-y:auto;
+            background-attachment:fixed;
         }
         body::before { content:'';position:fixed;width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,0.2) 0%,transparent 70%);top:-150px;right:-150px;border-radius:50%;animation:glow 5s ease-in-out infinite; }
         body::after { content:'';position:fixed;width:400px;height:400px;background:radial-gradient(circle,rgba(236,72,153,0.15) 0%,transparent 70%);bottom:-100px;left:-100px;border-radius:50%;animation:glow 6s ease-in-out infinite reverse; }
