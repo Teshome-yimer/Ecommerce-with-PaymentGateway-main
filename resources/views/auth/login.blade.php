@@ -54,13 +54,13 @@
         .sub { color:rgba(255,255,255,0.5);font-size:0.8rem;text-align:center;margin-bottom:14px; }
 
         label { font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px; }
-        .input-wrap { position:relative;margin-bottom:12px; }
+        .input-wrap { position:relative;margin-bottom:8px; }
         .input-wrap i { position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.35);font-size:0.9rem; }
         input[type=email], input[type=password], input[type=text] {
-            width:100%;padding:10px 14px 10px 40px;
+            width:100%;padding:9px 14px 9px 40px;
             background:rgba(255,255,255,0.07);
             border:1.5px solid rgba(255,255,255,0.12);
-            border-radius:12px;color:#fff;font-size:0.88rem;outline:none;transition:all 0.2s;
+            border-radius:12px;color:#fff;font-size:0.85rem;outline:none;transition:all 0.2s;
         }
         input::placeholder { color:rgba(255,255,255,0.3); }
         input:focus { border-color:#6366f1;background:rgba(99,102,241,0.12);box-shadow:0 0 0 3px rgba(99,102,241,0.2); }
