@@ -86,7 +86,7 @@
         }
         .soc-btn:hover { background:rgba(255,255,255,0.12);color:#fff;transform:translateY(-2px); }
 
-        .footer-link { text-align:center;margin-top:10px;font-size:0.8rem;color:rgba(255,255,255,0.45); }
+        .footer-link { text-align:center;margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.45); }
         .footer-link a { color:#818cf8;font-weight:700;text-decoration:none; }
         .footer-link a:hover { color:#a5b4fc; }
 
