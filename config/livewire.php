@@ -64,7 +64,7 @@ return [
     */
 
     'temporary_file_upload' => [
-        'disk' => 'public',        // Use public disk for temporary files
+        'disk' => 'local',        // Use local disk for temporary files
         'rules' => ['required', 'file', 'max:5120'], // Max 5MB
         'directory' => 'livewire-tmp',   // Directory for temporary files
         'middleware' => 'throttle:60,1',  // Rate limiting
