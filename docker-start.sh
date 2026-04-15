@@ -71,6 +71,7 @@ php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 
 # Seed roles - force always
 php artisan db:seed --class=RoleSeeder --force 2>&1 || echo "Seeder warning..."
+php artisan db:seed --class=AdminSeeder --force 2>&1 || echo "AdminSeeder warning..."
 
 php artisan config:cache
 php artisan view:cache
