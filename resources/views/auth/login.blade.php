@@ -94,6 +94,9 @@
         .remember-row a { font-size:0.78rem;color:#818cf8;text-decoration:none; }
 
         .err { background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:10px 14px;color:#fca5a5;font-size:0.82rem;margin-bottom:16px; }
+        .scroll-hint { position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:100; }
+        .scroll-btn { width:36px;height:36px;border-radius:50%;background:rgba(99,102,241,0.3);border:1.5px solid rgba(99,102,241,0.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(8px); }
+        .scroll-btn:hover { background:rgba(99,102,241,0.6);transform:scale(1.1); }
     </style>
 </head>
 <body>
