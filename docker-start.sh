@@ -32,7 +32,7 @@ function e(\$key, \$default = '') {
   'DB_USERNAME=' . e('DB_USERNAME'),
   'DB_PASSWORD=' . e('DB_PASSWORD'),
   '',
-  'FILESYSTEM_DISK=public',
+  'FILESYSTEM_DISK=cloudinary',
   'SESSION_DRIVER=file',
   'SESSION_LIFETIME=120',
   'CACHE_DRIVER=file',
