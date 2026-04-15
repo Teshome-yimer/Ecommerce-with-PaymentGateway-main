@@ -12,9 +12,11 @@
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            display: flex; align-items: center; justify-content: center; padding: 20px;
-            position: relative; overflow: hidden;
+            display: flex; align-items: flex-start; justify-content: center; padding: 24px 20px;
+            position: relative; overflow-x: hidden; overflow-y: auto;
+            background-attachment: fixed;
         }
+        html { overflow-y: auto; scroll-behavior: smooth; }
         body::before {
             content: ''; position: fixed; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
@@ -33,8 +35,8 @@
             background: rgba(255,255,255,0.06);
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 28px;
-            padding: 48px 44px;
+            border-radius: 24px;
+            padding: 28px 32px;
             width: 100%; max-width: 420px;
             position: relative; z-index: 2;
             box-shadow: 0 30px 70px rgba(0,0,0,0.5);
@@ -42,34 +44,34 @@
         }
         @keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
-        .brand { display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:32px; }
-        .brand-icon { width:50px;height:50px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff; }
-        .brand-name { font-size:1.6rem;font-weight:800;color:#fff; }
+        .brand { display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:18px; }
+        .brand-icon { width:42px;height:42px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff; }
+        .brand-name { font-size:1.4rem;font-weight:800;color:#fff; }
 
-        h2 { font-size:1.55rem;font-weight:800;color:#fff;text-align:center;margin-bottom:6px; }
-        .sub { color:rgba(255,255,255,0.5);font-size:0.85rem;text-align:center;margin-bottom:28px; }
+        h2 { font-size:1.3rem;font-weight:800;color:#fff;text-align:center;margin-bottom:4px; }
+        .sub { color:rgba(255,255,255,0.5);font-size:0.82rem;text-align:center;margin-bottom:18px; }
 
-        label { font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:7px; }
-        .input-wrap { position:relative;margin-bottom:18px; }
+        label { font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px; }
+        .input-wrap { position:relative;margin-bottom:12px; }
         .input-wrap i { position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.35);font-size:0.9rem; }
         input[type=email], input[type=password], input[type=text] {
-            width:100%;padding:13px 16px 13px 44px;
+            width:100%;padding:10px 14px 10px 40px;
             background:rgba(255,255,255,0.07);
             border:1.5px solid rgba(255,255,255,0.12);
-            border-radius:12px;color:#fff;font-size:0.92rem;outline:none;transition:all 0.2s;
+            border-radius:12px;color:#fff;font-size:0.88rem;outline:none;transition:all 0.2s;
         }
         input::placeholder { color:rgba(255,255,255,0.3); }
         input:focus { border-color:#6366f1;background:rgba(99,102,241,0.12);box-shadow:0 0 0 3px rgba(99,102,241,0.2); }
 
         .btn-main {
-            width:100%;padding:14px;border:none;border-radius:12px;
+            width:100%;padding:11px;border:none;border-radius:12px;
             background:linear-gradient(135deg,#6366f1,#8b5cf6);
-            color:#fff;font-weight:700;font-size:1rem;cursor:pointer;
-            box-shadow:0 6px 20px rgba(99,102,241,0.4);transition:all 0.3s;margin-top:4px;
+            color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;
+            box-shadow:0 6px 20px rgba(99,102,241,0.4);transition:all 0.3s;margin-top:2px;
         }
         .btn-main:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(99,102,241,0.6); }
 
-        .divider { display:flex;align-items:center;gap:12px;margin:20px 0; }
+        .divider { display:flex;align-items:center;gap:12px;margin:14px 0; }
         .divider::before,.divider::after { content:'';flex:1;height:1px;background:rgba(255,255,255,0.1); }
         .divider span { color:rgba(255,255,255,0.35);font-size:0.75rem; }
 
@@ -83,13 +85,13 @@
         }
         .soc-btn:hover { background:rgba(255,255,255,0.12);color:#fff;transform:translateY(-2px); }
 
-        .footer-link { text-align:center;margin-top:22px;font-size:0.85rem;color:rgba(255,255,255,0.45); }
+        .footer-link { text-align:center;margin-top:14px;font-size:0.82rem;color:rgba(255,255,255,0.45); }
         .footer-link a { color:#818cf8;font-weight:700;text-decoration:none; }
         .footer-link a:hover { color:#a5b4fc; }
 
-        .remember-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:20px; }
-        .remember-row label { font-size:0.82rem;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:7px;cursor:pointer;margin:0; }
-        .remember-row a { font-size:0.82rem;color:#818cf8;text-decoration:none; }
+        .remember-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:12px; }
+        .remember-row label { font-size:0.78rem;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:7px;cursor:pointer;margin:0; }
+        .remember-row a { font-size:0.78rem;color:#818cf8;text-decoration:none; }
 
         .err { background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:10px 14px;color:#fca5a5;font-size:0.82rem;margin-bottom:16px; }
     </style>
