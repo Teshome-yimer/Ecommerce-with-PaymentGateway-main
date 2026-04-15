@@ -21,7 +21,7 @@
                     <div class="carousel-inner">
                         @foreach($product->images as $index => $image)
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                            <img src="{{ Storage::url($image) }}" class="d-block w-100 rounded" style="height: 400px; object-fit: cover;" alt="{{ $product->name }}">
+                            <img src="{{ str_starts_with($image, 'http') ? $image : Storage::url($image) }}" class="d-block w-100 rounded" style="height: 400px; object-fit: cover;" alt="{{ $product->name }}">
                         </div>
                         @endforeach
                     </div>
