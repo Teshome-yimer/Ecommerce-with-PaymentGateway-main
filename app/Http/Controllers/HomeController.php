@@ -32,6 +32,9 @@ class HomeController extends Controller
 
     public function products(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $query = Product::where('is_active', true)->where('in_stock', true);
 
         // Filter by category
@@ -68,6 +71,9 @@ class HomeController extends Controller
 
     public function productDetail($slug)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $product = Product::where('slug', $slug)
             ->where('is_active', true)
             ->with(['category', 'brand'])

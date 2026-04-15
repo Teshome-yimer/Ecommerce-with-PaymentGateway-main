@@ -46,11 +46,14 @@ class Product extends Model
 
     /**
      * Get the first image URL
+     * Cloudinary stores full URLs directly
      */
     public function getFirstImageAttribute()
     {
         if (is_array($this->images) && count($this->images) > 0) {
-            return asset('storage/' . $this->images[0]);
+            $image = $this->images[0];
+            // Cloudinary returns full URLs; local fallback uses storage path
+            return str_starts_with($image, 'http') ? $image : asset('storage/' . $image);
         }
         return asset('images/no-image.jpg');
     }
@@ -62,7 +65,7 @@ class Product extends Model
     {
         if (is_array($this->images)) {
             return array_map(function($image) {
-                return asset('storage/' . $image);
+                return str_starts_with($image, 'http') ? $image : asset('storage/' . $image);
             }, $this->images);
         }
         return [];

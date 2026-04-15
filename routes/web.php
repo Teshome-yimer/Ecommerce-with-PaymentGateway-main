@@ -20,20 +20,20 @@ Auth::routes(['verify' => true]);
 // Override Laravel's /home redirect to go to /
 Route::get('/home', function () { return redirect('/'); });
 
-// Public routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products', [HomeController::class, 'products'])->name('products');
-Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
-
-// Cart
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::delete('/cart', [CartController::class, 'clear'])->name('cart.clear');
-
-// Protected routes
+// All routes require authentication — guests are redirected to login
 Route::middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/products', [HomeController::class, 'products'])->name('products');
+    Route::get('/product/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
+
+    // Cart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart', [CartController::class, 'clear'])->name('cart.clear');
+
+    // Protected routes
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');

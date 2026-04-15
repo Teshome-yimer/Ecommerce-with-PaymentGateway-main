@@ -9,14 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Inter', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            height: 100%; overflow: hidden;
+        }
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            display: flex; align-items: flex-start; justify-content: center; padding: 24px 20px;
-            position: relative; overflow-x: hidden; overflow-y: auto;
+            display: flex; align-items: center; justify-content: center; padding: 16px 20px;
+            position: relative;
             background-attachment: fixed;
         }
-        html { overflow-y: auto; scroll-behavior: smooth; }
         body::before {
             content: ''; position: fixed; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);

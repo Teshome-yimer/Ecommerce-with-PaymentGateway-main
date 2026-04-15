@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>E-Commerce - @yield('title', 'Shop')</title>
+    <title>የኛ ገበያ - @yield('title', 'Shop')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -191,22 +191,7 @@
                     </li>
 
                     @guest
-                        <li class="nav-item">
-                            <a href="{{ route('login') }}"
-                               style="display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:50px;border:2px solid #6366f1;color:#6366f1;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.2s;"
-                               onmouseover="this.style.background='#6366f1';this.style.color='#fff'"
-                               onmouseout="this.style.background='transparent';this.style.color='#6366f1'">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('register') }}"
-                               style="display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:50px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-weight:600;font-size:0.9rem;text-decoration:none;box-shadow:0 4px 15px rgba(99,102,241,0.35);transition:all 0.2s;"
-                               onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(99,102,241,0.5)'"
-                               onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(99,102,241,0.35)'">
-                                <i class="fas fa-user-plus"></i> Register
-                            </a>
-                        </li>
+                        {{-- Login/Register buttons hidden - redirect handled by HomeController --}}
                     @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" style="color:#374151;font-weight:600;">

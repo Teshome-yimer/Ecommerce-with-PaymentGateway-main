@@ -52,7 +52,7 @@ class ProductResource extends Resource
                                     ->label('Product Images')
                                     ->multiple()
                                     ->directory('products')
-                                    ->disk('public')
+                                    ->disk('cloudinary')
                                     ->maxFiles(5)
                                     ->reorderable()
                                     ->image()
@@ -110,7 +110,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('images')
                     ->label('Image')
-                    ->disk('public')
+                    ->disk('cloudinary')
                     ->circular()
                     ->stacked()
                     ->limit(3)

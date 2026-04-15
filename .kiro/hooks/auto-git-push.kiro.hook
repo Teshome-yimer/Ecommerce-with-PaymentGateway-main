@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Auto Git Push",
+  "description": "ፋይል በተቀየረ ቁጥር automatically git add, commit, እና push ያደርጋል",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git add -A && git commit -m \"auto: update files\" && git push"
+  }
+}

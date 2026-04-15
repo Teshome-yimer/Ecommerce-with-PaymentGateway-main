@@ -38,7 +38,7 @@ class BrandResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->directory('brands')
-                    ->disk('public')
+                    ->disk('cloudinary')
                     ->visibility('public')
                     ->imageEditor()
                     ->maxSize(1024)
@@ -62,7 +62,7 @@ class BrandResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ImageColumn::make('image')
-                    ->disk('public')
+                    ->disk('cloudinary')
                     ->square(),
 
                 Tables\Columns\IconColumn::make('is_active')
