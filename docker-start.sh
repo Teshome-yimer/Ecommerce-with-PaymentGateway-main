@@ -34,6 +34,7 @@ function e(\$key, \$default = '') {
   '',
   'FILESYSTEM_DISK=cloudinary',
   'LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK=local',
+  'LIVEWIRE_TEMPORARY_FILE_UPLOAD_DIRECTORY=livewire-tmp',
   'SESSION_DRIVER=file',
   'SESSION_LIFETIME=120',
   'CACHE_DRIVER=file',
