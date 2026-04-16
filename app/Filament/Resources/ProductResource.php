@@ -57,10 +57,9 @@ class ProductResource extends Resource
                                     ->maxFiles(5)
                                     ->reorderable()
                                     ->image()
-                                    ->maxSize(2048)
-                                    ->imageEditor()
-                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/jfif'])
-                                    ->helperText('Upload up to 5 images. Max size: 2MB each.')
+                                    ->maxSize(5120)
+                                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
+                                    ->helperText('Upload up to 5 images. Max size: 5MB each. (JPG, PNG, WEBP)')
                                     ->columnSpanFull(),
                             ])
                     ])->columnSpan(['lg' => 2]),
