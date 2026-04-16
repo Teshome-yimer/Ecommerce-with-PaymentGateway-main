@@ -123,7 +123,7 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
                     @if($relatedProduct->images && count($relatedProduct->images) > 0)
-                        <img src="{{ str_starts_with($relatedProduct->images[0], 'http') ? $relatedProduct->images[0] : Storage::url($relatedProduct->images[0]) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $relatedProduct->name }}">
+                        <img src="{{ asset('storage/' . $relatedProduct->images[0]) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $relatedProduct->name }}">
                     @else
                         <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;"><i class="fas fa-image fa-3x text-muted"></i></div>
                     @endif
