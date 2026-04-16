@@ -114,11 +114,11 @@ class ProductResource extends Resource
                     ->label('Image')
                     ->getStateUsing(function ($record) {
                         if (is_array($record->images) && count($record->images) > 0) {
-                            $img = $record->images[0];
-                            return str_starts_with($img, 'http') ? $img : asset('storage/' . $img);
+                            return $record->images[0];
                         }
                         return null;
                     })
+                    ->disk('public')
                     ->circular(),
 
                 Tables\Columns\TextColumn::make('name')
