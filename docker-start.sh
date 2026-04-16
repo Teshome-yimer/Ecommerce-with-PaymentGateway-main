@@ -9,6 +9,21 @@ echo "Configuring Apache on port $PORT"
 sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf 2>/dev/null || true
 sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf 2>/dev/null || true
 
+# Create storage directories FIRST (before any app code runs)
+echo "Creating storage directories..."
+mkdir -p storage/framework/cache/data \
+         storage/framework/sessions \
+         storage/framework/views \
+         storage/logs \
+         storage/app/public/livewire-tmp \
+         storage/app/public/products \
+         bootstrap/cache
+
+chmod -R 777 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+
+echo "Storage directories created and permissions set"
+
 # Write .env using PHP to avoid CRLF issues from Windows-created bash scripts
 php -r "
 function e(\$key, \$default = '') {
