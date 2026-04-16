@@ -52,14 +52,15 @@ class ProductResource extends Resource
                                     ->label('Product Images')
                                     ->multiple()
                                     ->directory('products')
-                                    ->disk(config('filesystems.default', 'public'))
+                                    ->disk('public')
                                     ->visibility('public')
                                     ->maxFiles(5)
                                     ->reorderable()
                                     ->image()
                                     ->maxSize(5120)
                                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'])
-                                    ->helperText('Upload up to 5 images. Max size: 5MB each. (JPG, PNG, WEBP)')
+                                    ->helperText('Upload up to 5 images. Max size: 5MB each. (JPG, PNG, WEBP, GIF)')
+                                    ->uploadingMessage('Uploading images...')
                                     ->columnSpanFull(),
                             ])
                     ])->columnSpan(['lg' => 2]),
