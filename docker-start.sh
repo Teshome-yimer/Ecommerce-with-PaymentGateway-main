@@ -33,6 +33,7 @@ function e(\$key, \$default = '') {
   'DB_PASSWORD=' . e('DB_PASSWORD'),
   '',
   'FILESYSTEM_DISK=cloudinary',
+  'LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK=local',
   'SESSION_DRIVER=file',
   'SESSION_LIFETIME=120',
   'CACHE_DRIVER=file',
