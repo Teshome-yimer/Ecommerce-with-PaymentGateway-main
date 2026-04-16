@@ -91,6 +91,16 @@ done
 
 php artisan migrate --force 2>&1 || echo "Migration warning (continuing)..."
 
+# Create storage:link with verification
+echo "Creating storage symlink..."
+php artisan storage:link --force 2>&1 || echo "Storage link warning"
+if [ -L "public/storage" ]; then
+    echo "✓ Storage symlink created successfully"
+else
+    echo "✗ Storage symlink failed - creating manually"
+    ln -sf ../storage/app/public public/storage 2>/dev/null || true
+fi
+
 # Seed roles and admin — use --force (production) and --no-interaction to
 # suppress any confirmation prompts. Temporarily disable set -e so a seeder
 # failure (e.g. duplicate data on re-deploy) never stops the container.
