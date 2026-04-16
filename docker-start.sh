@@ -38,7 +38,7 @@ function e(\$key, \$default = '') {
   'APP_URL=' . e('APP_URL', 'http://localhost'),
   '',
   'LOG_CHANNEL=stack',
-  'LOG_LEVEL=debug',
+  'LOG_LEVEL=error',
   '',
   'DB_CONNECTION=mysql',
   'DB_HOST=' . e('DB_HOST'),
