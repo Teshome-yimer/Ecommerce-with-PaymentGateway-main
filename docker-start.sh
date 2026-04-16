@@ -100,6 +100,7 @@ php artisan storage:link 2>/dev/null || true
 chmod -R 777 storage bootstrap/cache
 mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs storage/app/livewire-tmp
 chmod -R 777 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
 
 # Fix MPM at runtime
 rm -f /etc/apache2/mods-enabled/mpm_event.conf \
