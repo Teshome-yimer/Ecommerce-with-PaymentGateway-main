@@ -93,12 +93,11 @@ if [ $ADMIN_EXIT -ne 0 ]; then
 fi
 set -e
 
+php artisan storage:link 2>/dev/null || true
 php artisan config:cache
 php artisan view:cache
 php artisan permission:cache-reset 2>/dev/null || true
-php artisan storage:link 2>/dev/null || true
-chmod -R 777 storage bootstrap/cache
-mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs storage/app/livewire-tmp
+mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs storage/app/livewire-tmp storage/app/public/products
 chmod -R 777 storage bootstrap/cache
 chown -R www-data:www-data storage bootstrap/cache
 
