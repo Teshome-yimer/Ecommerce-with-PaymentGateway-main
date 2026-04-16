@@ -201,7 +201,7 @@
 
                                 <div class="product-img-wrap">
                                     @if($product->images && count($product->images) > 0)
-                                        <img src="{{ str_starts_with($product->images[0], 'http') ? $product->images[0] : asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}">
+                                        <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}">
                                     @else
                                         <div class="d-flex align-items-center justify-content-center h-100 bg-light">
                                             <i class="fas fa-image fa-3x text-muted"></i>
