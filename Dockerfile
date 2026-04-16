@@ -21,9 +21,16 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache \
-    && mkdir -p public/images && chmod -R 775 public/images
+RUN mkdir -p storage/framework/cache/data \
+             storage/framework/sessions \
+             storage/framework/views \
+             storage/logs \
+             storage/app/public/livewire-tmp \
+             storage/app/public/products \
+             bootstrap/cache \
+             public/images \
+    && chown -R www-data:www-data storage bootstrap/cache public/images \
+    && chmod -R 775 storage bootstrap/cache public/images
 
 # Configure Apache virtualhost
 RUN echo '<VirtualHost *:80>\n\
