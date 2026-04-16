@@ -64,16 +64,16 @@ return [
     */
 
     'temporary_file_upload' => [
-        'disk' => 'public',       // Use public disk for temporary files
+        'disk' => env('LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK', 'local'),
         'rules' => ['required', 'file', 'max:5120'], // Max 5MB
-        'directory' => 'livewire-tmp',   // Directory for temporary files
-        'middleware' => 'throttle:60,1',  // Rate limiting
-        'preview_mimes' => [   // Supported file types for temporary pre-signed file URLs...
+        'directory' => 'livewire-tmp',
+        'middleware' => 'throttle:60,1',
+        'preview_mimes' => [
             'png', 'gif', 'bmp', 'svg',
             'jpg', 'jpeg', 'jfif', 'webp',
         ],
-        'max_upload_time' => 5, // Max duration (in minutes) before an upload is invalidated...
-        'cleanup' => true, // Should cleanup temporary uploads older than 24 hrs...
+        'max_upload_time' => 5,
+        'cleanup' => true,
     ],
 
     /*
