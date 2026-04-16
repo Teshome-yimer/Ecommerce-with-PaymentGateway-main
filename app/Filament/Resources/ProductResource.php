@@ -52,7 +52,7 @@ class ProductResource extends Resource
                                     ->label('Product Images')
                                     ->multiple()
                                     ->directory('products')
-                                    ->disk(env('FILESYSTEM_DISK', 'public'))
+                                    ->disk(config('filesystems.default', 'public'))
                                     ->visibility('public')
                                     ->maxFiles(5)
                                     ->reorderable()
