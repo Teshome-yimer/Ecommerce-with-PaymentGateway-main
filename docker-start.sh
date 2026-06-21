@@ -136,4 +136,9 @@ ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mp
 ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load 2>/dev/null || true
 
 echo "=== App ready on port $PORT ==="
+
+# Fix MPM conflict: disable event and worker, enable prefork
+a2dismod mpm_event mpm_worker 2>/dev/null || true
+a2enmod mpm_prefork
+
 exec apache2-foreground
