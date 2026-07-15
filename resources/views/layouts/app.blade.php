@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>የኛ ገበያ - @yield('title', 'Shop')</title>
+    <title>ተሸሾፕ - @yield('title', 'Shop')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -162,7 +162,7 @@
                 <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;">
                     <i class="fas fa-store" style="color:#fff;font-size:1rem;"></i>
                 </div>
-                <span>የኛ ገበያ</span>
+                <span>ተሸሾፕ</span>
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -254,7 +254,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <h5>የኛ ገበያ</h5>
+                    <h5>ተሸሾፕ</h5>
                     <p class="text-light">የታመነ የ online ግዢ መድረክ።</p>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -267,7 +267,7 @@
             </div>
             <hr>
             <div class="text-center">
-                <p class="text-light mb-0">&copy; {{ date('Y') }} የኛ ገበያ. All rights reserved.</p>
+                <p class="text-light mb-0">&copy; {{ date('Y') }} ተሸሾፕ. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -471,7 +471,7 @@
     </div>
     <div class="chat-messages" id="chat-messages">
         <div class="msg bot">
-            <div class="msg-bubble">👋 ሰላም! እኔ Teshome ነኝ — <strong>የኛ ገበያ</strong> ድጋፍ።<br>ምን ልረዳዎ እችላለሁ?</div>
+            <div class="msg-bubble">👋 ሰላም! እኔ Teshome ነኝ — <strong>ተሸሾፕ</strong> ድጋፍ።<br>ምን ልረዳዎ እችላለሁ?</div>
             <div class="msg-time">አሁን</div>
         </div>
     </div>

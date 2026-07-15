@@ -25,7 +25,7 @@
                     <!-- Header -->
                     <div class="row mb-4 pb-4 border-bottom">
                         <div class="col-md-6">
-                            <h3 class="text-primary fw-bold">የኛ ገበያ</h3>
+                            <h3 class="text-primary fw-bold">ተሸሾፕ</h3>
                             <p class="mb-1">ወሎ, ኢትዮጵያ</p>
                             <p class="mb-1">ስልክ: +251 962868748</p>
                             <p class="mb-0">ኢሜይል: tesheyimer86@gmail.com</p>
@@ -137,7 +137,7 @@
                         <p class="fw-bold">ለግዢዎ እናመሰግናለን!</p>
                         <p class="text-muted">ይህ በኮምፒዩተር የተፈጠረ ደረሰኝ ነው። ፊርማ አያስፈልግም።</p>
                         <p class="text-muted">ለማንኛውም ጥያቄ: tesheyimer86@gmail.com<br>
-                        የኛ ገበያ — የታመነ የ online ግዢ መድረክ</p>
+                        ተሸሾፕ — የታመነ የ online ግዢ መድረክ</p>
                     </div>
                 </div>
             </div>

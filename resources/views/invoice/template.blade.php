@@ -199,7 +199,7 @@
         <div class="header">
             <div class="header-content">
                 <div class="company-info">
-                    <div class="company-name">የኛ ገበያ</div>
+                    <div class="company-name">ተሸሾፕ</div>
                     <div>ወሎ, ኢትዮጵያ</div>
                     <div>ስልክ: +251 962868748</div>
                     <div>ኢሜይል: tesheyimer86@gmail.com</div>
@@ -313,7 +313,7 @@
             <p><strong>ለግዢዎ እናመሰግናለን!</strong></p>
             <p>ይህ በኮምፒዩተር የተፈጠረ ደረሰኝ ነው። ፊርማ አያስፈልግም።</p>
             <p>ለማንኛውም ጥያቄ: tesheyimer86@gmail.com</p>
-            <p>የኛ ገበያ — የታመነ የ online ግዢ መድረክ</p>
+            <p>ተሸሾፕ — የታመነ የ online ግዢ መድረክ</p>
         </div>
     </div>
 </body>

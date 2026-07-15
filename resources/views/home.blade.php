@@ -181,7 +181,7 @@
     <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <div class="hero-badge">👉 አንኳን ወደ የኛ ገበያ በደህና መጡ</div>
+                <div class="hero-badge">👉 አንኳን ወደ ተሸሾፕ በደህና መጡ</div>
                 <h1 class="hero-title mb-3">ፈጣን፣ ቀላል እና<br><span>የታመነ ግዢ</span></h1>
                 <p class="hero-subtitle mb-5">የonline ግዢ መድረክ — ጥራት ያለው ምርት በቀላሉ ይግዙ!</p>
                 <div class="d-flex flex-wrap gap-3">
@@ -193,7 +193,7 @@
                 <div class="hero-image-wrap">
                     <!-- Local hero image — no text overlay -->
                     <div style="position:relative;display:inline-block;width:100%;">
-                        <img src="{{ asset('images/hero.jpg') }}" class="img-fluid" alt="የኛ ገበያ"
+                        <img src="{{ asset('images/hero.jpg') }}" class="img-fluid" alt="ተሸሾፕ"
                              style="border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,0.5);width:100%;object-fit:cover;">
                         <!-- Payment logos bottom strip inside image -->
                         <div style="position:absolute;bottom:0;left:0;right:0;border-radius:0 0 24px 24px;background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);padding:18px 20px 14px;display:flex;align-items:center;gap:12px;">

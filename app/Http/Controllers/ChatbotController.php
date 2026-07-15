@@ -10,7 +10,7 @@ class ChatbotController extends Controller
     private function getSystemPrompt(): string
     {
         return <<<PROMPT
-You are "Teshome", the friendly AI assistant for "የኛ ገበያ" (Yegna Gebya) — an Ethiopian e-commerce platform.
+You are "Teshome", the friendly AI assistant for "ተሸሾፕ" (Tesheshop) — an Ethiopian e-commerce platform.
 
 === LANGUAGE RULE ===
 Detect the language the user writes in and ALWAYS respond in that SAME language.
@@ -25,7 +25,7 @@ Amharic → Amharic. English → English. Arabic → Arabic. Any language → sa
 === FULL PLATFORM KNOWLEDGE ===
 
 **About the Platform:**
-- Name: የኛ ገበያ (Yegna Gebya)
+- Name: ተሸሾፕ (Tesheshop)
 - Type: Ethiopian e-commerce website
 - URL: http://127.0.0.1:8000 (local) / hosted on Railway
 - Admin panel: /admin (Filament-based, for Teshome only)
@@ -161,7 +161,7 @@ PROMPT;
             return "⚠️ This is a security concern. Please email us directly at tesheyimer86@gmail.com with full details. Do not share sensitive information in chat.";
         }
         if ($this->has($m, ['ሰላም', 'hello', 'hi', 'hey', 'selam', 'ሃይ', 'good morning', 'good evening'])) {
-            return "👋 ሰላም! እኔ Teshome ነኝ — የኛ ገበያ ድጋፍ። ምን ልረዳዎ እችላለሁ?";
+            return "👋 ሰላም! እኔ Teshome ነኝ — ተሸሾፕ ድጋፍ። ምን ልረዳዎ እችላለሁ?";
         }
         if ($this->has($m, ['password', 'የይለፍ ቃል', 'ፓስወርድ', 'forgot', 'reset', 'ረሱ', 'change password', 'መቀየር'])) {
             return "🔐 የይለፍ ቃል ለመቀየር:\n1. ወደ መለያዎ ይግቡ\n2. ከላይ ስምዎን ጠቅ ያድርጉ → 'የእኔ መለያ'\n3. 'የይለፍ ቃል ቀይር' ክፍሉን ይሙሉ\n\nForgot password? Go to /password/reset and enter your email.";
@@ -203,7 +203,7 @@ PROMPT;
             return "📞 Contact us:\n• Email: tesheyimer86@gmail.com\n• Phone: 0962868748\n• Hours: Mon-Sat, 8am–6pm";
         }
         if ($this->has($m, ['thank', 'አመሰግናለሁ', 'tnx', 'thanks', 'great', 'good'])) {
-            return "😊 You're welcome! Feel free to ask anything else. Happy shopping at የኛ ገበያ! 🛍️";
+            return "😊 You're welcome! Feel free to ask anything else. Happy shopping at Tesheshop! 🛍️";
         }
 
         return "🤔 I'm not sure about that right now. For general questions, browse our site or contact us:\n• 📧 tesheyimer86@gmail.com\n• 📞 0962868748";

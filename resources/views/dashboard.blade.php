@@ -128,7 +128,7 @@
         @endif
         <div class="dash-welcome">
             <div class="dash-welcome-title">እንኳን ደህና መጡ, {{ Auth::user()->name }}! 👋</div>
-            <div class="dash-welcome-sub">ወደ የኛ ገበያ ዳሽቦርድ — ትዕዛዞችዎን ያስተዳድሩ</div>
+            <div class="dash-welcome-sub">ወደ ተሸሾፕ ዳሽቦርድ — ትዕዛዞችዎን ያስተዳድሩ</div>
         </div>
     </div>
 

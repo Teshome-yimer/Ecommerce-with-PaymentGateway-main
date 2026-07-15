@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "=== Starting YegnGebya ==="
+echo "=== Starting Tesheshop ==="
 
 PORT="${PORT:-80}"
 echo "Configuring Apache on port $PORT"
@@ -31,7 +31,7 @@ function e(\$key, \$default = '') {
     return \$val !== false ? trim(str_replace([\"\\r\", \"\\n\", \"\\t\"], '', \$val)) : \$default;
 }
 \$lines = [
-  'APP_NAME=' . e('APP_NAME', 'YegnGebya'),
+  'APP_NAME=' . e('APP_NAME', 'Tesheshop'),
   'APP_ENV=production',
   'APP_KEY=' . e('APP_KEY'),
   'APP_DEBUG=' . e('APP_DEBUG', 'false'),
@@ -61,8 +61,8 @@ function e(\$key, \$default = '') {
   'MAIL_USERNAME=' . e('MAIL_USERNAME'),
   'MAIL_PASSWORD=' . e('MAIL_PASSWORD'),
   'MAIL_ENCRYPTION=' . e('MAIL_ENCRYPTION', 'ssl'),
-  'MAIL_FROM_ADDRESS=' . e('MAIL_FROM_ADDRESS', 'noreply@yegngebya.com'),
-  'MAIL_FROM_NAME=' . e('APP_NAME', 'YegnGebya'),
+  'MAIL_FROM_ADDRESS=' . e('MAIL_FROM_ADDRESS', 'noreply@tesheshop.app.aletcloud.com'),
+  'MAIL_FROM_NAME=' . e('APP_NAME', 'Tesheshop'),
   '',
   'CHAPA_SECRET_KEY=' . e('CHAPA_SECRET_KEY'),
   'CHAPA_PUBLIC_KEY=' . e('CHAPA_PUBLIC_KEY'),
