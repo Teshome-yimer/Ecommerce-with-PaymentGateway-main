@@ -10,15 +10,36 @@ use Illuminate\Support\Str;
 
 class SocialLoginController extends Controller
 {
+    private array $providers = ['google', 'github'];
+
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        if (! in_array($provider, $this->providers, true)) {
+            abort(404);
+        }
+
+        if (! config("services.{$provider}.client_id") || ! config("services.{$provider}.client_secret")) {
+            return redirect('login')->with(
+                'error',
+                ucfirst($provider) . ' login is not configured. Please contact the admin.'
+            );
+        }
+
+        return Socialite::driver($provider)
+            ->redirectUrl($this->callbackUrl($provider))
+            ->redirect();
     }
 
     public function callback($provider)
     {
+        if (! in_array($provider, $this->providers, true)) {
+            abort(404);
+        }
+
         try {
-            $socialUser = Socialite::driver($provider)->user();
+            $socialUser = Socialite::driver($provider)
+                ->redirectUrl($this->callbackUrl($provider))
+                ->user();
 
             $user = User::updateOrCreate(
                 ['email' => $socialUser->getEmail()],
@@ -32,10 +53,20 @@ class SocialLoginController extends Controller
             );
 
             Auth::login($user);
-            return redirect()->intended('home');
 
+            return redirect()->intended('/');
         } catch (\Exception $e) {
-            return redirect('login')->with('error', 'Login with ' . ucfirst($provider) . ' failed. Please try again.');
+            report($e);
+
+            return redirect('login')->with(
+                'error',
+                'Login with ' . ucfirst($provider) . ' failed. Please try again.'
+            );
         }
+    }
+
+    private function callbackUrl(string $provider): string
+    {
+        return rtrim(config('app.url'), '/') . "/auth/{$provider}/callback";
     }
 }
