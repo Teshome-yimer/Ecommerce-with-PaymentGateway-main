@@ -70,7 +70,7 @@
             @foreach($order->items as $item)
             <div class="item-row">
                 @if($item->product->images && count($item->product->images) > 0)
-                    <img src="{{ Storage::url($item->product->images[0]) }}" class="item-img" alt="{{ $item->product->name }}">
+                    <img src="{{ $item->product->first_image }}" class="item-img" alt="{{ $item->product->name }}">
                 @else
                     <div class="item-placeholder"><i class="fas fa-image" style="color:#a5b4fc;"></i></div>
                 @endif

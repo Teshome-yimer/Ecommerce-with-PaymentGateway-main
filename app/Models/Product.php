@@ -45,15 +45,41 @@ class Product extends Model
     }
 
     /**
+     * Resolve a stored image path/public_id/URL to a browser-ready URL.
+     * Supports Cloudinary full URLs, Cloudinary public IDs, and local storage paths.
+     */
+    public static function resolveImageUrl(?string $image): string
+    {
+        if (!$image) {
+            return asset('images/no-image.svg');
+        }
+
+        if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+            return $image;
+        }
+
+        // Cloudinary public IDs / remote disk paths
+        try {
+            if (config('filesystems.disks.cloudinary.cloud_name') || config('filesystems.disks.cloudinary.url')) {
+                return \Illuminate\Support\Facades\Storage::disk('cloudinary')->url($image);
+            }
+        } catch (\Throwable $e) {
+            // fall through to local storage
+        }
+
+        return asset('storage/' . ltrim($image, '/'));
+    }
+
+    /**
      * Get the first image URL
      */
     public function getFirstImageAttribute()
     {
         if (is_array($this->images) && count($this->images) > 0) {
-            $image = $this->images[0];
-            return asset('storage/' . $image);
+            return self::resolveImageUrl($this->images[0]);
         }
-        return asset('images/no-image.jpg');
+
+        return asset('images/no-image.svg');
     }
 
     /**
@@ -62,10 +88,9 @@ class Product extends Model
     public function getImageUrlsAttribute()
     {
         if (is_array($this->images)) {
-            return array_map(function($image) {
-                return asset('storage/' . $image);
-            }, $this->images);
+            return array_map(fn ($image) => self::resolveImageUrl($image), $this->images);
         }
+
         return [];
     }
 }

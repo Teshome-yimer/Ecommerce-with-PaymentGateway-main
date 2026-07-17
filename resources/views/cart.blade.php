@@ -39,7 +39,7 @@
                 @foreach($cartItems as $item)
                 <div class="cart-item" id="cart-item-{{ $item->id }}">
                     @if($item->product->images && count($item->product->images) > 0)
-                        <img src="{{ Storage::url($item->product->images[0]) }}" class="cart-item-img" alt="{{ $item->product->name }}">
+                        <img src="{{ $item->product->first_image }}" class="cart-item-img" alt="{{ $item->product->name }}">
                     @else
                         <div class="cart-item-placeholder"><i class="fas fa-image" style="color:#a5b4fc;font-size:1.5rem;"></i></div>
                     @endif

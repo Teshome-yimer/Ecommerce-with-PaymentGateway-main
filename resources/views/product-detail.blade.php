@@ -21,7 +21,7 @@
                     <div class="carousel-inner">
                         @foreach($product->images as $index => $image)
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                            <img src="{{ asset('storage/' . $image) }}" class="d-block w-100 rounded" style="height: 400px; object-fit: cover;" alt="{{ $product->name }}">
+                            <img src="{{ \App\Models\Product::resolveImageUrl($image) }}" class="d-block w-100 rounded" style="height: 400px; object-fit: cover;" alt="{{ $product->name }}">
                         </div>
                         @endforeach
                     </div>
@@ -39,7 +39,7 @@
                 <div class="row mt-3">
                     @foreach($product->images as $index => $image)
                     <div class="col-3">
-                        <img src="{{ asset('storage/' . $image) }}" class="img-thumbnail" style="height: 80px; object-fit: cover; cursor: pointer;"
+                        <img src="{{ \App\Models\Product::resolveImageUrl($image) }}" class="img-thumbnail" style="height: 80px; object-fit: cover; cursor: pointer;"
                              onclick="$('#productCarousel').carousel({{ $index }})" alt="{{ $product->name }}">
                     </div>
                     @endforeach
@@ -123,7 +123,7 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
                     @if($relatedProduct->images && count($relatedProduct->images) > 0)
-                        <img src="{{ asset('storage/' . $relatedProduct->images[0]) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $relatedProduct->name }}">
+                        <img src="{{ $relatedProduct->first_image }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ $relatedProduct->name }}">
                     @else
                         <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;"><i class="fas fa-image fa-3x text-muted"></i></div>
                     @endif

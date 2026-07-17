@@ -52,7 +52,7 @@ class ProductResource extends Resource
                                     ->label('Product Images')
                                     ->multiple()
                                     ->directory('products')
-                                    ->disk('public')
+                                    ->disk('cloudinary')
                                     ->visibility('public')
                                     ->maxFiles(5)
                                     ->reorderable()
@@ -113,12 +113,8 @@ class ProductResource extends Resource
                 Tables\Columns\ImageColumn::make('images')
                     ->label('Image')
                     ->getStateUsing(function ($record) {
-                        if (is_array($record->images) && count($record->images) > 0) {
-                            return $record->images[0];
-                        }
-                        return null;
+                        return $record->first_image;
                     })
-                    ->disk('public')
                     ->circular(),
 
                 Tables\Columns\TextColumn::make('name')

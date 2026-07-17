@@ -193,7 +193,7 @@
                             @foreach($order->items->take(3) as $item)
                             <div class="product-thumb">
                                 @if($item->product && $item->product->images)
-                                    <img src="{{ Storage::url($item->product->images[0]) }}" alt="{{ $item->product->name }}">
+                                    <img src="{{ $item->product->first_image }}" alt="{{ $item->product->name }}">
                                 @else
                                     <div class="product-thumb-placeholder"><i class="fas fa-image" style="color:#a5b4fc;"></i></div>
                                 @endif

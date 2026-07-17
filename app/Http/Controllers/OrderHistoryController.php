@@ -134,7 +134,7 @@ class OrderHistoryController extends Controller
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
-                        'image' => $item->product->images[0] ?? null,
+                        'image' => $item->product->first_image ?? null,
                     ];
                 }
                 $addedItems++;
