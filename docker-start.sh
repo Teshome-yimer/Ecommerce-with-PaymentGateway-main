@@ -116,6 +116,12 @@ ADMIN_EXIT=$?
 if [ $ADMIN_EXIT -ne 0 ]; then
     echo "AdminSeeder warning (exit $ADMIN_EXIT) — continuing..."
 fi
+
+php artisan db:seed --class=DemoCatalogSeeder --force --no-interaction 2>&1
+CATALOG_EXIT=$?
+if [ $CATALOG_EXIT -ne 0 ]; then
+    echo "DemoCatalogSeeder warning (exit $CATALOG_EXIT) — continuing..."
+fi
 set -e
 
 php artisan config:cache
