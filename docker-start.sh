@@ -30,6 +30,13 @@ function e(\$key, \$default = '') {
     \$val = getenv(\$key);
     return \$val !== false ? trim(str_replace([\"\\r\", \"\\n\", \"\\t\"], '', \$val)) : \$default;
 }
+\$cloudName = e('CLOUDINARY_CLOUD_NAME');
+\$cloudKey = e('CLOUDINARY_API_KEY');
+\$cloudSecret = e('CLOUDINARY_API_SECRET');
+\$cloudUrl = e('CLOUDINARY_URL');
+if (\$cloudUrl === '' && \$cloudName !== '' && \$cloudKey !== '' && \$cloudSecret !== '') {
+    \$cloudUrl = 'cloudinary://' . \$cloudKey . ':' . \$cloudSecret . '@' . \$cloudName;
+}
 \$lines = [
   'APP_NAME=' . e('APP_NAME', 'Tesheshop'),
   'APP_ENV=production',
@@ -73,10 +80,10 @@ function e(\$key, \$default = '') {
   '',
   'GEMINI_API_KEY=' . e('GEMINI_API_KEY'),
   '',
-  'CLOUDINARY_URL=' . e('CLOUDINARY_URL'),
-  'CLOUDINARY_CLOUD_NAME=' . e('CLOUDINARY_CLOUD_NAME'),
-  'CLOUDINARY_API_KEY=' . e('CLOUDINARY_API_KEY'),
-  'CLOUDINARY_API_SECRET=' . e('CLOUDINARY_API_SECRET'),
+  'CLOUDINARY_URL=' . \$cloudUrl,
+  'CLOUDINARY_CLOUD_NAME=' . \$cloudName,
+  'CLOUDINARY_API_KEY=' . \$cloudKey,
+  'CLOUDINARY_API_SECRET=' . \$cloudSecret,
 ];
 file_put_contents('/var/www/html/.env', implode(\"\n\", \$lines) . \"\n\");
 echo '.env created with LF line endings' . PHP_EOL;
