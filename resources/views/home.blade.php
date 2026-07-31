@@ -171,6 +171,12 @@
 @keyframes floatUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); }
 .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+/* 3D viewer modal styles */
+.model3d-modal { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+.model3d-modal[aria-hidden="true"] { display: none; }
+.model3d-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.model3d-modal-content { position: relative; z-index: 2; width: min(980px, 95%); background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+.model3d-close { position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; }
 </style>
 @endpush
 
@@ -330,9 +336,16 @@
                                 <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">Out of Stock</span>
                             @endif
                         </div>
-                        <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
-                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                        </button>
+                        <div class="d-grid gap-2">
+                            <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                            @if(!empty($product->model_url))
+                            <button type="button" class="btn btn-outline-secondary btn-view-3d" data-model-url="{{ Storage::url($product->model_url) }}" data-poster="{{ $product->first_image ?? '' }}">
+                                <i class="fas fa-cube me-2"></i>View 3D
+                            </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -375,8 +388,40 @@
 
 @endsection
 
+<!-- 3D model viewer modal -->
+<div id="model3dModal" class="model3d-modal" aria-hidden="true" style="display:none;">
+  <div class="model3d-modal-backdrop" onclick="closeModel3d()"></div>
+  <div class="model3d-modal-content">
+    <button class="model3d-close" onclick="closeModel3d()" aria-label="Close">✕</button>
+    <model-viewer id="modelViewer" src="" poster="" alt="3D product" camera-controls auto-rotate ar ar-modes="webxr scene-viewer quick-look" style="width:100%;height:70vh;" interaction-prompt="auto" exposure="1" shadow-intensity="1"></model-viewer>
+  </div>
+</div>
+
 @push('scripts')
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <script>
+/* 3D viewer handlers (for product cards) */
+document.addEventListener('click', function(e){
+  const btn = e.target.closest && e.target.closest('.btn-view-3d');
+  if(!btn) return;
+  const modelUrl = btn.dataset.modelUrl;
+  const poster = btn.dataset.poster || '';
+  const viewer = document.getElementById('modelViewer');
+  if(!viewer) return;
+  // set src (model-viewer will lazy-load when src is set)
+  viewer.setAttribute('src', modelUrl);
+  if(poster) viewer.setAttribute('poster', poster);
+  const modal = document.getElementById('model3dModal');
+  if(modal){ modal.style.display = 'flex'; modal.setAttribute('aria-hidden','false'); }
+});
+function closeModel3d(){
+  const viewer = document.getElementById('modelViewer');
+  if(viewer){ viewer.removeAttribute('src'); viewer.removeAttribute('poster'); }
+  const modal = document.getElementById('model3dModal');
+  if(modal){ modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModel3d(); });
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
