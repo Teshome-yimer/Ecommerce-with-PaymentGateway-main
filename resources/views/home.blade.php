@@ -171,6 +171,12 @@
 @keyframes floatUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); }
 .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+/* 3D viewer modal styles */
+.model3d-modal { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+.model3d-modal[aria-hidden="true"] { display: none; }
+.model3d-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.model3d-modal-content { position: relative; z-index: 2; width: min(980px, 95%); background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+.model3d-close { position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; }
 </style>
 @endpush
 
@@ -330,9 +336,22 @@
                                 <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">Out of Stock</span>
                             @endif
                         </div>
-                        <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
-                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                        </button>
+                        <div class="d-grid gap-2">
+                            <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                            @if(is_array($product->images) && count($product->images) >= 12)
+                            <button type="button" class="btn btn-outline-secondary btn-view-360" data-images='@json($product->image_urls)'>
+                                <i class="fas fa-sync-alt me-2"></i>View 360
+                            </button>
+                            @endif
+
+                            @if(!empty($product->model_url))
+                            <button type="button" class="btn btn-outline-secondary btn-view-3d" data-model-url="{{ Storage::url($product->model_url) }}" data-poster="{{ $product->first_image ?? '' }}">
+                                <i class="fas fa-cube me-2"></i>View 3D
+                            </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -375,8 +394,109 @@
 
 @endsection
 
+<!-- 3D model viewer modal -->
+<div id="model3dModal" class="model3d-modal" aria-hidden="true" style="display:none;">
+  <div class="model3d-modal-backdrop" onclick="closeModel3d()"></div>
+  <div class="model3d-modal-content">
+    <button class="model3d-close" onclick="closeModel3d()" aria-label="Close">✕</button>
+    <model-viewer id="modelViewer" src="" poster="" alt="3D product" camera-controls auto-rotate ar ar-modes="webxr scene-viewer quick-look" style="width:100%;height:70vh;" interaction-prompt="auto" exposure="1" shadow-intensity="1"></model-viewer>
+  </div>
+</div>
+
+<!-- 360 viewer modal -->
+<div id="viewer360Modal" class="model3d-modal" aria-hidden="true" style="display:none;">
+  <div class="model3d-modal-backdrop" onclick="closeViewer360()"></div>
+  <div class="model3d-modal-content">
+    <button class="model3d-close" onclick="closeViewer360()" aria-label="Close">✕</button>
+    <div id="viewer360Container" style="width:100%;height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <img id="viewer360Image" src="" alt="360 view" style="max-width:100%;height:100%;object-fit:contain;user-select:none;touch-action:none;">
+    </div>
+  </div>
+</div>
+
 @push('scripts')
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <script>
+/* 3D & 360 viewer handlers (for product cards) */
+// Click handler: 360 priority, then 3D
+document.addEventListener('click', function(e){
+  const btn360 = e.target.closest && e.target.closest('.btn-view-360');
+  if(btn360){
+    let images = [];
+    try{ images = JSON.parse(btn360.getAttribute('data-images') || '[]'); }catch(err){ images = []; }
+    if(images.length) openViewer360(images);
+    return;
+  }
+
+  const btn3d = e.target.closest && e.target.closest('.btn-view-3d');
+  if(btn3d){
+    const modelUrl = btn3d.dataset.modelUrl;
+    const poster = btn3d.dataset.poster || '';
+    const viewer = document.getElementById('modelViewer');
+    if(!viewer) return;
+    // set src (model-viewer will lazy-load when src is set)
+    viewer.setAttribute('src', modelUrl);
+    if(poster) viewer.setAttribute('poster', poster);
+    const modal = document.getElementById('model3dModal');
+    if(modal){ modal.style.display = 'flex'; modal.setAttribute('aria-hidden','false'); }
+  }
+});
+function closeModel3d(){
+  const viewer = document.getElementById('modelViewer');
+  if(viewer){ viewer.removeAttribute('src'); viewer.removeAttribute('poster'); }
+  const modal = document.getElementById('model3dModal');
+  if(modal){ modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+}
+
+// 360 viewer implementation (simple image-sequence drag)
+let _spin = { images: [], index: 0, dragging: false, startX: 0 };
+function openViewer360(images){
+  _spin.images = images.slice();
+  _spin.index = 0;
+  const img = document.getElementById('viewer360Image');
+  if(!img) return;
+  img.src = _spin.images[0];
+  const modal = document.getElementById('viewer360Modal');
+  if(modal){ modal.style.display = 'flex'; modal.setAttribute('aria-hidden','false'); }
+}
+function closeViewer360(){
+  const modal = document.getElementById('viewer360Modal');
+  if(modal){ modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+  const img = document.getElementById('viewer360Image'); if(img) img.src = '';
+}
+(function(){
+  const img = document.getElementById('viewer360Image');
+  if(!img) return;
+  function showIndex(i){
+    if(!_spin.images.length) return;
+    _spin.index = (i + _spin.images.length) % _spin.images.length;
+    img.src = _spin.images[_spin.index];
+  }
+  function onDown(e){
+    _spin.dragging = true;
+    _spin.startX = (e.touches ? e.touches[0].clientX : e.clientX);
+  }
+  function onMove(e){
+    if(!_spin.dragging) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX);
+    const dx = x - _spin.startX;
+    if(Math.abs(dx) > 6){
+      const step = Math.max(1, Math.floor(Math.abs(dx) / 6));
+      if(dx > 0) showIndex(_spin.index - step); else showIndex(_spin.index + step);
+      _spin.startX = x;
+    }
+  }
+  function onUp(){ _spin.dragging = false; }
+  img.addEventListener('mousedown', onDown);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onUp);
+  img.addEventListener('touchstart', onDown, {passive:true});
+  img.addEventListener('touchmove', onMove, {passive:true});
+  img.addEventListener('touchend', onUp);
+})();
+
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeModel3d(); closeViewer360(); } });
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
