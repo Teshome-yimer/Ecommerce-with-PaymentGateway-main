@@ -64,7 +64,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Payment Method</h5>
+                        <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>የክፍያ ዘዴ</h5>
                     </div>
                     <div class="card-body">
                         <div class="payment-methods">
@@ -98,7 +98,7 @@
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" style="height:24px;object-fit:contain;">
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" style="height:24px;object-fit:contain;">
                                                 </div>
-                                                <h6 class="mb-1">Credit/Debit Card</h6>
+                                                <h6 class="mb-1">ክሬዲት/ዴቢት ካርድ</h6>
                                                 <small class="text-muted">Visa, Mastercard</small>
                                             </div>
                                         </label>
@@ -116,8 +116,8 @@
                                                     <span style="background:#c62828;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Awash</span>
                                                     <span style="background:#2e7d32;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Dashen</span>
                                                 </div>
-                                                <h6 class="mb-1">Bank Transfer</h6>
-                                                <small class="text-muted">CBE, Awash, Dashen & more</small>
+                                                <h6 class="mb-1">የባንክ ዝውውር</h6>
+                                                <small class="text-muted">CBE, Awash, Dashen እና ሌሎች</small>
                                             </div>
                                         </label>
                                     </div>
@@ -133,7 +133,7 @@
                                                     <span style="background:#00897b;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">Telebirr</span>
                                                     <span style="background:#1976d2;color:#fff;font-size:0.7rem;padding:3px 8px;border-radius:6px;font-weight:700;">HelloCash</span>
                                                 </div>
-                                                <h6 class="mb-1">Mobile Wallet</h6>
+                                                <h6 class="mb-1">ሞባይል ዋሌት</h6>
                                                 <small class="text-muted">Telebirr, HelloCash</small>
                                             </div>
                                         </label>
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'bank_transfer': '<i class="fas fa-university"></i> ባንክ ዝውውር',
             'ewallet': '<i class="fas fa-mobile-alt"></i> ሞባይል ዋሌት'
         };
-        payButton.innerHTML = buttonText[paymentMethod] || 'Place Order & Pay';
+        payButton.innerHTML = buttonText[paymentMethod] || 'ትዕዛዙ ያስገቡ እና ይክፈሉ';
     }
 });
 

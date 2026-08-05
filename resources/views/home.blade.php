@@ -185,8 +185,8 @@
                 <h1 class="hero-title mb-3">ፈጣን፣ ቀላል እና<br><span>የታመነ ግዢ</span></h1>
                 <p class="hero-subtitle mb-5">የonline ግዢ መድረክ — ጥራት ያለው ምርት በቀላሉ ይግዙ!</p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="{{ route('products') }}" class="btn hero-btn-primary"><i class="fas fa-shopping-bag me-2"></i>Shop Now</a>
-                    <a href="#featured" class="btn hero-btn-outline"><i class="fas fa-star me-2"></i>Featured</a>
+                    <a href="{{ route('products') }}" class="btn hero-btn-primary"><i class="fas fa-shopping-bag me-2"></i>አሁን ይግዙ</a>
+                    <a href="#featured" class="btn hero-btn-outline"><i class="fas fa-star me-2"></i>ምርጥ ምርቶች</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -233,10 +233,10 @@
 <div class="stats-bar">
     <div class="container">
         <div class="row g-3">
-            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Product::count() }}">0</div><div class="stat-label">Products</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\User::count() }}">0</div><div class="stat-label">Customers</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Order::count() }}">0</div><div class="stat-label">Orders</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Brand::count() }}">0</div><div class="stat-label">Brands</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Product::count() }}">0</div><div class="stat-label">ምርቶች</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\User::count() }}">0</div><div class="stat-label">ደንበኞች</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Order::count() }}">0</div><div class="stat-label">ትዕዛዞች</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-number" data-count="{{ \App\Models\Brand::count() }}">0</div><div class="stat-label">ብራንዶች</div></div></div>
         </div>
     </div>
 </div>
@@ -245,9 +245,9 @@
 <section class="py-5" style="background:#f8f7ff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
-            <div class="section-label">Browse</div>
-            <h2 class="section-heading">Shop by Category</h2>
-            <p class="text-muted">Find exactly what you're looking for</p>
+            <div class="section-label">ይቃልኩ</div>
+            <h2 class="section-heading">በምድብ ይግዙ</h2>
+            <p class="text-muted">ትፈልጉትን በትክክል ያግኙ</p>
         </div>
         <div class="row g-4">
             @foreach($categories as $i => $category)
@@ -262,7 +262,7 @@
                             @endif
                         </div>
                         <div class="category-name">{{ $category->name }}</div>
-                        <span class="category-browse">Browse →</span>
+                        <span class="category-browse">ይመልከቱ →</span>
                     </div>
                 </a>
             </div>
@@ -299,15 +299,15 @@
 <section class="py-5" id="featured" style="background:#f8f7ff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
-            <div class="section-label">Handpicked</div>
-            <h2 class="section-heading">Featured Products</h2>
-            <p class="text-muted">Our best-selling items just for you</p>
+            <div class="section-label">የተመረጡ</div>
+            <h2 class="section-heading">ምርጥ ምርቶች</h2>
+            <p class="text-muted">ለእርስዎ የተመረጡ ምርጡ ምርቶች</p>
         </div>
         <div class="row g-4">
             @foreach($featuredProducts as $i => $product)
             <div class="col-lg-3 col-md-6 animate-on-scroll" style="transition-delay:{{ $i * 100 }}ms">
                 <div class="product-card h-100">
-                    @if($product->on_sale)<div class="product-badge">Sale</div>@endif
+                    @if($product->on_sale)<div class="product-badge">ቅናሽ</div>@endif
                     <div class="product-img-wrap">
                         @if($product->images && count($product->images) > 0)
                             <img src="{{ $product->first_image }}" alt="{{ $product->name }}">
@@ -315,7 +315,7 @@
                             <div class="d-flex align-items-center justify-content-center h-100 bg-light"><i class="fas fa-image fa-3x text-muted"></i></div>
                         @endif
                         <div class="product-overlay">
-                            <a href="{{ route('product.detail', $product->slug) }}" class="btn btn-light btn-sm rounded-pill px-4"><i class="fas fa-eye me-1"></i>Quick View</a>
+                            <a href="{{ route('product.detail', $product->slug) }}" class="btn btn-light btn-sm rounded-pill px-4"><i class="fas fa-eye me-1"></i>በፍጥነት ይመልከቱ</a>
                         </div>
                     </div>
                     <div class="product-body">
@@ -325,13 +325,13 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="product-price">Birr {{ number_format($product->price, 0, '.', ',') }}</span>
                             @if($product->in_stock)
-                                <span class="badge" style="background:#dcfce7;color:#16a34a;font-size:0.7rem;">In Stock</span>
+                                <span class="badge" style="background:#dcfce7;color:#16a34a;font-size:0.7rem;">አለ</span>
                             @else
-                                <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">Out of Stock</span>
+                                <span class="badge" style="background:#fee2e2;color:#dc2626;font-size:0.7rem;">የለም</span>
                             @endif
                         </div>
                         <button onclick="addToCart({{ $product->id }})" class="btn btn-add-cart" {{ !$product->in_stock ? 'disabled' : '' }}>
-                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            <i class="fas fa-cart-plus me-2"></i>ወደ ጋሪ ይጨምሩ
                         </button>
                     </div>
                 </div>
@@ -339,7 +339,7 @@
             @endforeach
         </div>
         <div class="text-center mt-5 animate-on-scroll">
-            <a href="{{ route('products') }}" class="btn hero-btn-primary btn-lg px-5">View All Products <i class="fas fa-arrow-right ms-2"></i></a>
+            <a href="{{ route('products') }}" class="btn hero-btn-primary btn-lg px-5">ሁሉንም ምርቶች ይመልከቱ <i class="fas fa-arrow-right ms-2"></i></a>
         </div>
     </div>
 </section>
@@ -348,16 +348,16 @@
 <section class="py-5" style="background:#fff;">
     <div class="container">
         <div class="text-center mb-5 animate-on-scroll">
-            <div class="section-label">Our Promise</div>
-            <h2 class="section-heading">Why Choose Us</h2>
+            <div class="section-label">የእኝ ቃል</div>
+            <h2 class="section-heading">ለምን እኛን ይምረጡ</h2>
         </div>
         <div class="row g-4">
             @php
             $features = [
-                ['icon'=>'fas fa-shipping-fast','color'=>'#eef2ff','icolor'=>'#6366f1','title'=>'Fast Delivery','desc'=>'Quick and reliable delivery right to your doorstep across Ethiopia.'],
-                ['icon'=>'fas fa-shield-alt','color'=>'#f0fdf4','icolor'=>'#16a34a','title'=>'Secure Payment','desc'=>'Your payment is protected with bank-level encryption and security.'],
-                ['icon'=>'fas fa-undo','color'=>'#fff7ed','icolor'=>'#ea580c','title'=>'Easy Returns','desc'=>'Not satisfied? Return within 7 days, no questions asked.'],
-                ['icon'=>'fas fa-headset','color'=>'#fdf4ff','icolor'=>'#9333ea','title'=>'24/7 Support','desc'=>'Our support team is always ready to help you anytime.'],
+                ['icon'=>'fas fa-shipping-fast','color'=>'#eef2ff','icolor'=>'#6366f1','title'=>'ፈጣን ማድረስ','desc'=>'በኢትዮጵያ ውስጥ ወደ መገኛዎ ቤት ፈጣን እና የተመራጭ አበርካታ.'],
+                ['icon'=>'fas fa-shield-alt','color'=>'#f0fdf4','icolor'=>'#16a34a','title'=>'ደህንነቱ የተጠበቀ ክፍያ','desc'=>'ክፍያዎ በባንክ ደረጃ ምስጠራ እና ደህንነት የተጠበቀ ነው.'],
+                ['icon'=>'fas fa-undo','color'=>'#fff7ed','icolor'=>'#ea580c','title'=>'ቀላል መመለስ','desc'=>'ያስደስትዎት ከሌለ? በ7 ቀን ውስጥ ሳይጠየቁ ይመለሱ.'],
+                ['icon'=>'fas fa-headset','color'=>'#fdf4ff','icolor'=>'#9333ea','title'=>'24/7 ድጋፍ','desc'=>'የድጋፍ ቡዳችን በማንኛውም ጊዜ እርስዎ ለመርዳት ዝግጁ ነው.'],
             ];
             @endphp
             @foreach($features as $i => $f)

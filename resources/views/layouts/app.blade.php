@@ -144,10 +144,74 @@
             color: #991b1b;
         }
 
-        /* Responsive */
+        /* Mobile nav — always visible, no hamburger */
+        .top-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .top-nav-links .nav-link {
+            font-size: 0.85rem;
+            padding: 0.35rem 0.6rem !important;
+            white-space: nowrap;
+        }
+
+        .top-nav-links .nav-link.active,
+        .top-nav-links .nav-link:hover {
+            color: #6366f1 !important;
+            background: #f3f4f6;
+            border-radius: 999px;
+        }
+
+        .profile-name-text {
+            max-width: 90px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         @media (max-width: 768px) {
             .hero-simple {
                 padding: 60px 0;
+            }
+
+            .navbar-brand span {
+                font-size: 1.1rem;
+            }
+
+            .navbar-brand > div {
+                width: 32px !important;
+                height: 32px !important;
+            }
+
+            .top-nav-links .nav-link {
+                font-size: 0.78rem;
+                padding: 0.3rem 0.45rem !important;
+            }
+
+            .profile-name-text {
+                display: none;
+            }
+
+            .top-nav-links .cart-link {
+                width: 34px !important;
+                height: 34px !important;
+            }
+
+            .top-nav-links .profile-avatar {
+                width: 30px !important;
+                height: 30px !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .top-nav-links .nav-link {
+                font-size: 0.72rem;
+                padding: 0.25rem 0.35rem !important;
             }
         }
     </style>
@@ -156,73 +220,63 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" style="background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(99,102,241,0.08);padding:0 0;">
-        <div class="container" style="padding-top:10px;padding-bottom:10px;">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}" style="font-weight:800;font-size:1.3rem;color:#1e1b4b;text-decoration:none;">
+    <nav class="navbar" style="background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(99,102,241,0.08);padding:0;">
+        <div class="container d-flex align-items-center justify-content-between gap-2" style="padding-top:10px;padding-bottom:10px;">
+            <a class="navbar-brand d-flex align-items-center gap-2 flex-shrink-0" href="{{ route('home') }}" style="font-weight:800;font-size:1.3rem;color:#1e1b4b;text-decoration:none;margin-right:0;">
                 <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;">
                     <i class="fas fa-store" style="color:#fff;font-size:1rem;"></i>
                 </div>
                 <span>ተሸሾፕ</span>
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto ms-4 gap-1">
-                    <li class="nav-item">
-                        <a class="nav-link px-3 py-2 rounded-pill fw-500" href="{{ route('home') }}" style="color:#374151;font-weight:500;transition:all 0.2s;">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 py-2 rounded-pill fw-500" href="{{ route('products') }}" style="color:#374151;font-weight:500;">Products</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav align-items-center gap-2">
-                    <!-- Cart -->
-                    <li class="nav-item">
-                        <a class="nav-link position-relative d-flex align-items-center justify-content-center"
-                           href="{{ route('cart') }}"
-                           style="width:42px;height:42px;background:#f3f4f6;border-radius:50%;color:#374151;">
-                            <i class="fas fa-shopping-cart" style="font-size:1rem;"></i>
-                            <span class="cart-badge" id="cart-count">{{ $cartCount ?? 0 }}</span>
+            <ul class="top-nav-links ms-auto">
+                <li>
+                    <a class="nav-link fw-500 {{ request()->routeIs('home') ? 'active' : '' }}"
+                       href="{{ route('home') }}" style="color:#374151;font-weight:500;">ቤት</a>
+                </li>
+                <li>
+                    <a class="nav-link fw-500 {{ request()->routeIs('products') || request()->routeIs('product.detail') ? 'active' : '' }}"
+                       href="{{ route('products') }}" style="color:#374151;font-weight:500;">ምርቶች</a>
+                </li>
+                <li>
+                    <a class="nav-link position-relative d-flex align-items-center justify-content-center cart-link"
+                       href="{{ route('cart') }}"
+                       style="width:42px;height:42px;background:#f3f4f6;border-radius:50%;color:#374151;">
+                        <i class="fas fa-shopping-cart" style="font-size:1rem;"></i>
+                        <span class="cart-badge" id="cart-count">{{ $cartCount ?? 0 }}</span>
+                    </a>
+                </li>
+                @auth
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-1 p-0 {{ request()->routeIs('profile.*') || request()->routeIs('dashboard') || request()->routeIs('orders.*') ? 'active' : '' }}"
+                           href="#" role="button" data-bs-toggle="dropdown" style="color:#374151;font-weight:600;border:none;background:transparent;">
+                            <div class="profile-avatar" style="width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid #6366f1;flex-shrink:0;">
+                                @if(Auth::user()->avatar)
+                                    <img src="{{ Storage::url(Auth::user()->avatar) }}" style="width:100%;height:100%;object-fit:cover;" alt="">
+                                @else
+                                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;">
+                                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
+                            <span class="profile-name-text">{{ Auth::user()->name }}</span>
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="border-radius:16px;padding:8px;">
+                            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-primary"></i>ዳሽቦርድ</a></li>
+                            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2 text-success"></i>የእኔ ትዕዛዞች</a></li>
+                            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-warning"></i>የእኔ መለያ</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item rounded-3 py-2 text-danger" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt me-2"></i>ውጣ
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                            </li>
+                        </ul>
                     </li>
-
-                    @guest
-                        {{-- Login/Register buttons hidden - redirect handled by HomeController --}}
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" style="color:#374151;font-weight:600;">
-                                <div style="width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid #6366f1;flex-shrink:0;">
-                                    @if(Auth::user()->avatar)
-                                        <img src="{{ Storage::url(Auth::user()->avatar) }}" style="width:100%;height:100%;object-fit:cover;" alt="">
-                                    @else
-                                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;">
-                                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                        </div>
-                                    @endif
-                                </div>
-                                {{ Auth::user()->name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="border-radius:16px;padding:8px;">
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-primary"></i>ዳሽቦርድ</a></li>
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('orders.history') }}"><i class="fas fa-shopping-bag me-2 text-success"></i>የእኔ ትዕዛዞች</a></li>
-                                <li><a class="dropdown-item rounded-3 py-2" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-warning"></i>የእኔ መለያ</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item rounded-3 py-2 text-danger" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt me-2"></i>ውጣ
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+                @endauth
+            </ul>
         </div>
     </nav>
 
@@ -295,7 +349,7 @@
 
             // Show loading state
             button.disabled = true;
-            button.innerHTML = 'Adding...';
+            button.innerHTML = 'በሚጨምር ላይ...';
 
             $.ajaxSetup({
                 headers: {
