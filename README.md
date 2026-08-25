@@ -68,8 +68,9 @@ Ensure you have the following installed on your system:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
-   cd YOUR_REPOSITORY_NAME
+   git clone https://github.com/Teshome-yimer/Ecommerce-with-PaymentGateway-main.git
+cd Ecommerce-with-PaymentGateway-main
+
    ```
 
 2. **Install PHP Dependencies**
