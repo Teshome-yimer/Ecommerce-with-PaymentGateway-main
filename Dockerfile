@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install dependencies
+  # Install dependencies
 RUN apt-get update --fix-missing || (sleep 5 && apt-get update --fix-missing) || (sleep 15 && apt-get update --fix-missing) \
     && apt-get install -y --fix-missing \
     git curl zip unzip libpng-dev libonig-dev \
